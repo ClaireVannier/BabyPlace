@@ -3,10 +3,12 @@
 /* ************************************************************************* */
 
 // Import the manager modules responsible for handling data operations on the tables
-const ItemManager = require("./models/ItemManager");
+const ItemManager = require("./managers/ItemManager");
+const ParentManager = require("./managers/ParentManager");
 
 const managers = [
   ItemManager,
+  ParentManager,
   // Add other managers here
 ];
 
@@ -15,8 +17,8 @@ const tables = {};
 
 // Register each manager as data access point for its table
 managers.forEach((ManagerClass) => {
-  const manager = new ManagerClass();
-
+  const manager = new ManagerClass(); // Nursery manager {table: "nursery"}
+  // a revoir parce que pas compris
   tables[manager.table] = manager;
 });
 

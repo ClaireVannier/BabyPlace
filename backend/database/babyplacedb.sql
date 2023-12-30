@@ -2,11 +2,17 @@ CREATE DATABASE IF NOT EXISTS babyplace;
 
 USE babyplace; 
 
+
 CREATE TABLE user (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password TEXT NOT NULL
+);
+
+CREATE TABLE parent (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(80) NOT NULL,
-    email VARCHAR(100) NOT NULL,
     phone VARCHAR(12) NOT NULL
 );
 
@@ -43,41 +49,45 @@ CREATE TABLE administrative_record (
 
 CREATE TABLE booking (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    booking_at DATETIME NOT NULL
+    booked_at DATETIME NOT NULL
 );
 
-ALTER TABLE children
-ADD COLUMN user_id INT,
-ADD CONSTRAINT fk_user_id
-    FOREIGN KEY (user_id)
-    REFERENCES user(id);
+-- Ajouter une clé étrangère pour référencer la table "children"
+ALTER TABLE booking
+ADD COLUMN children_id INT,
+ADD CONSTRAINT fk_booked_children
+    FOREIGN KEY (children_id)
+    REFERENCES children(id);
 
-ALTER TABLE user
+-- Ajouter une clé étrangère pour référencer la table "nursery"
+ALTER TABLE booking
+ADD COLUMN nursery_id INT,
+ADD CONSTRAINT fk_booking_nursery
+    FOREIGN KEY (nursery_id)
+    REFERENCES nursery(id);
+
+
+ALTER TABLE children
+ADD COLUMN parent_id INT,
+ADD CONSTRAINT fk_parent_id
+    FOREIGN KEY (parent_id)
+    REFERENCES parent(id);
+
+ALTER TABLE parent
 ADD COLUMN administrative_record_id INT,
 ADD CONSTRAINT fk_administrative_record_id
     FOREIGN KEY (administrative_record_id)
     REFERENCES administrative_record(id);
 
-CREATE TABLE user_booking (
-    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    user_id INT NOT NULL,
-    booking_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user(id),
-    FOREIGN KEY (booking_id) REFERENCES booking(id)
-);
+ALTER TABLE parent
+ADD COLUMN user_id INT,
+ADD CONSTRAINT fk_parent_user
+    FOREIGN KEY (user_id)
+    REFERENCES user(id);
 
-CREATE TABLE user_nursery (
-    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    user_id INT NOT NULL,
-    nursery_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user(id),
-    FOREIGN KEY (nursery_id) REFERENCES nursery(id)
-);
+ALTER TABLE nursery
+ADD COLUMN user_id INT,
+ADD CONSTRAINT fk_nursery_user
+    FOREIGN KEY (user_id)
+    REFERENCES user(id);
 
-CREATE TABLE nursery_booking (
-    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    nursery_id INT NOT NULL,
-    booking_id INT NOT NULL,
-    FOREIGN KEY (nursery_id) REFERENCES nursery(id),
-    FOREIGN KEY (booking_id) REFERENCES booking(id)
-);
