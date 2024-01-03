@@ -2,19 +2,17 @@
 const ItemManager = require("./managers/ItemManager");
 const ParentManager = require("./managers/ParentManager");
 const NurseryManager = require("./managers/NurseryManager");
-// const UserManager = require("./managers/UserManager");
-// const ChildrenManager = require("./managers/ChildrenManager");
-// const AdministrativeRecordManager = require("./managers/AdministrativeRecordManager");
-// const BookingManager = require("./managers/BookingManager");
+const ChildrenManager = require("./managers/ChildrenManager");
+const BookingManager = require("./managers/BookingManager");
+const AdministrativeManager = require("./managers/AdministrativeManager");
 
 const managers = [
   ItemManager,
   ParentManager,
   NurseryManager,
-  // UserManager,
-  // ChildrenManager,
-  // AdministrativeRecordManager,
-  // BookingManager,
+  ChildrenManager,
+  BookingManager,
+  AdministrativeManager,
 ];
 
 // Create an empty object to hold data managers for different tables

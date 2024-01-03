@@ -38,7 +38,7 @@ CREATE TABLE nursery (
     musical_activities BOOLEAN NOT NULL
 );
 
-CREATE TABLE administrative_record (
+CREATE TABLE administrative (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     social_security_number VARCHAR(15) NOT NULL,
     income_proof_url TEXT NOT NULL,
@@ -51,14 +51,12 @@ CREATE TABLE booking (
     booked_at DATETIME NOT NULL
 );
 
--- Ajouter une clé étrangère pour référencer la table "children"
 ALTER TABLE booking
 ADD COLUMN children_id INT,
 ADD CONSTRAINT fk_booked_children
     FOREIGN KEY (children_id)
     REFERENCES children(id);
 
--- Ajouter une clé étrangère pour référencer la table "nursery"
 ALTER TABLE booking
 ADD COLUMN nursery_id INT,
 ADD CONSTRAINT fk_booking_nursery
