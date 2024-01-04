@@ -1,0 +1,47 @@
+footer {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  gap: 80px;
+  position: absolute;
+  bottom: 0;
+
+  img {
+    height: 20px;
+  }
+
+  .footerDescription {
+    font-size: 15px;
+    margin: 0 30px 10px 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  footer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .footerDescription {
+      font-size: 20px;
+      width: auto;
+      margin-right: 60px;
+    }
+
+    .footerLogo {
+      width: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    img {
+      width: auto;
+      margin-left: 60px;
+    }
+
+    p {
+      width: fit-content;
+    }
+  }
+}
