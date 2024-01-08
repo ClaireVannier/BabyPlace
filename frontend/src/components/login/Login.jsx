@@ -62,7 +62,7 @@ function Login() {
           <button className="formBtn" type="submit">
             Se connecter
           </button>
-          <p>
+          <p className="linktoregister">
             Nouveau sur BabyPlace ?{" "}
             <Link to="/register">Inscrivez-vous ici</Link>
           </p>

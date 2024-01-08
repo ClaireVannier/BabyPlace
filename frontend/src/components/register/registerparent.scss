@@ -1,0 +1,101 @@
+.registerContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .imgRegister {
+    display: none;
+  }
+
+  .logoForm {
+    margin: 40px 0;
+    width: 180px;
+
+    #logoFormCoeur {
+      height: 50px;
+    }
+  }
+
+  .registerForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 75%;
+    margin-top: 30px;
+  }
+
+  .titleForm {
+    margin-bottom: 50px;
+    font-size: 30px;
+  }
+  label {
+    font-size: larger;
+    input {
+      margin-top: 5px;
+      padding: 10px 15px;
+      border: 1px solid grey;
+      border-radius: 5px;
+      outline: none;
+      background-color: transparent;
+    }
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .formBtn {
+    margin-top: 10px;
+    background: linear-gradient(
+      148.74deg,
+      rgb(71, 79, 255) 2.49%,
+      rgb(227, 122, 204) 99.05%
+    );
+    color: #f2f2f2;
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+  }
+  .linktologin {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .registerContainer {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+
+    .imgRegister {
+      display: block;
+      width: 40%;
+    }
+    .titleForm {
+      font-size: 40px;
+    }
+    .registerForm {
+      width: 35%;
+      margin: 0 150px 0 200px;
+    }
+    input {
+      font-size: 20px;
+    }
+    .linktologin {
+      margin-top: 15px;
+      font-size: 22px;
+    }
+  }
+}
