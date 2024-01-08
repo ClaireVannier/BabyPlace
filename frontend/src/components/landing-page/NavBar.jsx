@@ -4,6 +4,8 @@ import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 
 function NavBar({ userType, setUserType }) {
+  const registerLink = userType === "pro" ? "/register/pro" : "/register";
+
   return userType === "parent" ? (
     <nav className="navBar">
       <div className="logoContainer">
@@ -36,7 +38,7 @@ function NavBar({ userType, setUserType }) {
         Vous êtes un parent?
       </button>
       <div className="navButton">
-        <Link to="/register">S'inscrire</Link>
+        <Link to={registerLink}>S'inscrire</Link>
         <Link to="/login">Connexion</Link>
       </div>
     </nav>

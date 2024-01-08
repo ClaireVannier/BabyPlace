@@ -4,7 +4,7 @@ import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 
-function Register() {
+function RegisterPro() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -69,46 +69,19 @@ function Register() {
             />
           </label>
           <label>
-            Prénom: <br />
-            <input
-              type="text"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Nom: <br />
-            <input
-              type="text"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label>
-            Numéro de téléphone: <br />
-            <input
-              type="number"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              required
-            />
+            Nom de la crèche: <br />
+            <input type="text" name="name" onChange={handleChange} required />
           </label>
           <button className="formBtn" type="submit">
             S'inscrire
           </button>
         </form>
         <p className="linktologin">
-          Déjà inscrit? <br />
-          <Link to="/login">Connectez-vous ici</Link>
+          Déjà inscrit? <Link to="/login">Connectez-vous ici</Link>
         </p>
       </div>
     </div>
   );
 }
 
-export default Register;
+export default RegisterPro;

@@ -1,0 +1,27 @@
+.profilContainer {
+  .profilTitle {
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+    padding: 30px 0;
+    box-shadow: 0px 12px 5px 0px rgba(168, 168, 168, 0.35);
+    border: 1px solid grey;
+  }
+
+  .myreservations {
+    font-size: 25px;
+    margin: 40px 0 30px 30px;
+    color: #7e72f2;
+    font-weight: 800;
+    text-shadow: 3px 2px 8px rgba(47, 47, 47, 0.38);
+  }
+
+  .reservationContainer {
+    background: linear-gradient(
+      114deg,
+      rgb(71 79 255 / 43%) 2.49%,
+      rgb(227, 122, 204) 99.05%
+    );
+    margin: 0 20px;
+  }
+}

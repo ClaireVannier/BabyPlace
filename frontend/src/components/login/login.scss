@@ -1,17 +1,24 @@
 .formContainer {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
   .logoForm {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+    width: 60%;
     margin-top: 50px;
-    width: 180px;
 
     #logoFormCoeur {
       height: 50px;
+    }
+
+    #logoFormTxt {
+      width: 100%;
     }
   }
 
@@ -20,9 +27,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 75%;
-    margin-top: 300px;
+    margin-top: 170px;
+
+    label {
+      font-size: 22px;
+    }
   }
 
   .titleForm {
@@ -31,6 +40,7 @@
   }
 
   input {
+    margin-top: 10px;
     padding: 10px 15px;
     border: 1px solid grey;
     border-radius: 5px;
@@ -41,7 +51,7 @@
   form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 30px;
   }
 
   .formBtn {
@@ -52,31 +62,54 @@
       rgb(227, 122, 204) 99.05%
     );
     color: #f2f2f2;
-    padding: 10px 0;
-    font-size: 24px;
+    padding: 12px 0;
+    font-size: 28px;
     font-weight: 700;
     cursor: pointer;
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: 10px;
     transition: 0.3s ease-in-out;
   }
   .linktoregister {
-    margin-top: 10px;
+    margin-top: 20px;
     text-align: center;
-    font-size: 16px;
+    font-size: 20px;
+    color: grey;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1400px) {
   .formContainer {
-    .titleForm {
-      font-size: 40px;
+    .logoForm {
+      #logoFormCoeur {
+        height: 80px;
+        width: 80%;
+      }
+      #logoFormTxt {
+        width: 50%;
+      }
     }
     .loginForm {
-      width: 30%;
-    }
-    input {
-      font-size: 20px;
+      width: 80%;
+      .titleForm {
+        font-size: 60px;
+      }
+
+      form {
+        width: 40%;
+
+        label {
+          width: auto;
+
+          input {
+            width: 100%;
+            padding: 15px;
+          }
+        }
+        .linktoregister {
+          font-size: 25px;
+        }
+      }
     }
   }
 }

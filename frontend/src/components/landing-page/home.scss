@@ -1,4 +1,4 @@
-h2 {
+.title {
   font-size: 30px;
   text-align: center;
   margin-bottom: 20px;
@@ -11,15 +11,43 @@ h2 {
   padding: 50px 0;
 }
 .imgHome {
-  margin-top: 20px;
-  height: 700px;
+  margin-top: 40px;
+  width: 100%;
+  height: 500px;
+  object-fit: contain;
 }
 
-@media screen and (min-width: 768px) {
+.imgHomePro {
+  margin-top: 40px;
+  width: 100%;
+  height: 400px;
+}
+
+@media screen and (min-width: 1250px) {
   .home {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 70vh;
+  }
+
+  .imgHome {
+    width: 35%;
+    height: auto;
+    margin-top: 200px;
+  }
+
+  .imgHomePro {
+    width: 20%;
+    height: 1000px;
+    margin-top: 200px;
+  }
+
+  .title {
+    font-size: 50px;
+  }
+
+  .descriptionHome {
+    font-size: 25px;
   }
 }

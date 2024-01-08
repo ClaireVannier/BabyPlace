@@ -1,11 +1,12 @@
 footer {
-  width: 100%;
-  margin: 0 auto;
+  margin-left: 30px;
   display: flex;
-  gap: 80px;
-  position: absolute;
-  bottom: 0;
-
+  gap: 125px;
+  .footerLogo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   img {
     height: 20px;
   }
@@ -16,32 +17,27 @@ footer {
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1250px) {
   footer {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    margin: 130px 0 0 50px;
 
     .footerDescription {
-      font-size: 20px;
+      font-size: 22px;
       width: auto;
       margin-right: 60px;
     }
 
     .footerLogo {
-      width: auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      gap: 15px;
     }
 
     img {
-      width: auto;
-      margin-left: 60px;
-    }
-
-    p {
-      width: fit-content;
+      height: 30px;
     }
   }
 }

@@ -1,118 +1,117 @@
-* {
-  width: 100%;
+.navBar {
+  height: 15vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 
-  .navBar {
-    width: 85%;
-    height: 15vh;
-    margin: 0 auto;
+  & button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .logoContainer {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
+    gap: 10px;
 
-    & button {
-      background: none;
-      border: none;
-      cursor: pointer;
+    #logoCoeur {
+      width: 30px;
+      height: 30px;
     }
-
-    .logoContainer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-
-      #logoCoeur {
-        width: 30px;
-        height: 30px;
-      }
-      #logoTxt {
-        height: 30px;
-        width: 148px;
-        margin-top: 2%;
-      }
+    #logoTxt {
+      height: 30px;
+      width: 148px;
+      margin-top: 2%;
     }
+  }
 
-    .userButton {
-      border-bottom: 1px solid transparent;
-      transition: 0.3s ease-in-out;
-      font-weight: 700;
-      font-size: 20px;
-      width: auto;
+  .userButton {
+    border-bottom: 1px solid transparent;
+    transition: 0.3s ease-in-out;
+    font-weight: 700;
+    font-size: 20px;
+    width: auto;
 
-      &:hover {
-        border-bottom: 1px solid #212353;
-      }
+    &:hover {
+      border-bottom: 1px solid #212353;
     }
+  }
 
-    .navButton {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      font-size: 20px;
-      width: 300px;
+  .navButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    font-size: 20px;
+    width: 300px;
 
-      & a {
-        padding: 10px 25px 10px 25px;
-        border: 1px solid transparent;
-        border-radius: 50px;
+    & a {
+      padding: 10px 25px 10px 25px;
+      border: 1px solid transparent;
+      border-radius: 50px;
 
-        &:first-of-type {
-          background-color: #7e72f2;
-          color: #f2f2f2;
-          font-weight: 500;
-          transition: 0.3s ease-in-out;
+      &:first-of-type {
+        background-color: #7e72f2;
+        color: #f2f2f2;
+        font-weight: 500;
+        transition: 0.3s ease-in-out;
 
-          &:hover {
-            background: none;
-            border: 1px solid #7e72f2;
-            color: black;
-          }
+        &:hover {
+          background: none;
+          border: 1px solid #7e72f2;
+          color: black;
         }
+      }
 
-        &:last-of-type {
-          box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
-          border: 1px solid transparent;
-          transition: 0.3s ease-in-out;
+      &:last-of-type {
+        box-shadow: -5px 5px 5px rgba(75, 93, 104, 0.1);
+        border: 1px solid transparent;
+        transition: 0.3s ease-in-out;
 
-          &:hover {
-            background: none;
-            border: 1px solid #7e72f2;
-            color: black;
-          }
+        &:hover {
+          background: none;
+          border: 1px solid #7e72f2;
+          color: black;
         }
       }
     }
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1250px) {
   .navBar {
     display: flex;
     flex-direction: row;
+    margin: 0 50px;
 
     .logoContainer {
       display: flex;
       justify-content: flex-start;
-      width: auto;
+      gap: 30px;
 
       #logoCoeur {
-        height: 70px;
-      }
+        width: auto;
+        height: 60px;
+      } 
 
       #logoTxt {
-        height: 70px;
+        width: auto;
+        height: 50px;
       }
     }
 
     .userButton {
-      font-size: 26px;
+      font-size: 30px;
       width: auto;
     }
 
     .navButton {
-      font-size: 20px;
+      font-size: 30px;
+      margin-right: 30px;
     }
   }
 }

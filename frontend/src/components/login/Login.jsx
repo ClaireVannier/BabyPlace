@@ -35,27 +35,27 @@ function Login() {
         <img id="logoFormTxt" src={logobaby} alt="texte du site" />
       </div>
       <div className="loginForm">
-        <h2 className="titleForm">Je me connecte</h2>
+        <h2 className="titleForm">Je me connecte !</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Email:
+            Email: <br />
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="Email"
+              placeholder="email"
               required
             />
           </label>
           <label>
-            Password:
+            Mot de Passe: <br />
             <input
               type="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Password"
+              placeholder="mot de passe"
               required
             />
           </label>
@@ -63,7 +63,7 @@ function Login() {
             Se connecter
           </button>
           <p className="linktoregister">
-            Nouveau sur BabyPlace ?{" "}
+            Nouveau sur BabyPlace ? <br />
             <Link to="/register">Inscrivez-vous ici</Link>
           </p>
         </form>
