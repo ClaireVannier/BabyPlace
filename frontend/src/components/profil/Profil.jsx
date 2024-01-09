@@ -9,6 +9,9 @@ function Profile() {
   const fakeReservations = [
     { id: 1, name: "Creche A", booked_at: "2023-09-12 12:00:00" },
     { id: 2, name: "Creche B", booked_at: "2023-09-12 12:00:00" },
+    { id: 3, name: "Creche C", booked_at: "2023-09-12 12:00:00" },
+    { id: 4, name: "Creche D", booked_at: "2023-09-12 12:00:00" },
+    { id: 5, name: "Creche E", booked_at: "2023-09-12 12:00:00" },
   ];
   // const [reservations, setReservations] = useState([]);
 
@@ -36,12 +39,12 @@ function Profile() {
 
   return (
     <div className="profilContainer">
-      <h2 className="profilTitle">{`Bonjour ${parentData.firstName} ${parentData.lastName}`}</h2>
+      <h2 className="profilTitle">{`Bonjour ${parentData.firstName} ${parentData.lastName} 😁 `}</h2>
       <h3 className="myreservations">Mes Réservations</h3>
       <ul className="reservationContainer">
         {fakeReservations.map((reservation) => (
           <li className="reservation" key={reservation.id}>
-            {`Crèche: ${reservation.name}, Date: ${reservation.booked_at}`}
+            {` ${reservation.name} Date: ${reservation.booked_at}`}
           </li>
         ))}
       </ul>

@@ -5,6 +5,7 @@ import Login from "./components/login/Login";
 import RegisterParent from "./components/register/RegisterParent";
 import RegisterPro from "./components/register/RegisterPro";
 import Profil from "./components/profil/Profil";
+import NurseryList from "./components/search/NurseryList";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<RegisterParent />} />
         <Route path="/register/pro" element={<RegisterPro />} />
         <Route path="/profil" element={<Profil />} />
+        <Route path="/search" element={<NurseryList />} />
       </Routes>
     </div>
   );
