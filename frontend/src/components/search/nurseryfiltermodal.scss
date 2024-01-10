@@ -10,9 +10,21 @@
   padding: 40px 20px;
   box-shadow: 5px 5px 15px 5px #000000;
 
+  .filtercontainer {
+    display: flex;
+    gap: 25px;
+
+    .resetfilter {
+      font-size: 13px;
+      border-radius: 5px;
+      background-color: lightgrey;
+      padding: 0 10px;
+    }
+  }
+
   .titlefilter {
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
     font-style: italic;
     font-weight: 600;
   }
@@ -59,9 +71,19 @@
 
 @media screen and (min-width: 1400px) {
   .filter-modal {
-    margin-top: 20px;
+    margin: 30px 0;
     width: 600px;
     height: fit-content;
+
+    .filtercontainer {
+      gap: 50px;
+
+      .resetfilter {
+        font-size: 18px;
+        height: fit-content;
+        padding: 5px;
+      }
+    }
     .titlefilter {
       font-size: 35px;
     }

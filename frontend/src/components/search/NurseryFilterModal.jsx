@@ -40,10 +40,12 @@ function NurseryFilterModal({ applyFilters, appliedFilters }) {
 
   return (
     <div className="filter-modal">
-      <button type="button" className="resetfilter" onClick={handleReset}>
-        Réinitialiser
-      </button>
-      <h2 className="titlefilter">Selectionnez différents filtres: </h2>
+      <div className="filtercontainer">
+        <h2 className="titlefilter">Selectionnez différents filtres: </h2>
+        <button type="button" className="resetfilter" onClick={handleReset}>
+          Réinitialiser
+        </button>
+      </div>
       <div className="checkboxcontainer">
         <label>
           <input
