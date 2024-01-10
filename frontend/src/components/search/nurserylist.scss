@@ -1,0 +1,39 @@
+.nurserylistcontainer {
+  display: flex;
+  justify-content: end;
+  .filterbtn {
+    font-size: 22px;
+    background: linear-gradient(
+      148.74deg,
+      rgb(71, 79, 255) 2.49%,
+      rgb(227, 122, 204) 99.05%
+    );
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 20px 20px 0 0;
+  }
+}
+
+.cardList {
+  margin: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+@media screen and (min-width: 1400px) {
+  .nurserylistcontainer {
+    svg {
+      width: 30px;
+      height: 30px;
+      margin: 5px 10px 0 0;
+    }
+    .filterbtn {
+      font-size: 30px;
+      font-weight: 550;
+      padding: 10px 15px;
+      margin: 20px 20px 0 0;
+    }
+  }
+}

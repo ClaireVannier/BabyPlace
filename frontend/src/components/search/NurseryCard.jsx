@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 function NurseryCard({ nursery }) {
   return (
     <div className="nurseryCard">
-      <img src={nursery.picture_url} alt={nursery.name} />
-      <h3>{nursery.name}</h3>
-      <p>{nursery.adress}</p>
+      <img
+        className="nurseryimg"
+        src={nursery.picture_url}
+        alt={nursery.name}
+      />
+      <h3 className="nurseryname">{nursery.name}</h3>
+      <p className="nurseryadress">{nursery.adress}</p>
     </div>
   );
 }

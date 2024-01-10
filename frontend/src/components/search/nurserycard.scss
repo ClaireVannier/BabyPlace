@@ -1,0 +1,49 @@
+.nurseryCard {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+  margin: 0 auto;
+  padding: 10px;
+  width: 350px;
+  border-radius: 5px;
+
+  .nurseryimg {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px 5px rgba(68, 68, 68, 0.51);
+  }
+
+  .nurseryname {
+    font-size: 22px;
+    margin: 20px 0 10px 0;
+  }
+
+  .nurseryadress {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 600;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .nurseryCard {
+    width: 70%;
+    padding: 20px 40px;
+
+    .nurseryimg {
+      border-radius: 10px;
+    }
+
+    .nurseryname {
+      font-size: 35px;
+    }
+
+    .nurseryadress {
+      margin-top: 10px;
+      font-size: 25px;
+    }
+  }
+}

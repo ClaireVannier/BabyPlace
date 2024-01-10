@@ -10,7 +10,7 @@ const fakeNurseries = [
     description:
       "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
     outdoor_space: true,
-    homemade_meals: true,
+    homemade_meals: false,
     developmental_activities: false,
     musical_activities: false,
   },
@@ -23,8 +23,8 @@ const fakeNurseries = [
     description:
       "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
     outdoor_space: true,
-    homemade_meals: true,
-    developmental_activities: false,
+    homemade_meals: false,
+    developmental_activities: true,
     musical_activities: false,
   },
   {
@@ -35,10 +35,10 @@ const fakeNurseries = [
     picture_url: creche2,
     description:
       "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
-    outdoor_space: true,
+    outdoor_space: false,
     homemade_meals: true,
     developmental_activities: false,
-    musical_activities: false,
+    musical_activities: true,
   },
   {
     id: 4,
@@ -50,8 +50,8 @@ const fakeNurseries = [
       "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
     outdoor_space: true,
     homemade_meals: true,
-    developmental_activities: false,
-    musical_activities: false,
+    developmental_activities: true,
+    musical_activities: true,
   },
   {
     id: 5,
@@ -61,10 +61,10 @@ const fakeNurseries = [
     picture_url: creche2,
     description:
       "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
-    outdoor_space: true,
+    outdoor_space: false,
     homemade_meals: true,
-    developmental_activities: false,
-    musical_activities: false,
+    developmental_activities: true,
+    musical_activities: true,
   },
 ];
 
