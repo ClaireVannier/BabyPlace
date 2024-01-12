@@ -6,6 +6,10 @@ import RegisterParent from "./components/register/RegisterParent";
 import RegisterPro from "./components/register/RegisterPro";
 import Profil from "./components/profil/Profil";
 import NurseryList from "./components/search/NurseryList";
+import ConfirmationAccount from "./components/confirmations/ConfirmationAccount";
+import ConfirmationReservation from "./components/confirmations/ConfirmationReservation";
+import ConfirmationFile from "./components/confirmations/ConfirmationFile";
+import RegisterForm from "./components/administrative_file/RegisterForm";
 
 function App() {
   return (
@@ -17,6 +21,19 @@ function App() {
         <Route path="/register/pro" element={<RegisterPro />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/search" element={<NurseryList />} />
+        <Route
+          path="/register/accountcreated"
+          element={<ConfirmationAccount />}
+        />
+        <Route
+          path="/reservation/confirmation"
+          element={<ConfirmationReservation />}
+        />
+        <Route
+          path="/register/confirmationfile"
+          element={<ConfirmationFile />}
+        />
+        <Route path="/register/file" element={<RegisterForm />} />
       </Routes>
     </div>
   );
