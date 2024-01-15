@@ -30,21 +30,15 @@
   }
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 850px) {
   .nurseryCard {
     width: 70%;
-    padding: 20px 40px;
-
-    .nurseryimg {
-      border-radius: 10px;
-    }
 
     .nurseryname {
       font-size: 35px;
     }
-
     .nurseryadress {
-      margin-top: 10px;
+      margin: 10px 0;
       font-size: 25px;
     }
   }
