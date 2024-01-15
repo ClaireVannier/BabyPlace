@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 
@@ -59,12 +59,12 @@ function Login() {
               required
             />
           </label>
-          <button className="formBtn" type="submit">
+          <NavLink to="/search" className="formBtn">
             Se connecter
-          </button>
+          </NavLink>
           <p className="linktoregister">
             Nouveau sur BabyPlace ? <br />
-            <Link to="/register">Inscrivez-vous ici</Link>
+            <NavLink to="/register">Inscrivez-vous ici</NavLink>
           </p>
         </form>
       </div>

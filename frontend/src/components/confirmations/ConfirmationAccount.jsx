@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import mombaby from "../../assets/mom-baby-1.svg";
 import logoblanc from "../../assets/logo-blanc.svg";
 
@@ -19,9 +20,9 @@ function ConfirmationAccount() {
         informations administrative obligatoires. <br />{" "}
         <span>Promis, ca sera la seule fois! 😁</span>
       </p>
-      <button className="gotofile" type="button">
+      <NavLink to="/register/file" className="gotofile">
         Compléter mon dossier
-      </button>
+      </NavLink>
     </div>
   );
 }

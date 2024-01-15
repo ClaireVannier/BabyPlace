@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
@@ -98,9 +98,13 @@ function Register() {
               required
             />
           </label>
-          <button className="formBtn" type="submit">
+          <NavLink
+            to="/register/accountcreated"
+            className="formBtn"
+            type="submit"
+          >
             S'inscrire
-          </button>
+          </NavLink>
         </form>
         <p className="linktologin">
           Déjà inscrit? <br />

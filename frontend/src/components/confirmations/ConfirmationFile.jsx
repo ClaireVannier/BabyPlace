@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import logodossier from "../../assets/img-dossier.svg";
 import logoblanc from "../../assets/logo-blanc.svg";
 
@@ -17,9 +18,9 @@ function ConfirmationFile() {
         Vous pouvez maintenant profiter de toutes les fonctionnalités du site et
         commencer à faire votre première recherche.
       </p>
-      <button className="gotofile" type="button">
+      <NavLink to="/search" className="gotofile" type="button">
         Rechercher une crèche
-      </button>
+      </NavLink>
     </div>
   );
 }

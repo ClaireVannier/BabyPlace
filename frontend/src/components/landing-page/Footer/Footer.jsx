@@ -1,5 +1,5 @@
-import logocoeur from "../../assets/logocoeur.svg";
-import logobaby from "../../assets/logobaby.svg";
+import logocoeur from "../../../assets/logocoeur.svg";
+import logobaby from "../../../assets/logobaby.svg";
 
 function Footer() {
   return (

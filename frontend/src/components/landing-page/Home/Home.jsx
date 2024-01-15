@@ -1,8 +1,8 @@
 import { useState } from "react";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
-import mom2 from "../../assets/mom2.png";
-import pro1 from "../../assets/pro1.svg";
+import NavBar from "../NavBar/NavBar";
+import Footer from "../Footer/Footer";
+import mom2 from "../../../assets/mom2.png";
+import pro1 from "../../../assets/pro1.svg";
 
 function Home() {
   const [userType, setUserType] = useState("parent");

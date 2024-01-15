@@ -56,6 +56,7 @@
   }
 
   .formBtn {
+    text-align: center;
     margin-top: 10px;
     background: linear-gradient(
       148.74deg,
@@ -100,7 +101,7 @@
     form {
       width: 80%;
       display: flex;
-      gap: 20Px;
+      gap: 20px;
     }
     label {
       font-size: 23px;

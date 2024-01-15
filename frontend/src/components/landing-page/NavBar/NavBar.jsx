@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import logobaby from "../../assets/logobaby.svg";
-import logocoeur from "../../assets/logocoeur.svg";
+import logobaby from "../../../assets/logobaby.svg";
+import logocoeur from "../../../assets/logocoeur.svg";
 
 function NavBar({ userType, setUserType }) {
   const registerLink = userType === "pro" ? "/register/pro" : "/register";

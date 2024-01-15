@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
@@ -34,9 +35,13 @@ function RegisterForm() {
           <p className="confirm-file">
             Tout est bien complet? Alors vous pouvez:
           </p>
-          <button className="formBtnRegister" type="submit">
+          <NavLink
+            to="/register/confirmationfile"
+            className="formBtnRegister"
+            type="submit"
+          >
             Valider mon dossier
-          </button>
+          </NavLink>
         </form>
       </div>
     </div>
