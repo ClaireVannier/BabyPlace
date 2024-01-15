@@ -1,18 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300&display=swap");
+
 .nurseryCard {
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid grey;
   margin: 0 auto;
-  padding: 10px;
+  padding-bottom: 15px;
   width: 350px;
   border-radius: 5px;
 
   .nurseryimg {
     width: 100%;
-    border-radius: 5px;
+    border-radius: 5px 5px 0 0;
     box-shadow: 5px 5px 15px 5px rgba(68, 68, 68, 0.51);
   }
 
@@ -25,6 +26,7 @@
     font-size: 16px;
     font-style: italic;
     font-weight: 600;
+    font-family: "Nunito Sans", sans-serif;
   }
 }
 
