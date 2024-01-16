@@ -12,7 +12,7 @@ function ConfirmationReservation() {
         src={logoresa}
         alt="femme avec une horloge"
       />
-      <h2 className="confirmation-title">Fantastique</h2>
+      <h2 className="confirmation-title">Fantastique !</h2>
       <p className="account-created">
         La crèche Picoti confirme accueillir votre enfant le 12 janvier.
       </p>

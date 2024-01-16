@@ -18,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterParent />} />
+        <Route path="/register/file" element={<RegisterForm />} />
         <Route path="/register/pro" element={<RegisterPro />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/search" element={<NurseryList />} />
@@ -33,7 +34,6 @@ function App() {
           path="/register/confirmationfile"
           element={<ConfirmationFile />}
         />
-        <Route path="/register/file" element={<RegisterForm />} />
       </Routes>
     </div>
   );

@@ -56,52 +56,31 @@
   }
 }
 
-@media screen and (min-witdh: 768px) {
+@media screen and (min-width: 1400px) {
   .confirmation-container {
-    min-height: 100vh;
-  
-    .logo-container {
-      margin-top: 30px;
-      width: 35%;
-      img {
-        width: 30%;
-      }
-    }
-  
+    height: fit-content; 
     .confirmation-img {
       width: 30%;
-      margin: 50px 0 30px 0;
     }
-  
+    .logo-container {
+      width: 10%;
+    }
     .confirmation-title {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 20px;
+      font-size: 50px;
     }
-  
-    .account-created {
-      text-align: center;
-      margin: 0 50px;
-      font-size: 24px;
-    }
+.account-created {
+  font-size: 28px;
+}
     .need-information {
-      font-size: 20px;
-      margin: 50px 40px 30px 40px;
+      font-size: 30px;
+
       span {
-        margin-left: 140px;
-        font-size: 16px;
-        margin-top: 30px;
-        display: inline-block;
+        font-size: 24Px;
       }
     }
-  
+
     .gotofile {
-      font-size: 25px;
-      padding: 15px;
-      border-radius: 10px;
-      border: 1px solid grey;
-      background-color: #ffa84c;
-      margin: 50px 0;
-      font-weight: 300;
+      font-size: 35px;
     }
-  }}
+  }
+}

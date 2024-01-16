@@ -8,7 +8,9 @@
   align-content: center;
   align-items: center;
   justify-content: space-between;
-
+  position: fixed;
+  width: 100%;
+  top: 0;
   .icon-profil {
     height: 30px;
     width: 30px;
@@ -35,6 +37,7 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding-top: 60px;
 }
 
 @media screen and (min-width: 850px) {
@@ -58,5 +61,10 @@
         margin-right: 50px;
       }
     }
+  }
+
+  .cardList {
+    padding-top: 100px;
+    gap: 50px
   }
 }
