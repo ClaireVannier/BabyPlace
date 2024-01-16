@@ -98,7 +98,10 @@ function Profile() {
               src={creche1}
               alt="illustration creche"
             />
-            <p className="namereservation"> {` ${reservation.name} le ${reservation.booked_at}`}</p>
+            <p className="namereservation">
+              {" "}
+              {` ${reservation.name} le ${reservation.booked_at}`}
+            </p>
             <p className="status">Confirmée</p>
           </li>
         ))}
