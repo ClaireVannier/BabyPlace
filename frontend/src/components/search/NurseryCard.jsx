@@ -1,16 +1,19 @@
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 function NurseryCard({ nursery }) {
   return (
-    <div className="nurseryCard">
-      <img
-        className="nurseryimg"
-        src={nursery.picture_url}
-        alt={nursery.name}
-      />
-      <h3 className="nurseryname">{nursery.name}</h3>
-      <p className="nurseryadress">{nursery.adress}</p>
-    </div>
+    <NavLink to={`nurserydetails/${nursery.id}`}>
+      <div className="nurseryCard">
+        <img
+          className="nurseryimg"
+          src={nursery.picture_url}
+          alt={nursery.name}
+        />
+        <h3 className="nurseryname">{nursery.name}</h3>
+        <p className="nurseryadress">{nursery.adress}</p>
+      </div>
+    </NavLink>
   );
 }
 

@@ -10,6 +10,7 @@ import ConfirmationAccount from "./components/confirmations/ConfirmationAccount"
 import ConfirmationReservation from "./components/confirmations/ConfirmationReservation";
 import ConfirmationFile from "./components/confirmations/ConfirmationFile";
 import RegisterForm from "./components/administrative_file/AdministrativeForm";
+import NurseryPage from "./components/search/nursery_details /NurseryPage";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           path="/register/confirmationfile"
           element={<ConfirmationFile />}
         />
+        <Route path="search/nurserydetails/:id" element={<NurseryPage />} />
       </Routes>
     </div>
   );

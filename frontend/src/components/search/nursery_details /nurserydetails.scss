@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&display=swap");
+.nursery-detail-container {
+  background: linear-gradient(
+    130deg,
+    rgb(71, 79, 255) 2.49%,
+    rgb(227, 122, 204) 99.05%
+  );
+  height: max-content;
+  padding-bottom: 20px;
+
+  .nursery-detail-name {
+    padding: 25px 0 0 30px;
+    color: white;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .nursery-detail-container-white {
+    background-color: white;
+    margin: 30px 20px;
+    padding-bottom: 30px;
+    border-radius: 15px;
+    min-height: 85vh;
+
+    .nursery-detail-img {
+      border-radius: 15px 15px 0 0;
+      width: 100%;
+    }
+
+    .nursery-detail-info {
+      margin: 30px 0 10px 15px;
+      font-size: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      font-family: "Nunito", sans-serif;
+
+      span {
+        display: inline-block;
+        margin-bottom: 5px;
+        font-weight: 700;
+      }
+
+      h3 {
+        font-weight: 600;
+      }
+    }
+
+    .reservation-button {
+      margin: 40px 0 0 200px;
+      background-color: #9b51e0;
+      color: #f2f2f2;
+      padding: 0.5em 1em;
+      font-size: 28px;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: 0.3s ease-in-out;
+    }
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .nursery-detail-container {
+    .nursery-detail-name {
+      text-align: center;
+      font-size: 40px;
+    }
+    .nursery-detail-container-white {
+      max-width: 1300px;
+      margin: auto;
+      margin-top: 50px;
+      .reservation-button {
+        font-size: 35px;
+        margin-left: 1050px;
+      }
+    }
+  }
+}

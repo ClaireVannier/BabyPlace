@@ -8,7 +8,7 @@ const fakeNurseries = [
     adress: "31 Rue du Pradas Merignac",
     picture_url: creche1,
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
+      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
     outdoor_space: true,
     homemade_meals: false,
     developmental_activities: false,
@@ -21,7 +21,7 @@ const fakeNurseries = [
 
     picture_url: creche1,
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
+      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
     outdoor_space: true,
     homemade_meals: false,
     developmental_activities: true,
@@ -34,7 +34,7 @@ const fakeNurseries = [
 
     picture_url: creche2,
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
+      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
     outdoor_space: false,
     homemade_meals: true,
     developmental_activities: false,
@@ -47,7 +47,7 @@ const fakeNurseries = [
 
     picture_url: creche2,
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
+      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
     outdoor_space: true,
     homemade_meals: true,
     developmental_activities: true,
@@ -60,7 +60,7 @@ const fakeNurseries = [
 
     picture_url: creche2,
     description:
-      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet",
+      "lorem ipsum dolor sit amet, consectetur adipiscing lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet",
     outdoor_space: false,
     homemade_meals: true,
     developmental_activities: true,
