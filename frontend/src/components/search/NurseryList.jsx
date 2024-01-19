@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import fakeNurseries from "./FakeData";
+import exports from "./FakeData";
 import NurseryCard from "./NurseryCard";
 import NurseryFilterModal from "./NurseryFilterModal";
 
@@ -16,7 +16,7 @@ function NurseryList() {
   });
 
   const applyFilters = (filters) => {
-    const filteredList = fakeNurseries.filter((nursery) => {
+    const filteredList = exports.fakeNurseries.filter((nursery) => {
       return (
         (!filters.outdoorSpace ||
           nursery.outdoor_space === filters.outdoorSpace) &&
@@ -81,7 +81,7 @@ function NurseryList() {
       <div className="cardList">
         {(filteredNurseries.length >= 1
           ? filteredNurseries
-          : fakeNurseries
+          : exports.fakeNurseries
         ).map((item) => (
           <NurseryCard key={item.id} nursery={item} />
         ))}

@@ -9,6 +9,7 @@ const nurseryControllers = require("./controllers/nurseryControllers");
 const childrenControllers = require("./controllers/childrenControllers");
 const bookingControllers = require("./controllers/bookingControllers");
 const administrativeControllers = require("./controllers/administrativeControllers");
+const dateControllers = require("./controllers/dateControllers");
 
 // Route to get a list of items
 router.get("/items", itemControllers.browse);
@@ -40,10 +41,17 @@ router.post("/booking", bookingControllers.post);
 router.put("/booking/:id", bookingControllers.put);
 router.delete("/booking/:id", bookingControllers.deleteBooking);
 
-// Route for AdmnistrativeRecord
+// Route for Admnistrative
 
 router.get("/administrative/:id", administrativeControllers.get);
 router.post("/administrative", administrativeControllers.post);
 router.put("/administrative/:id", administrativeControllers.put);
+
+// Route pour date
+
+router.get("/date/:id", dateControllers.get);
+router.post("/date", dateControllers.post);
+router.put("/date/:id", dateControllers.put);
+router.delete("/date/:id", dateControllers.deletedate);
 
 module.exports = router;

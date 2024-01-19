@@ -36,11 +36,11 @@ function RegisterForm() {
             Tout est bien complet? Alors vous pouvez:
           </p>
           <NavLink
-            to="/register/confirmationfile"
+            to="/register/children"
             className="formBtnRegister"
             type="submit"
           >
-            Valider mon dossier
+            Renseigner mes enfants
           </NavLink>
         </form>
       </div>

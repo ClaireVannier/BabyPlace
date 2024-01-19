@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
 
 function NurseryDetails({ nursery }) {
   return (
@@ -32,10 +33,17 @@ function NurseryDetails({ nursery }) {
             )}
             {nursery.musical_activities && <li> - Eveil musical</li>}
           </ul>
+          <p>Nombre de place restante: {nursery.capacity}</p>
         </div>
-        <button className="reservation-button" type="button">
-          Reserver
-        </button>
+        <div className="booking-container">
+          <NavLink
+            to={`/nursery/reservation/${nursery.id}`}
+            className="reservation-NavLink"
+            type="button"
+          >
+            Suivant
+          </NavLink>
+        </div>
       </div>
     </div>
   );
@@ -53,5 +61,6 @@ NurseryDetails.propTypes = {
     homemade_meals: PropTypes.bool,
     developmental_activities: PropTypes.bool,
     musical_activities: PropTypes.bool,
+    capacity: PropTypes.number,
   }).isRequired,
 };

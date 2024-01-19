@@ -11,6 +11,8 @@ import ConfirmationReservation from "./components/confirmations/ConfirmationRese
 import ConfirmationFile from "./components/confirmations/ConfirmationFile";
 import RegisterForm from "./components/administrative_file/AdministrativeForm";
 import NurseryPage from "./components/search/nursery_details /NurseryPage";
+import Reservation from "./components/reservations/Reservations";
+import AdministrativeChildren from "./components/administrative_file/AdministrativeChildren.Jsx";
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
           element={<ConfirmationFile />}
         />
         <Route path="search/nurserydetails/:id" element={<NurseryPage />} />
+        <Route path="nursery/reservation/:id" element={<Reservation />} />
+        <Route path="/register/children" element={<AdministrativeChildren />} />
       </Routes>
     </div>
   );

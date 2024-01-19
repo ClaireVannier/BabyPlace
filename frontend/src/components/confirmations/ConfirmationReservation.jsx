@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import logoresa from "../../assets/img-time.svg";
 import logoblanc from "../../assets/logo-blanc.svg";
 
@@ -20,9 +21,9 @@ function ConfirmationReservation() {
         La crèche se reserve le droit d'annuler malgré tout, vous pouvez suivre
         le statut de votre réservation dans votre profil.
       </p>
-      <button className="gotofile" type="button">
+      <NavLink to="/profil" className="gotofile">
         Aller voir mon profil
-      </button>
+      </NavLink>
     </div>
   );
 }

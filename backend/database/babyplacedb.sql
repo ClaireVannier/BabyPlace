@@ -47,8 +47,7 @@ CREATE TABLE administrative (
 );
 
 CREATE TABLE booking (
-    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    booked_at DATETIME NOT NULL
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY
 );
 
 ALTER TABLE booking
@@ -71,10 +70,10 @@ ADD CONSTRAINT fk_parent_id
     REFERENCES parent(id);
 
 ALTER TABLE parent
-ADD COLUMN administrative_record_id INT,
-ADD CONSTRAINT fk_administrative_record_id
-    FOREIGN KEY (administrative_record_id)
-    REFERENCES administrative_record(id);
+ADD COLUMN administrative_id INT,
+ADD CONSTRAINT fk_administrative_id
+    FOREIGN KEY (administrative_id)
+    REFERENCES administrative(id);
 
 ALTER TABLE parent
 ADD COLUMN user_id INT,
@@ -88,3 +87,15 @@ ADD CONSTRAINT fk_nursery_user
     FOREIGN KEY (user_id)
     REFERENCES user(id);
 
+ALTER TABLE nursery
+ADD COLUMN capacity INT,
+ADD COLUMN time_slot VARCHAR(255);
+
+
+CREATE TABLE date (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    booking_id INT,
+    start_date DATETIME,
+    end_date DATETIME,
+    FOREIGN KEY (booking_id) REFERENCES booking(id)
+);
