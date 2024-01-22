@@ -9,7 +9,7 @@ const register = async (req, res) => {
   tables.user
     .create(req.body, false)
     .then(() => {
-      res.status(201).send({ message: "Compte crée avec succès" });
+      res.status(201).json({ message: "Compte crée avec succès" });
     })
     .catch((err) => {
       console.error(err);
@@ -21,7 +21,7 @@ const registerPro = async (req, res) => {
   tables.user
     .create(req.body, true)
     .then(() => {
-      res.status(201).send({ message: "Compte crée avec succès" });
+      res.status(201).json({ message: "Compte crée avec succès" });
     })
     .catch((err) => {
       console.error(err);

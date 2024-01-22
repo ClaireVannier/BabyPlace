@@ -12,7 +12,7 @@ import ConfirmationFile from "./components/confirmations/ConfirmationFile";
 import RegisterForm from "./components/administrative_file/AdministrativeForm";
 import NurseryPage from "./components/search/nursery_details /NurseryPage";
 import Reservation from "./components/reservations/Reservations";
-import AdministrativeChildren from "./components/administrative_file/AdministrativeChildren.Jsx";
+import AdministrativeChildren from "./components/administrative_file/AdministrativeChildren";
 
 function App() {
   return (

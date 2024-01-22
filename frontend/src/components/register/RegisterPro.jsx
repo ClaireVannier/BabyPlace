@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
@@ -9,9 +10,6 @@ function RegisterPro() {
     email: "",
     password: "",
     confirmPassword: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
   });
 
   const handleChange = (e) => {
@@ -24,7 +22,22 @@ function RegisterPro() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // ici la logique pour traiter les données du formulaire
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/register/pro`, {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((resp) => {
+        console.info(resp);
+        // use navigate vers le form de dossier admin
+        // dossier admin: faire le form, axios post, postamner avant de faire le form
+        // une fois back ok, et une fois form ok pour post (verifier dans bdd), rediriger vers confirmation file
+        //
+        // TODO : post le formulaire dans la table nursery
+      })
+      .catch((err) => {
+        console.error(err);
+      });
     console.info("Données du formulaire soumises :", formData);
   };
 
@@ -68,10 +81,11 @@ function RegisterPro() {
               required
             />
           </label>
-          <label>
+          {/* a deplacer dans le formulaire dinscription dossier coté creche  */}
+          {/* <label>
             Nom de la crèche: <br />
             <input type="text" name="name" onChange={handleChange} required />
-          </label>
+          </label> */}
           <button className="formBtn" type="submit">
             S'inscrire
           </button>

@@ -11,21 +11,20 @@ const get = async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    res.sendStatus(500).json({ sucess: false, message: err.message });
+    res.status(500).json({ sucess: false, message: err.message });
   }
 };
 
 const post = async (req, res) => {
-  const parent = req.body;
-
-  try {
-    const insertId = await tables.parent.create(parent);
-
-    res.status(201).json({ insertId });
-  } catch (err) {
-    console.error(err);
-    res.status(500).error(err.message);
-  }
+  tables.parent
+    .create(req.body)
+    .then(() => {
+      res.status(201).json({ message: "Parent crée avec succès" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(422).send({ error: err.message });
+    });
 };
 
 const put = async (req, res) => {
