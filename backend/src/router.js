@@ -1,8 +1,6 @@
 const express = require("express");
-const multer = require("multer");
 
 const router = express.Router();
-const upload = multer({ dest: "public/uploads/" });
 
 // Import itemControllers module for handling item-related operations
 const itemControllers = require("./controllers/itemControllers");
@@ -12,15 +10,7 @@ const childrenControllers = require("./controllers/childrenControllers");
 const bookingControllers = require("./controllers/bookingControllers");
 const administrativeControllers = require("./controllers/administrativeControllers");
 const dateControllers = require("./controllers/dateControllers");
-const uploadController = require("./controllers/uploadControllers");
-const validateUser = require("./middlewares/Security/validateUser.middleware");
 const userControllers = require("./controllers/userControllers");
-
-const {
-  authMiddleware,
-  authAdminMiddleware,
-} = require("./middlewares/Security/auth.middleware");
-const currentMiddlewareUser = require("./middlewares/currentUser.middleware");
 
 // Route to get a list of items
 router.get("/items", itemControllers.browse);
@@ -67,36 +57,9 @@ router.delete("/date/:id", dateControllers.deletedate);
 
 // Route for User
 
-router.get(
-  "/users",
-  authMiddleware,
-  authAdminMiddleware,
-  userControllers.getUsers
-);
-router.get(
-  "/users/:id([0-9]+)",
-  authMiddleware,
-  currentMiddlewareUser,
-  userControllers.getUser
-);
-router.get("/users/me", authMiddleware, userControllers.getProfile);
-router.post("/users", validateUser, userControllers.postUser);
-router.post("/login", userControllers.postLogin);
+router.post("/register", userControllers.register);
+router.post("/register/pro", userControllers.registerPro);
 
-// UPLOADS
-
-router.get(
-  "/uploads",
-  authMiddleware,
-  authAdminMiddleware,
-  uploadController.getList
-);
-
-router.post(
-  "/uploads",
-  authMiddleware,
-  upload.single("avatar"),
-  uploadController.create
-);
+router.post("/login", userControllers.login);
 
 module.exports = router;

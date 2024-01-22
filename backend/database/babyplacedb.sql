@@ -103,7 +103,7 @@ CREATE TABLE date (
 );
 
 
-INSERT INTO user (email,password,is_nursery) VALUES ('user@demo.com','1234',0),('admin@demo.com', '1234',1);
+INSERT INTO user (email,password) VALUES ('user@demo.com','1234')
 
  CREATE TABLE upload ( 
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,

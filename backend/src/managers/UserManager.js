@@ -8,12 +8,16 @@ class UserManager extends AbstractManager {
     super({ table: "user" });
   }
 
-  async create(user) {
+  static hashPassword(password, workFactor = 5) {
+    return _hash(password, workFactor);
+  }
+
+  async create(user, isNursery) {
     const hashedPassword = await UserManager.hashPassword(user.password);
 
     const [result] = await this.database.query(
       `INSERT INTO ${this.table} (email, password, is_nursery) VALUES (?, ?, ?)`,
-      [user.email, hashedPassword, user.isNursery]
+      [user.email, hashedPassword, isNursery ? 1 : 0]
     );
 
     return result.insertId;
@@ -49,10 +53,6 @@ class UserManager extends AbstractManager {
       `UPDATE ${this.table} SET avatar = ? WHERE id = ?`,
       [avatarId, userId]
     );
-  }
-
-  static hashPassword(password, workFactor = 5) {
-    return _hash(password, workFactor);
   }
 }
 

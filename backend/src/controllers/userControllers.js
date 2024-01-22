@@ -1,30 +1,45 @@
 const jwt = require("jsonwebtoken");
-const UserManager = require("../managers/UserManager");
-
-const userManager = new UserManager();
+const tables = require("../tables");
 
 function generateAccessToken(data) {
-  return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "86400s" });
+  return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "3600s" });
 }
 
-const getUsers = async (_, res) => {
-  try {
-    const users = await UserManager.findAll();
-    res.json(users);
-  } catch (err) {
-    console.error(err);
-    res.status(500);
-  }
+const register = async (req, res) => {
+  tables.user
+    .create(req.body, false)
+    .then(() => {
+      res.status(201).send({ message: "Compte crée avec succès" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(422).send({ error: err.message });
+    });
 };
 
-const postLogin = async (req, res) => {
+const registerPro = async (req, res) => {
+  tables.user
+    .create(req.body, true)
+    .then(() => {
+      res.status(201).send({ message: "Compte crée avec succès" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(422).send({ error: err.message });
+    });
+};
+
+const login = async (req, res) => {
   try {
-    const user = await UserManager.login(req.body);
+    const user = await tables.user.login(req.body);
     if (user) {
-      const token = generateAccessToken({ id: user.id });
+      const token = generateAccessToken({
+        id: user.id,
+        isNursery: user.is_nursery,
+      });
       res.send({ token });
     } else {
-      res.status(401).send({ error: "Identifiant incorrect" });
+      res.status(401).send({ error: "Identifiants incorrects !" });
     }
   } catch (err) {
     console.error(err);
@@ -32,41 +47,37 @@ const postLogin = async (req, res) => {
   }
 };
 
-const postUser = async (req, res) => {
-  try {
-    const userId = await userManager.create(req.body);
-    res.send({
-      id: userId,
-      email: req.body.email,
-      password: req.body.password,
-      is_nursery: req.body.isNursery,
-    });
-  } catch (err) {
-    res.status(422).send({ error: err.message });
-  }
-};
+// const getAll = async (_, res) => {
+//   try {
+//     const users = await UserManager.findAll();
+//     res.json(users);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500);
+//   }
+// };
 
-const getProfil = (req, res) => {
-  res.send(req.user);
-};
+// const getById = async (req, res) => {
+//   const id = +req.params.id;
+//   try {
+//     const [result] = await UserManager.find(id);
+//     if (!result.length) {
+//       return res.status(404).send({ error: "User not found" });
+//     }
+//     return res.send(result[0]);
+//   } catch (error) {
+//     return res.status(422).send({ error: error.message });
+//   }
+// };
 
-const getUser = async (req, res) => {
-  const id = +req.params.id;
-  try {
-    const [result] = await UserManager.find(id);
-    if (!result.length) {
-      return res.status(404).send({ error: "User not found" });
-    }
-    return res.send(result[0]);
-  } catch (error) {
-    return res.status(422).send({ error: error.message });
-  }
-};
+// const getProfil = (req, res) => {
+//   res.send(req.user);
+// };
 
 module.exports = {
-  getUsers,
-  postUser,
-  postLogin,
-  getProfil,
-  getUser,
+  // getAll,
+  register,
+  registerPro,
+  login,
+  // getById,
 };
