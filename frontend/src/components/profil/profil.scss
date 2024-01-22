@@ -50,6 +50,7 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding-bottom: 25px;
 
   .reservation {
     background-color: white;
@@ -68,7 +69,6 @@
 }
 .namereservation {
   font-size: 20px;
-
 }
 .status {
   background-color: #22c55e;
@@ -77,12 +77,11 @@
 }
 
 @media screen and (min-width: 1400px) {
-
   .header-profil {
     height: 80px;
     svg {
-      height: 30Px;
-      width: 30Px;
+      height: 30px;
+      width: 30px;
       margin-left: 20px;
     }
     .title-profil {
@@ -97,33 +96,33 @@
     .iconprofil {
       height: 60px;
       width: 60px;
-      margin-right: 15Px;
+      margin-right: 15px;
     }
 
     .name-user {
       font-size: 30px;
     }
   }
-.reservationContainer {
-  max-width: 800px;
-  margin: auto;
-  margin-top: 50px;
+  .reservationContainer {
+    max-width: 800px;
+    margin: auto;
+    margin-top: 50px;
 
-  .reservation {
-    box-shadow: 5px 6px 8px 1px rgba(103,103,103,0.78);
-    justify-content: space-between;
+    .reservation {
+      box-shadow: 5px 6px 8px 1px rgba(103, 103, 103, 0.78);
+      justify-content: space-between;
+    }
+    .iconnursery {
+      height: 70px;
+      width: 70px;
+      margin-left: 15px;
+    }
+    .namereservation {
+      font-size: 24px;
+    }
+    .status {
+      margin-right: 15px;
+      font-size: 20px;
+    }
   }
-  .iconnursery {
-    height: 70px;
-    width: 70px;
-    margin-left: 15px;
-  }
-  .namereservation {
-    font-size: 24px;
-  }
-  .status {
-    margin-right: 15px;
-    font-size: 20px;
-  }
-}
 }
