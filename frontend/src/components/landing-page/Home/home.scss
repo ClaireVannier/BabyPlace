@@ -1,0 +1,53 @@
+.title {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.descriptionHome {
+  text-align: center;
+  font-size: 20px;
+  margin: 0 auto;
+  width: 80%;
+  padding: 50px 0;
+}
+.imgHome {
+  margin-top: 40px;
+  width: 100%;
+  height: 500px;
+  object-fit: contain;
+}
+
+.imgHomePro {
+  margin-top: 40px;
+  width: 100%;
+  height: 400px;
+}
+
+@media screen and (min-width: 1250px) {
+  .home {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 63vh;
+  }
+
+  .imgHome {
+    width: 35%;
+    height: auto;
+    margin-top: 200px;
+  }
+
+  .imgHomePro {
+    width: 20%;
+    height: 1000px;
+    margin-top: 200px;
+  }
+
+  .title {
+    font-size: 50px;
+  }
+
+  .descriptionHome {
+    font-size: 25px;
+  }
+}

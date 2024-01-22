@@ -1,0 +1,47 @@
+@import "../components/landing-page/NavBar/navbar.scss";
+@import "../components/landing-page/Footer/footer.scss";
+@import "../components/landing-page/Home/home.scss";
+
+@import "../components/login/login.scss";
+@import "../components/register/registerparent.scss";
+@import "../components/profil/profil.scss";
+
+@import "../components/search/nurserycard.scss";
+@import "../components/search/nurseryfiltermodal.scss";
+@import "../components/search/nurserylist.scss";
+
+@import "../components/confirmations/confirmation.scss";
+
+@import "../components/administrative_file/registerformadmin.scss";
+
+@import "../components/search/nursery_details /nurserydetails.scss";
+
+@import "../components/reservations/reservations.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  font: inherit;
+  color: inherit;
+}
+
+body {
+  line-height: 1;
+  background-color: #f2f2f2;
+}
+
+html {
+  scroll-behavior: smooth;
+  cursor: default;
+  min-height: 100vh;
+}
+a {
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
