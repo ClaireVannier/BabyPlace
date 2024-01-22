@@ -1,16 +1,18 @@
 const bcrypt = require("bcrypt");
 const AbstractManager = require("./AbstractManager");
 
+const { compare, hash: _hash } = bcrypt;
+
 class UserManager extends AbstractManager {
   constructor() {
     super({ table: "user" });
   }
 
-  create(user) {
+  async create(user) {
     return UserManager.hashPassword(user.password).then((hash) => {
       return this.database.query(
-        `insert into ${this.table} (email, password, is_admin) values (?, ?, ?)`,
-        [user.email, hash, user.is_admin]
+        `insert into ${this.table} (email, password, is_nursery) values (?, ?, ?)`,
+        [user.email, hash, user.is_nursery]
       );
     });
   }
@@ -27,13 +29,14 @@ class UserManager extends AbstractManager {
 
     const user = rows[0];
 
-    const result = await bcrypt.compare(password, user.password);
+    const result = await compare(password, user.password);
 
     return result ? user : undefined;
   }
+
   getProfile(id) {
     return this.database.query(
-      `SELECT id, email, is_admin AS isAdmin FROM ${this.table} WHERE id = ?`,
+      `SELECT id, email, is_nursery AS isNursery FROM ${this.table} WHERE id = ?`,
       [id]
     );
   }
@@ -46,7 +49,7 @@ class UserManager extends AbstractManager {
   }
 
   static hashPassword(password, workFactor = 5) {
-    return bcrypt.hash(password, workFactor);
+    return _hash(password, workFactor);
   }
 }
 
