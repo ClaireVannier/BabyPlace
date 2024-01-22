@@ -33,6 +33,7 @@
     "lint-staged": "^13.2.3"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "mysql2": "^3.6.5",
     "react-router-dom": "^6.21.1",

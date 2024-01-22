@@ -5,8 +5,10 @@ USE babyplace;
 
 CREATE TABLE user (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    password TEXT NOT NULL
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    is_nursery BOOLEAN,
+    unique(email)
 );
 
 CREATE TABLE parent (
@@ -99,3 +101,15 @@ CREATE TABLE date (
     end_date DATETIME,
     FOREIGN KEY (booking_id) REFERENCES booking(id)
 );
+
+
+INSERT INTO user (email,password,is_nursery) VALUES ('user@demo.com','1234',0),('admin@demo.com', '1234',1);
+
+ CREATE TABLE upload ( 
+  id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  url varchar(255) NOT NULL,
+  unique(url),
+  created_at timestamp default CURRENT_TIMESTAMP
+);
+
+ALTER TABLE user ADD COLUMN avatar int(11), ADD CONSTRAINT fk_avatar_upload_id FOREIGN KEY (avatar) REFERENCES upload(id);
