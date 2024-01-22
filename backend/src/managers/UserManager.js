@@ -9,40 +9,43 @@ class UserManager extends AbstractManager {
   }
 
   async create(user) {
-    return UserManager.hashPassword(user.password).then((hash) => {
-      return this.database.query(
-        `insert into ${this.table} (email, password, is_nursery) values (?, ?, ?)`,
-        [user.email, hash, user.is_nursery]
-      );
-    });
+    const hashedPassword = await UserManager.hashPassword(user.password);
+
+    const [result] = await this.database.query(
+      `INSERT INTO ${this.table} (email, password, is_nursery) VALUES (?, ?, ?)`,
+      [user.email, hashedPassword, user.isNursery]
+    );
+
+    return result.insertId;
   }
 
   async login({ email, password }) {
-    const [rows] = await this.database.query(
-      `select * from ${this.table} where email like ?`,
+    const [userRows] = await this.database.query(
+      `SELECT * FROM ${this.table} WHERE email LIKE ?`,
       [email]
     );
 
-    if (!rows.length) {
-      return undefined;
+    if (userRows.length === 0) {
+      return undefined; // L'utilisateur n'existe pas
     }
 
-    const user = rows[0];
+    const user = userRows[0];
+    const passwordMatch = await compare(password, user.password);
 
-    const result = await compare(password, user.password);
-
-    return result ? user : undefined;
+    return passwordMatch ? user : undefined;
   }
 
-  getProfile(id) {
-    return this.database.query(
-      `SELECT id, email, is_nursery AS isNursery FROM ${this.table} WHERE id = ?`,
+  async getProfil(id) {
+    const [profilRows] = await this.database.query(
+      `SELECT id, email, is_nursery FROM ${this.table} WHERE id = ?`,
       [id]
     );
+
+    return profilRows.length > 0 ? profilRows[0] : undefined;
   }
 
-  addAvatar(userId, avatarId) {
-    return this.database.query(
+  async addAvatar(userId, avatarId) {
+    await this.database.query(
       `UPDATE ${this.table} SET avatar = ? WHERE id = ?`,
       [avatarId, userId]
     );

@@ -1,57 +1,59 @@
 const jwt = require("jsonwebtoken");
-const tables = require("../tables");
+const UserManager = require("../managers/UserManager");
+
+const userManager = new UserManager();
 
 function generateAccessToken(data) {
-  return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "1800s" });
+  return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "86400s" });
 }
 
-const getUsers = (_, res) => {
-  tables.user
-    .findAll()
-    .then(([rows]) => {
-      res.send(rows);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+const getUsers = async (_, res) => {
+  try {
+    const users = await UserManager.findAll();
+    res.json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500);
+  }
 };
 
-const postLogin = (req, res) => {
-  tables.user.login(req.body).then((user) => {
+const postLogin = async (req, res) => {
+  try {
+    const user = await UserManager.login(req.body);
     if (user) {
       const token = generateAccessToken({ id: user.id });
       res.send({ token });
     } else {
-      res.status(401).send({ error: "Identifiant incorrect!" });
+      res.status(401).send({ error: "Identifiant incorrect" });
     }
-  });
+  } catch (err) {
+    console.error(err);
+    res.status(500);
+  }
 };
 
-const postUser = (req, res) => {
-  tables.user
-    .create(req.body)
-    .then(([rows]) => {
-      res.send({
-        id: rows.insertId,
-        email: req.body.email,
-        is_nursery: req.body.is_nursery,
-      });
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(422).send({ error: err.message });
+const postUser = async (req, res) => {
+  try {
+    const userId = await userManager.create(req.body);
+    res.send({
+      id: userId,
+      email: req.body.email,
+      password: req.body.password,
+      is_nursery: req.body.isNursery,
     });
+  } catch (err) {
+    res.status(422).send({ error: err.message });
+  }
 };
 
-const getProfile = (req, res) => {
+const getProfil = (req, res) => {
   res.send(req.user);
 };
 
 const getUser = async (req, res) => {
   const id = +req.params.id;
   try {
-    const [result] = await tables.user.find(id);
+    const [result] = await UserManager.find(id);
     if (!result.length) {
       return res.status(404).send({ error: "User not found" });
     }
@@ -65,6 +67,6 @@ module.exports = {
   getUsers,
   postUser,
   postLogin,
-  getProfile,
+  getProfil,
   getUser,
 };

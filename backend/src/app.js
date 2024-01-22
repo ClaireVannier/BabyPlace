@@ -7,18 +7,13 @@ const router = require("./router");
 
 const app = express();
 
+app.use(cors());
+
 require("dotenv").config();
 
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api", router);
-
-app.use(
-  cors({
-    origin: `${process.env.FRONTEND_URL}`,
-    optionsSuccessStatus: 200,
-  })
-);
 
 app.use(express.static(path.join(__dirname, "../public")));
 
