@@ -49,7 +49,7 @@ function AdministrativeFormNursery() {
       .then((resp) => {
         if (resp.status === 201) {
           console.info(resp);
-          navigate("/register/confirmationfile");
+          navigate("/register/confirmationfile/true");
         } else {
           alert("Une erreur est survenue, veuillez réessayer");
         }

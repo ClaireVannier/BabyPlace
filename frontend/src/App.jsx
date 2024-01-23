@@ -36,7 +36,7 @@ function App() {
           element={<ConfirmationReservation />}
         />
         <Route
-          path="/register/confirmationfile"
+          path="/register/confirmationfile/:isNursery"
           element={<ConfirmationFile />}
         />
         <Route path="search/nurserydetails/:id" element={<NurseryPage />} />
