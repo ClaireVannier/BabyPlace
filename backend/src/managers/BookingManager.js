@@ -16,7 +16,7 @@ class BookingManager extends AbstractManager {
   async create(booking) {
     const [result] = await this.database.query(
       `insert into ${this.table} (children_id, nursery_id) values (?, ? )`,
-      [booking.children_id, booking.nursery_id]
+      [booking.childrenId, booking.nurseryId]
     );
 
     return result.insertId;

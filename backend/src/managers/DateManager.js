@@ -16,7 +16,7 @@ class dateManager extends AbstractManager {
   async create(date) {
     const [result] = await this.database.query(
       `insert into ${this.table} (booking_id, start_date, end_date) values (?, ?, ?)`,
-      [date.booking_id, date.start_date, date.end_date]
+      [date.bookingId, date.startDate, date.endDate]
     );
 
     return result.insertId;
@@ -25,7 +25,7 @@ class dateManager extends AbstractManager {
   async update(date, dateId) {
     const [result] = await this.database.query(
       `update ${this.table} set booking_id = ?, start_date = ?, end_date = ? WHERE id = ?`,
-      [date.booking_id, date.start_date, date.end_date, dateId]
+      [date.bookingId, date.startDate, date.endDate, dateId]
     );
 
     return result.affectedRows;

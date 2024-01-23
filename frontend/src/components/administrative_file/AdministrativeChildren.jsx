@@ -1,36 +1,70 @@
-import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 
 function AdministrativeChildren() {
-  const child = {
-    firstname: "",
-    birth_date: "",
-    is_walking: false,
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    birthDate: "",
+    isWalking: false,
     doctor: "",
     allergies: "",
-    parent_id: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: checked || value,
+    }));
   };
 
-  const getChildValue = (e) => {
-    if (e.target.name === "firstname") {
-      child.firstname = e.target.value;
-    }
-    if (e.target.name === "birth_date") {
-      child.birth_date = e.target.value;
-    }
-    if (e.target.name === "is_walking") {
-      child.is_walking = e.target.checked;
-    }
-    if (e.target.name === "doctor") {
-      child.doctor = e.target.value;
-    }
-    if (e.target.name === "allergies") {
-      child.allergies = e.target.value;
-    }
-    // console.log(child);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/children`, {
+        firstName: formData.firstName,
+        birthDate: formData.birthDate,
+        isWalking: formData.isWalking,
+        doctor: formData.doctor,
+        allergies: formData.allergies,
+      })
+      .then((resp) => {
+        if (resp.status === 201) {
+          console.info(resp);
+          navigate("/register/confirmationfile");
+        } else {
+          alert("Une erreur est survenue, veuillez réessayer");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
+
+  // const getChildValue = (e) => {
+  //   if (e.target.name === "firstname") {
+  //     child.firstname = e.target.value;
+  //   }
+  //   if (e.target.name === "birth_date") {
+  //     child.birth_date = e.target.value;
+  //   }
+  //   if (e.target.name === "is_walking") {
+  //     child.is_walking = e.target.checked;
+  //   }
+  //   if (e.target.name === "doctor") {
+  //     child.doctor = e.target.value;
+  //   }
+  //   if (e.target.name === "allergies") {
+  //     child.allergies = e.target.value;
+  //   }
+  //   // console.log(child);
+  // };
 
   return (
     <div className="registerContainer">
@@ -41,24 +75,24 @@ function AdministrativeChildren() {
           <img id="logoFormTxt" src={logobaby} alt="texte du site" />
         </div>
         <h2 className="titleFormRegister">Je renseigne mon/mes enfant(s)</h2>
-        <form action="submit">
+        <form onSubmit={handleSubmit}>
           <label>
             Prénom <br />
             <input
-              name="firstname"
+              name="firstName"
               className="input-file-secu"
               type="text"
-              onChange={getChildValue}
+              onChange={handleChange}
               required
             />
           </label>
           <label>
             Date de naissance <br />
             <input
-              name="birth_date"
+              name="birthDate"
               className="input-file-secu"
               type="date"
-              onChange={getChildValue}
+              onChange={handleChange}
               required
             />
           </label>
@@ -66,11 +100,10 @@ function AdministrativeChildren() {
             Marcheur? <br />
             Cocher si oui:
             <input
-              name="is_walking"
+              name="isWalking"
               className="input-checkbox"
               type="checkbox"
-              onChange={getChildValue}
-              required
+              onChange={handleChange}
             />
           </label>
           <label>
@@ -79,7 +112,7 @@ function AdministrativeChildren() {
               name="doctor"
               className="input-file-secu"
               type="text"
-              onChange={getChildValue}
+              onChange={handleChange}
               required
             />
           </label>
@@ -89,7 +122,7 @@ function AdministrativeChildren() {
               name="allergies"
               className="input-file-secu"
               type="text"
-              onChange={getChildValue}
+              onChange={handleChange}
               required
             />
           </label>
@@ -97,13 +130,9 @@ function AdministrativeChildren() {
           <p className="confirm-file">
             Tout est bien complet? Alors vous pouvez:
           </p>
-          <NavLink
-            to="/register/confirmationfile"
-            className="formBtnRegister"
-            type="submit"
-          >
+          <button className="formBtnRegister" type="submit">
             Valider mon dossier
-          </NavLink>
+          </button>
         </form>
       </div>
     </div>

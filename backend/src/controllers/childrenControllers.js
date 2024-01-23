@@ -16,16 +16,17 @@ const get = async (req, res) => {
 };
 
 const post = async (req, res) => {
-  const children = req.body;
-
-  try {
-    const insertId = await tables.children.create(children);
-
-    res.status(201).json({ insertId });
-  } catch (err) {
-    console.error(err);
-    res.status(500).error(err.message);
-  }
+  tables.children
+    .create(req.body)
+    .then(() => {
+      res
+        .status(201)
+        .json({ sucess: true, message: "Enfant crée avec succès" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(422).send({ error: err.message });
+    });
 };
 
 const put = async (req, res) => {

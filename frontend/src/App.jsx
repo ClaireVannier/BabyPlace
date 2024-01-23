@@ -23,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterParent />} />
         <Route path="/register/file" element={<AdministrativeParent />} />
+
         <Route path="/register/pro" element={<RegisterPro />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/search" element={<NurseryList />} />
