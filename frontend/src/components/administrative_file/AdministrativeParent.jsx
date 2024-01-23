@@ -3,7 +3,7 @@ import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 
-function RegisterForm() {
+function AdministrativeParent() {
   return (
     <div className="registerContainer">
       <img className="imgRegister" src={imgregister} alt="inscription" />
@@ -48,4 +48,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+export default AdministrativeParent;

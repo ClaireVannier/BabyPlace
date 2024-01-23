@@ -9,10 +9,11 @@ import NurseryList from "./components/search/NurseryList";
 import ConfirmationAccount from "./components/confirmations/ConfirmationAccount";
 import ConfirmationReservation from "./components/confirmations/ConfirmationReservation";
 import ConfirmationFile from "./components/confirmations/ConfirmationFile";
-import RegisterForm from "./components/administrative_file/AdministrativeForm";
+import AdministrativeParent from "./components/administrative_file/AdministrativeParent";
 import NurseryPage from "./components/search/nursery_details /NurseryPage";
 import Reservation from "./components/reservations/Reservations";
 import AdministrativeChildren from "./components/administrative_file/AdministrativeChildren";
+import AdministrativeFormNursery from "./components/administrative_file/AdministrativeFormNursery";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterParent />} />
-        <Route path="/register/file" element={<RegisterForm />} />
+        <Route path="/register/file" element={<AdministrativeParent />} />
         <Route path="/register/pro" element={<RegisterPro />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/search" element={<NurseryList />} />
@@ -40,6 +41,10 @@ function App() {
         <Route path="search/nurserydetails/:id" element={<NurseryPage />} />
         <Route path="nursery/reservation/:id" element={<Reservation />} />
         <Route path="/register/children" element={<AdministrativeChildren />} />
+        <Route
+          path="/register/pro/file"
+          element={<AdministrativeFormNursery />}
+        />
       </Routes>
     </div>
   );

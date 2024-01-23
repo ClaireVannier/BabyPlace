@@ -5,6 +5,7 @@ function generateAccessToken(data) {
   return jwt.sign(data, process.env.APP_SECRET, { expiresIn: "3600s" });
 }
 
+// s'inscrire en tant que parent
 const register = async (req, res) => {
   tables.user
     .create(req.body, false)
@@ -17,6 +18,7 @@ const register = async (req, res) => {
     });
 };
 
+// s'inscrire en tant que pro
 const registerPro = async (req, res) => {
   tables.user
     .create(req.body, true)
@@ -29,6 +31,7 @@ const registerPro = async (req, res) => {
     });
 };
 
+// se connecter
 const login = async (req, res) => {
   try {
     const user = await tables.user.login(req.body);

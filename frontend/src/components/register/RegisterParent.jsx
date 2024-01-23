@@ -33,20 +33,28 @@ function Register() {
         password: formData.password,
       })
       .then((resp) => {
-        console.info(resp);
-        axios
-          .post(`${import.meta.env.VITE_BACKEND_URL}/parents`, {
-            firstname: formData.firstname,
-            lastname: formData.lastname,
-            phone: formData.phone,
-          })
-          .then((resp2) => {
-            console.info(resp2);
-            navigate("/register/file");
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+        if (resp.status === 201) {
+          console.info(resp);
+          axios
+            .post(`${import.meta.env.VITE_BACKEND_URL}/parents`, {
+              firstname: formData.firstname,
+              lastname: formData.lastname,
+              phone: formData.phone,
+            })
+            .then((resp2) => {
+              if (resp2.status === 201) {
+                console.info(resp2);
+                navigate("/register/file");
+              } else {
+                alert("Une erreur est survenue, veuillez réessayer");
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        } else {
+          alert("Une erreur est survenue, veuillez reéssayer");
+        }
       })
       .catch((err) => {
         console.error(err);

@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 
 function RegisterPro() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,12 +30,12 @@ function RegisterPro() {
         password: formData.password,
       })
       .then((resp) => {
-        console.info(resp);
-        // use navigate vers le form de dossier admin
-        // dossier admin: faire le form, axios post, postamner avant de faire le form
-        // une fois back ok, et une fois form ok pour post (verifier dans bdd), rediriger vers confirmation file
-        //
-        // TODO : post le formulaire dans la table nursery
+        if (resp.status === 201) {
+          console.info(resp);
+          navigate("/register/pro/file");
+        } else {
+          alert("Une erreur est survenue, veuillez réessayer");
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -81,11 +83,6 @@ function RegisterPro() {
               required
             />
           </label>
-          {/* a deplacer dans le formulaire dinscription dossier coté creche  */}
-          {/* <label>
-            Nom de la crèche: <br />
-            <input type="text" name="name" onChange={handleChange} required />
-          </label> */}
           <button className="formBtn" type="submit">
             S'inscrire
           </button>

@@ -2,10 +2,8 @@ import { NavLink } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
-import { useState } from "react";
 
 function AdministrativeChildren() {
-
   const child = {
     firstname: "",
     birth_date: "",
@@ -31,7 +29,7 @@ function AdministrativeChildren() {
     if (e.target.name === "allergies") {
       child.allergies = e.target.value;
     }
-    console.log(child);
+    // console.log(child);
   };
 
   return (

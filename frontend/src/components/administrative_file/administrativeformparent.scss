@@ -41,10 +41,18 @@
 
   label {
     font-size: 22px;
-    width: 80%;
+    width: 100%;
     .input-file-secu {
       margin-left: 16px;
-      width: 80%;
+      width: 90%;
+      padding: 25px 0px;
+      overflow-wrap: anywhere;
+    }
+
+    .input-file-description {
+      margin-left: 16px;
+      width: 95%;
+      padding: 25px 0px;
     }
     .input-file {
       margin-top: 5px;
@@ -61,11 +69,17 @@
     gap: 30px;
     margin: 20px 30px 0 30px;
 
+    p {
+      font-size: 26px;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
     .confirm-file {
       font-size: 20px;
       text-align: center;
       font-style: italic;
-      margin-top: 50px;
+      margin-top: 20px;
     }
   }
 
@@ -85,6 +99,7 @@
     border-radius: 10px;
     transition: 0.3s ease-in-out;
     width: 80%;
+    margin-bottom: 15px;
   }
   .linktologin {
     margin-top: 30px;

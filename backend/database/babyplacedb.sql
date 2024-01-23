@@ -32,12 +32,12 @@ CREATE TABLE nursery (
     name VARCHAR(120) NOT NULL,
     address TEXT NOT NULL,
     phone VARCHAR(12) NOT NULL,
-    picture_url TEXT NOT NULL,
+    picture_url TEXT,
     description TEXT NOT NULL,
-    outdoor_space BOOLEAN NOT NULL,
-    homemade_meals BOOLEAN NOT NULL,
-    developmental_activities BOOLEAN NOT NULL,
-    musical_activities BOOLEAN NOT NULL
+    outdoor_space BOOLEAN,
+    homemade_meals BOOLEAN,
+    developmental_activities BOOLEAN,
+    musical_activities BOOLEAN
 );
 
 CREATE TABLE administrative (
@@ -90,8 +90,8 @@ ADD CONSTRAINT fk_nursery_user
     REFERENCES user(id);
 
 ALTER TABLE nursery
-ADD COLUMN capacity INT,
-ADD COLUMN time_slot VARCHAR(255);
+ADD COLUMN capacity INT NOT NULL,
+ADD COLUMN time_slot VARCHAR(255) NOT NULL;
 
 
 CREATE TABLE date (
