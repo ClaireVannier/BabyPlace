@@ -1,6 +1,10 @@
 const express = require("express");
+const multer = require("multer");
+const fs = require("node:fs");
+const generateUUID = require("./utils/uuid-generator");
 
 const router = express.Router();
+const upload = multer({ dest: "./public/uploads" });
 
 // Import itemControllers module for handling item-related operations
 const parentControllers = require("./controllers/parentControllers");
@@ -60,5 +64,64 @@ router.post("/register", userControllers.register);
 router.post("/register/pro", userControllers.registerPro);
 
 router.post("/login", userControllers.login);
+
+// route for upload un fichier
+
+router.post("/uploadincome", upload.single("incomeProofUrl"), (req, res) => {
+  const { originalname, filename } = req.file;
+  fs.rename(
+    `./public/uploads/${filename}`,
+    `./public/uploads/${generateUUID()}-${originalname}`,
+    (err) => {
+      if (err) throw err;
+      res.send("image ok");
+    }
+  );
+});
+router.post(
+  "/uploadphoto",
+  upload.single("PhotoVideoPermission"),
+  (req, res) => {
+    const { originalname, filename } = req.file;
+    fs.rename(
+      `./public/uploads/${filename}`,
+      `./public/uploads/${generateUUID()}-${originalname}`,
+      (err) => {
+        if (err) throw err;
+        res.send("image ok");
+      }
+    );
+  }
+);
+router.post(
+  "/uploadoutside",
+  upload.single("OutsidePermission"),
+  (req, res) => {
+    const { originalname, filename } = req.file;
+    fs.rename(
+      `./public/uploads/${filename}`,
+      `./public/uploads/${generateUUID()}-${originalname}`,
+      (err) => {
+        if (err) throw err;
+        res.send("image ok");
+      }
+    );
+  }
+);
+
+// router.post("/upload", upload.array("files", 3), (req, res) => {
+//   const fileList = req.files;
+//   fileList.forEach((file) => {
+//     const { filename, originalname } = file;
+//     fs.rename(
+//       `./public/uploads/${filename}`,
+//       `./public/uploads/${generateUUID()}-${originalname}`,
+//       (err) => {
+//         if (err) throw err;
+//       }
+//     );
+//   });
+//   res.send("image ok");
+// });
 
 module.exports = router;
