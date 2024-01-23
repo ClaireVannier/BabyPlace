@@ -1,17 +1,17 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 
 function RegisterPro() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
   });
 
   const handleChange = (e) => {
@@ -24,7 +24,22 @@ function RegisterPro() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // ici la logique pour traiter les données du formulaire
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/register/pro`, {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((resp) => {
+        if (resp.status === 201) {
+          console.info(resp);
+          navigate("/register/pro/file");
+        } else {
+          alert("Une erreur est survenue, veuillez réessayer");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
     console.info("Données du formulaire soumises :", formData);
   };
 
@@ -67,10 +82,6 @@ function RegisterPro() {
               onChange={handleChange}
               required
             />
-          </label>
-          <label>
-            Nom de la crèche: <br />
-            <input type="text" name="name" onChange={handleChange} required />
           </label>
           <button className="formBtn" type="submit">
             S'inscrire

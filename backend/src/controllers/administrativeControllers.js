@@ -16,16 +16,15 @@ const get = async (req, res) => {
 };
 
 const post = async (req, res) => {
-  const administrative = req.body;
-
-  try {
-    const insertId = await tables.administrative.create(administrative);
-
-    res.status(201).json({ insertId });
-  } catch (err) {
-    console.error(err);
-    res.status(500).error(err.message);
-  }
+  tables.administrative
+    .create(req.body)
+    .then(() => {
+      res.status(201).json({ message: "Dossier complété avec succès" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(422).send({ error: err.message });
+    });
 };
 
 const put = async (req, res) => {

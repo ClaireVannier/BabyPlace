@@ -17,10 +17,10 @@ class AdministrativeManager extends AbstractManager {
     const [result] = await this.database.query(
       `insert into ${this.table} (social_security_number, income_proof_url, photo_video_permission_url, outing_permission_url) values (?, ?, ?, ?)`,
       [
-        administrative.social_security_number,
-        administrative.income_proof_url,
-        administrative.photo_video_permission_url,
-        administrative.outing_permission_url,
+        administrative.socialSecurityNumber,
+        administrative.incomeProofUrl,
+        administrative.photoVideoPermissionUrl,
+        administrative.outingPermissionUrl,
       ]
     );
 
@@ -31,10 +31,10 @@ class AdministrativeManager extends AbstractManager {
     const [result] = await this.database.query(
       `update ${this.table} set social_security_number = ?, income_proof_url = ?, photo_video_permission_url = ?, outing_permission_url = ? WHERE id = ?`,
       [
-        administrative.social_security_number,
-        administrative.income_proof_url,
-        administrative.photo_video_permission_url,
-        administrative.outing_permission_url,
+        administrative.socialSecurityNumber,
+        administrative.incomeProofUrl,
+        administrative.photoVideoPermissionUrl,
+        administrative.outingPermissionUrl,
         administrativeId,
       ]
     );

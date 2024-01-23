@@ -1,16 +1,19 @@
+import axios from "axios";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     phone: "",
   });
 
@@ -24,8 +27,38 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // ici la logique pour traiter les données du formulaire
-    console.info("Données du formulaire soumises :", formData);
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/register`, {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((resp) => {
+        if (resp.status === 201) {
+          console.info(resp);
+          axios
+            .post(`${import.meta.env.VITE_BACKEND_URL}/parents`, {
+              firstname: formData.firstname,
+              lastname: formData.lastname,
+              phone: formData.phone,
+            })
+            .then((resp2) => {
+              if (resp2.status === 201) {
+                console.info(resp2);
+                navigate("/register/file");
+              } else {
+                alert("Une erreur est survenue, veuillez réessayer");
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        } else {
+          alert("Une erreur est survenue, veuillez reéssayer");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -72,7 +105,7 @@ function Register() {
             Prénom: <br />
             <input
               type="text"
-              name="firstName"
+              name="firstname"
               value={formData.firstName}
               onChange={handleChange}
               required
@@ -82,7 +115,7 @@ function Register() {
             Nom: <br />
             <input
               type="text"
-              name="lastName"
+              name="lastname"
               value={formData.lastName}
               onChange={handleChange}
               required
@@ -91,20 +124,16 @@ function Register() {
           <label>
             Numéro de téléphone: <br />
             <input
-              type="number"
-              name="phoneNumber"
+              type="text"
+              name="phone"
               value={formData.phoneNumber}
               onChange={handleChange}
               required
             />
           </label>
-          <NavLink
-            to="/register/accountcreated"
-            className="formBtn"
-            type="submit"
-          >
+          <button className="formBtn" type="submit">
             S'inscrire
-          </NavLink>
+          </button>
         </form>
         <p className="linktologin">
           Déjà inscrit? <br />

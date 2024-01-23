@@ -15,17 +15,19 @@ class NurseryManager extends AbstractManager {
 
   async create(nursery) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (name, address, phone, picture_url, description, outdoor_space, homemade_meals, developmental_activities, musical_activities) values (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (name, address, phone, picture_url, description, outdoor_space, homemade_meals, developmental_activities, musical_activities, capacity, time_slot) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         nursery.name,
         nursery.address,
         nursery.phone,
-        nursery.picture_url,
+        nursery.pictureUrl,
         nursery.description,
-        nursery.outdoor_space,
-        nursery.homemade_meals,
-        nursery.developmental_activities,
-        nursery.musical_activities,
+        nursery.outdoorSpace,
+        nursery.homemadeMeals,
+        nursery.developmentalActivities,
+        nursery.musicalActivities,
+        nursery.capacity,
+        nursery.timeSlot,
       ]
     );
     return result.insertId;
@@ -33,17 +35,19 @@ class NurseryManager extends AbstractManager {
 
   async update(nursery, nurseryId) {
     const [result] = await this.database.query(
-      `update ${this.table} set name = ?, address = ?, phone = ?, picture_url = ?, description = ?, outdoor_space = ?, homemade_meals = ?, developmental_activities = ?, musical_activities = ? WHERE id = ?`,
+      `update ${this.table} set name = ?, address = ?, phone = ?, picture_url = ?, description = ?, outdoor_space = ?, homemade_meals = ?, developmental_activities = ?, musical_activities = ?, capacity = ?, time_slot = ? WHERE id = ?`,
       [
         nursery.name,
         nursery.address,
         nursery.phone,
-        nursery.picture_url,
+        nursery.pictureUrl,
         nursery.description,
-        nursery.outdoor_space,
-        nursery.homemade_meals,
-        nursery.developmental_activities,
-        nursery.musical_activities,
+        nursery.outdoorSpace,
+        nursery.homemadeMeals,
+        nursery.developmentalActivities,
+        nursery.musicalActivities,
+        nursery.capacity,
+        nursery.timeSlot,
         nurseryId,
       ]
     );

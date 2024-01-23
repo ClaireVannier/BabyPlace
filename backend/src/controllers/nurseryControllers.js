@@ -16,15 +16,15 @@ const get = async (req, res) => {
 };
 
 const post = async (req, res) => {
-  const nursery = req.body;
-
-  try {
-    const insertId = await tables.nursery.create(nursery);
-    res.status(201).json({ insertId });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(err.message);
-  }
+  tables.nursery
+    .create(req.body)
+    .then(() => {
+      res.status(201).json({ message: "Crèche créer avec succès" });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(422).send({ error: err.message });
+    });
 };
 
 const put = async (req, res) => {

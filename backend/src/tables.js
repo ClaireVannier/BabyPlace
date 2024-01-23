@@ -6,6 +6,7 @@ const ChildrenManager = require("./managers/ChildrenManager");
 const BookingManager = require("./managers/BookingManager");
 const AdministrativeManager = require("./managers/AdministrativeManager");
 const DateManager = require("./managers/DateManager");
+const UserManager = require("./managers/UserManager");
 
 const managers = [
   ItemManager,
@@ -15,6 +16,7 @@ const managers = [
   BookingManager,
   AdministrativeManager,
   DateManager,
+  UserManager,
 ];
 
 // Create an empty object to hold data managers for different tables

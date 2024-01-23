@@ -17,9 +17,9 @@ class ChildrenManager extends AbstractManager {
     const [result] = await this.database.query(
       `insert into ${this.table} (firstname, birth_date, is_walking, doctor, allergies) values (?, ?, ?, ?, ?)`,
       [
-        children.firstname,
-        children.birth_date,
-        children.is_walking,
+        children.firstName,
+        children.birthDate,
+        children.isWalking,
         children.doctor,
         children.allergies,
       ]
@@ -34,7 +34,7 @@ class ChildrenManager extends AbstractManager {
       [
         children.firstname,
         children.birth_date,
-        children.is_walking,
+        children.isWalking,
         children.doctor,
         children.allergies,
         childrenId,

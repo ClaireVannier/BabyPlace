@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { NavLink, useNavigate } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 
 function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -19,9 +22,18 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ajoutez ici la logique pour traiter les données du formulaire (connexion, appel à l'API, etc.)
-    console.info("Données du formulaire soumises :", formData);
-    // Réinitialiser le formulaire après la soumission si nécessaire
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((resp) => {
+        console.info(resp);
+        navigate("/search");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
     setFormData({
       email: "",
       password: "",
@@ -59,9 +71,9 @@ function Login() {
               required
             />
           </label>
-          <NavLink to="/search" className="formBtn">
+          <button type="submit" className="formBtn">
             Se connecter
-          </NavLink>
+          </button>
           <p className="linktoregister">
             Nouveau sur BabyPlace ? <br />
             <NavLink to="/register">Inscrivez-vous ici</NavLink>
