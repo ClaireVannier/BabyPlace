@@ -22,7 +22,11 @@ function ConfirmationFile() {
           ? " accéder au dashboard."
           : " commencer à faire votre première recherche."}
       </p>
-      <NavLink to="/search" className="gotofile" type="button">
+      <NavLink
+        to={params.isNursery === "false" ? "/search" : "/dashboard"}
+        className="gotofile"
+        type="button"
+      >
         {params.isNursery === "true"
           ? "Accéder au dashboard"
           : "Rechercher une crèche"}
