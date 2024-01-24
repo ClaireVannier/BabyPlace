@@ -22,7 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterParent />} />
-        <Route path="/register/file" element={<AdministrativeParent />} />
+        <Route path="/register/file/:parentId" element={<AdministrativeParent />} />
 
         <Route path="/register/pro" element={<RegisterPro />} />
         <Route path="/profil" element={<Profil />} />
@@ -41,7 +41,7 @@ function App() {
         />
         <Route path="search/nurserydetails/:id" element={<NurseryPage />} />
         <Route path="nursery/reservation/:id" element={<Reservation />} />
-        <Route path="/register/children" element={<AdministrativeChildren />} />
+        <Route path="/register/children/:parentId" element={<AdministrativeChildren />} />
         <Route
           path="/register/pro/file"
           element={<AdministrativeFormNursery />}

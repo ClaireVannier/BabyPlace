@@ -9,8 +9,8 @@ function generateAccessToken(data) {
 const register = async (req, res) => {
   tables.user
     .create(req.body, false)
-    .then(() => {
-      res.status(201).json({ message: "Compte crée avec succès" });
+    .then((insertId) => {
+      res.status(201).json({ insertId });
     })
     .catch((err) => {
       console.error(err);
@@ -22,8 +22,8 @@ const register = async (req, res) => {
 const registerPro = async (req, res) => {
   tables.user
     .create(req.body, true)
-    .then(() => {
-      res.status(201).json({ message: "Compte crée avec succès" });
+    .then((insertId) => {
+      res.status(201).json({ insertId });
     })
     .catch((err) => {
       console.error(err);

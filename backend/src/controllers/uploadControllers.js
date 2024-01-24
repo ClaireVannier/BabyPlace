@@ -1,22 +1,33 @@
 const tables = require("../tables");
 
-const getList = async (req, res) => {
+const createIncome = async (req, res) => {
   try {
-    const [result] = await tables.upload.findAll();
-    return res.send(result);
+    const { id } = req.params;
+    const result = await tables.upload.createIncome(req, id);
+    return res.status(201).send({ result });
   } catch (err) {
     return res.status(400).send({ message: err.message });
   }
 };
 
-const create = async (req, res) => {
+const createPhoto = async (req, res) => {
   try {
-    const result = await tables.upload.create(req.file);
-    await tables.user.addAvatar(req.user.id, result.id);
-    return res.status(201).send({ ...req.user, avatar: result });
+    const { id } = req.params;
+    const result = await tables.upload.createPhoto(req, id);
+    return res.status(201).send({ result });
   } catch (err) {
     return res.status(400).send({ message: err.message });
   }
 };
 
-module.exports = { getList, create };
+const createOutsitePermission = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await tables.upload.createOutsitePermission(req, id);
+    return res.status(201).send({ result });
+  } catch (err) {
+    return res.status(400).send({ message: err.message });
+  }
+};
+
+module.exports = { createIncome, createPhoto, createOutsitePermission };

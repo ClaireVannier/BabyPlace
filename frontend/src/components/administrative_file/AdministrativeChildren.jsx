@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
@@ -7,6 +7,8 @@ import imgregister from "../../assets/imgregister.svg";
 
 function AdministrativeChildren() {
   const navigate = useNavigate();
+  const { parentId } = useParams();
+
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -33,6 +35,7 @@ function AdministrativeChildren() {
         isWalking: formData.isWalking,
         doctor: formData.doctor,
         allergies: formData.allergies,
+        parentId: parentId
       })
       .then((resp) => {
         if (resp.status === 201) {
@@ -47,24 +50,6 @@ function AdministrativeChildren() {
       });
   };
 
-  // const getChildValue = (e) => {
-  //   if (e.target.name === "firstname") {
-  //     child.firstname = e.target.value;
-  //   }
-  //   if (e.target.name === "birth_date") {
-  //     child.birth_date = e.target.value;
-  //   }
-  //   if (e.target.name === "is_walking") {
-  //     child.is_walking = e.target.checked;
-  //   }
-  //   if (e.target.name === "doctor") {
-  //     child.doctor = e.target.value;
-  //   }
-  //   if (e.target.name === "allergies") {
-  //     child.allergies = e.target.value;
-  //   }
-  //   // console.log(child);
-  // };
 
   return (
     <div className="registerContainer">
@@ -123,7 +108,7 @@ function AdministrativeChildren() {
               className="input-file-secu"
               type="text"
               onChange={handleChange}
-              required
+              
             />
           </label>
 

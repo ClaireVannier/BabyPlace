@@ -131,7 +131,7 @@ function AdministrativeFormNursery() {
               value={formData.capacity}
               onChange={handleChange}
               className="input-file-secu"
-              type="text"
+              type="number"
               required
             />
           </label>

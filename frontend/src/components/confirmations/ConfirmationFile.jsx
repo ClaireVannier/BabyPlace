@@ -15,12 +15,12 @@ function ConfirmationFile() {
         src={logodossier}
         alt="dossier avec une loupe"
       />
-      <h2 className="confirmation-title">Votre dossier est complet!</h2>
+      <h2 className="confirmation-title">Votre dossier est complet ! 🤩</h2>
       <p className="need-information">
-        Vous pouvez maintenant profiter de toutes les fonctionnalités du site et
+        Vous pouvez maintenant profiter de toutes les fonctionnalités du site et <br />
         {params.isNursery === "true"
           ? " accéder au dashboard."
-          : " commencer à faire votre première recherche."}
+          : " commencer à faire votre première recherche !"}
       </p>
       <NavLink
         to={params.isNursery === "false" ? "/search" : "/dashboard"}

@@ -15,13 +15,14 @@ class ChildrenManager extends AbstractManager {
 
   async create(children) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (firstname, birth_date, is_walking, doctor, allergies) values (?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (firstname, birth_date, is_walking, doctor, allergies, parent_id) values (?, ?, ?, ?, ?, ?)`,
       [
         children.firstName,
         children.birthDate,
         children.isWalking,
         children.doctor,
         children.allergies,
+        children.parentId
       ]
     );
 

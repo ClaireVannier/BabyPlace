@@ -15,31 +15,11 @@ class AdministrativeManager extends AbstractManager {
 
   async create(administrative) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (social_security_number, income_proof_url, photo_video_permission_url, outing_permission_url) values (?, ?, ?, ?)`,
-      [
-        administrative.socialSecurityNumber,
-        administrative.incomeProofUrl,
-        administrative.photoVideoPermissionUrl,
-        administrative.outingPermissionUrl,
-      ]
+      `insert into ${this.table} (social_security_number, income_proof_upload_id, photo_video_permission_upload_id, outing_permission_upload_id) values (?, NULL, NULL, NULL)`,
+      [administrative.socialSecurityNumber]
     );
 
     return result.insertId;
-  }
-
-  async update(administrative, administrativeId) {
-    const [result] = await this.database.query(
-      `update ${this.table} set social_security_number = ?, income_proof_url = ?, photo_video_permission_url = ?, outing_permission_url = ? WHERE id = ?`,
-      [
-        administrative.socialSecurityNumber,
-        administrative.incomeProofUrl,
-        administrative.photoVideoPermissionUrl,
-        administrative.outingPermissionUrl,
-        administrativeId,
-      ]
-    );
-
-    return result.affectedRows;
   }
 }
 

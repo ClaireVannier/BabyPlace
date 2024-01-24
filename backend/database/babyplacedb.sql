@@ -43,9 +43,9 @@ CREATE TABLE nursery (
 CREATE TABLE administrative (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     social_security_number VARCHAR(15) NOT NULL,
-    income_proof_url TEXT NOT NULL,
-    photo_video_permission_url TEXT NOT NULL,
-    outing_permission_url TEXT NOT NULL
+    income_proof_upload_id INT,
+    photo_video_permission_upload_id INT,
+    outing_permission_upload_id INT
 );
 
 CREATE TABLE booking (
@@ -100,4 +100,11 @@ CREATE TABLE date (
     start_date DATETIME,
     end_date DATETIME,
     FOREIGN KEY (booking_id) REFERENCES booking(id)
+);
+
+
+
+ CREATE TABLE upload ( 
+  id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  url varchar(255) NOT NULL
 );

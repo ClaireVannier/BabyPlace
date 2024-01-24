@@ -1,12 +1,9 @@
 const express = require("express");
 const multer = require("multer");
-const fs = require("node:fs");
-const generateUUID = require("./utils/uuid-generator");
 
 const router = express.Router();
 const upload = multer({ dest: "./public/uploads" });
 
-// Import itemControllers module for handling item-related operations
 const parentControllers = require("./controllers/parentControllers");
 const nurseryControllers = require("./controllers/nurseryControllers");
 const childrenControllers = require("./controllers/childrenControllers");
@@ -14,15 +11,7 @@ const bookingControllers = require("./controllers/bookingControllers");
 const administrativeControllers = require("./controllers/administrativeControllers");
 const dateControllers = require("./controllers/dateControllers");
 const userControllers = require("./controllers/userControllers");
-
-// // Route to get a list of items
-// router.get("/items", itemControllers.browse);
-
-// // Route to get a specific item by ID
-// router.get("/items/:id", itemControllers.read);
-
-// // Route to add a new item
-// router.post("/items", itemControllers.add);
+const uploadControllers = require("./controllers/uploadControllers");
 
 // Route for parents
 router.get("/parents/:id", parentControllers.get);
@@ -46,7 +35,6 @@ router.put("/booking/:id", bookingControllers.put);
 router.delete("/booking/:id", bookingControllers.deleteBooking);
 
 // Route for Admnistrative
-
 router.get("/administrative/:id", administrativeControllers.get);
 router.post("/administrative", administrativeControllers.post); // ca marche sur postman
 router.put("/administrative/:id", administrativeControllers.put);
@@ -66,62 +54,25 @@ router.post("/register/pro", userControllers.registerPro);
 router.post("/login", userControllers.login);
 
 // route for upload un fichier
-
-router.post("/uploadincome", upload.single("incomeProofUrl"), (req, res) => {
-  const { originalname, filename } = req.file;
-  fs.rename(
-    `./public/uploads/${filename}`,
-    `./public/uploads/${generateUUID()}-${originalname}`,
-    (err) => {
-      if (err) throw err;
-      res.send("image ok");
-    }
-  );
-});
+/**
+ * 
+ */
 router.post(
-  "/uploadphoto",
+  "/upload-income/:id",
+  upload.single("incomeProofUrl"),
+  uploadControllers.createIncome
+);
+
+router.post(
+  "/upload-photo/:id",
   upload.single("PhotoVideoPermission"),
-  (req, res) => {
-    const { originalname, filename } = req.file;
-    fs.rename(
-      `./public/uploads/${filename}`,
-      `./public/uploads/${generateUUID()}-${originalname}`,
-      (err) => {
-        if (err) throw err;
-        res.send("image ok");
-      }
-    );
-  }
-);
-router.post(
-  "/uploadoutside",
-  upload.single("OutsidePermission"),
-  (req, res) => {
-    const { originalname, filename } = req.file;
-    fs.rename(
-      `./public/uploads/${filename}`,
-      `./public/uploads/${generateUUID()}-${originalname}`,
-      (err) => {
-        if (err) throw err;
-        res.send("image ok");
-      }
-    );
-  }
+  uploadControllers.createPhoto
 );
 
-// router.post("/upload", upload.array("files", 3), (req, res) => {
-//   const fileList = req.files;
-//   fileList.forEach((file) => {
-//     const { filename, originalname } = file;
-//     fs.rename(
-//       `./public/uploads/${filename}`,
-//       `./public/uploads/${generateUUID()}-${originalname}`,
-//       (err) => {
-//         if (err) throw err;
-//       }
-//     );
-//   });
-//   res.send("image ok");
-// });
+router.post(
+  "/upload-outside-permission/:id",
+  upload.single("OutsidePermission"),
+  uploadControllers.createOutsitePermission
+);
 
 module.exports = router;

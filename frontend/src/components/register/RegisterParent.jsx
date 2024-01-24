@@ -34,17 +34,18 @@ function Register() {
       })
       .then((resp) => {
         if (resp.status === 201) {
-          console.info(resp);
-          axios
+          const insertId = resp.data.insertId;
+            axios
             .post(`${import.meta.env.VITE_BACKEND_URL}/parents`, {
               firstname: formData.firstname,
               lastname: formData.lastname,
               phone: formData.phone,
+              userId: insertId
             })
             .then((resp2) => {
               if (resp2.status === 201) {
-                console.info(resp2);
-                navigate("/register/file");
+                const insertId = resp2.data.insertId;
+                navigate(`/register/file/${insertId}`);
               } else {
                 alert("Une erreur est survenue, veuillez réessayer");
               }
