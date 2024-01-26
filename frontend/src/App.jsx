@@ -13,12 +13,14 @@ import NurseryPage from "./components/search/nursery_details /NurseryPage";
 import Reservation from "./components/reservations/Reservations";
 import AdministrativeChildren from "./components/administrative_file/AdministrativeChildren";
 import AdministrativeNursery from "./components/administrative_file/AdministrativeNursery";
-import { NurseriesApiProvider } from "./contexts/nurseries-api.context";
+import { NurseriesApiProvider } from "./contexts/nurseries-api.context";
+import { AuthProvider } from "./contexts/auth.context";
 
 function App() {
   return (
     <div>
-       <NurseriesApiProvider>
+        <AuthProvider>
+          <NurseriesApiProvider>
 
           <Routes>
             <Route path="/" element={<Home />} />
@@ -54,6 +56,7 @@ function App() {
           </Routes>
 
         </NurseriesApiProvider>
+        </AuthProvider>
 
 
     </div>
