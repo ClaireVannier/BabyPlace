@@ -37,8 +37,8 @@ const login = async (req, res) => {
     const user = await tables.user.login(req.body);
     if (user) {
       const token = generateAccessToken({
-        id: user.id,
-        isNursery: user.is_nursery,
+        userId: user.id,
+        isNursery: !!user.is_nursery,
       });
       res.send({ token });
     } else {

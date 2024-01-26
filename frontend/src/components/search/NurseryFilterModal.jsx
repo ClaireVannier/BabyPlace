@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-function NurseryFilterModal({ applyFilters, appliedFilters }) {
+function NurseryFilterModal({ applyFilters, appliedFilters, setToggleModal, setFilteredNurseries }) {
   const [outdoorSpace, setOutdoorSpace] = useState(appliedFilters.outdoorSpace);
   const [homemadeMeals, setHomemadeMeals] = useState(
     appliedFilters.homemadeMeals
@@ -14,9 +14,10 @@ function NurseryFilterModal({ applyFilters, appliedFilters }) {
   );
   const [selectedDate, setSelectedDate] = useState(appliedFilters.date);
 
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);
-  };
+  const closeModal = () => {
+    setToggleModal(false);
+  }
+
 
   const handleSearch = () => {
     const filters = {
@@ -36,26 +37,19 @@ function NurseryFilterModal({ applyFilters, appliedFilters }) {
     setDevelopmentalActivities(false);
     setMusicalActivities(false);
     setSelectedDate("");
+    setFilteredNurseries([]);
   };
 
   return (
     <div className="filter-modal">
       <div className="filtercontainer">
-        <h2 className="titlefilter">Selectionnez différents filtres: </h2>
         <button type="button" className="resetfilter" onClick={handleReset}>
           Réinitialiser
         </button>
+        <div onClick={closeModal}>X</div>
       </div>
+      <h2 className="titlefilter">Cocher pour filtrer</h2>
       <div className="checkboxcontainer">
-        <label>
-          <input
-            type="date"
-            className="datepicker"
-            value={selectedDate}
-            onChange={handleDateChange}
-          />
-          Date
-        </label>
         <label>
           <input
             className="checkboxfilter"

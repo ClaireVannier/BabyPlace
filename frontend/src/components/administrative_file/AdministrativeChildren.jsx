@@ -33,7 +33,6 @@ function AdministrativeChildren() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/children`, formData)
       .then((resp) => {
         if (resp.status === 201) {
-          console.info(resp);
           navigate("/register/confirmationfile/false");
         } else {
           alert("Une erreur est survenue, veuillez réessayer");

@@ -55,9 +55,6 @@ router.post("/register/nursery", userControllers.registerNursery);
 router.post("/login", userControllers.login);
 
 // route for upload un fichier
-/**
- * 
- */
 router.post(
   "/upload-income/:id",
   upload.single("incomeProofUrl"),
@@ -80,6 +77,12 @@ router.post(
   "/upload-nursery-picture/:nurseryId",
   upload.single("NurseryPicture"),
   uploadControllers.createNurseryPicture
+);
+
+router.post(
+  "/upload-parent-avatar/:parentId",
+  upload.single("Avatar"),
+  uploadControllers.createAvatar
 );
 
 module.exports = router;

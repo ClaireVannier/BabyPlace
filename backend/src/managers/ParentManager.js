@@ -15,7 +15,7 @@ class ParentManager extends AbstractManager {
 
   async create(parent) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (firstname, lastname, phone, user_id) values (?, ?, ?, ?)`,
+      `insert into ${this.table} (firstname, lastname, phone, avatar_upload_id, user_id) values (?, ?, ?, NULL, ?)`,
       [parent.firstname, parent.lastname, parent.phone, parent.userId]
     );
 

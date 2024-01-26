@@ -1,24 +1,40 @@
 .filter-modal {
   border-radius: 5px;
-  top: 30%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: fixed;
   background-color: #f7f6fe;
   width: 80%;
+  max-width: 500px;
   height: fit-content;
-  padding: 40px 20px;
-  box-shadow: 5px 5px 15px 5px #000000;
+  padding: 20px;
+  box-shadow: 5px 5px 15px 100em #0000008a;
 
   .filtercontainer {
     display: flex;
     gap: 25px;
+    justify-content: space-between;
+    margin: 0 0 1em;
 
     .resetfilter {
       font-size: 13px;
       border-radius: 5px;
       background-color: lightgrey;
       padding: 0 10px;
+    }
+
+    div {
+      padding: 0.5em 0.7em;
+      background: #c5c3c3;
+      border-radius: 50%;
+    }
+
+    .resetfilter, div {
+      cursor: pointer;
+      &:hover {
+        opacity: .8;
+      }
     }
   }
 
@@ -38,6 +54,7 @@
     .datepicker {
       width: 25px;
     }
+
     input {
       margin-right: 10px;
       border-radius: 10px;
@@ -51,12 +68,10 @@
   }
 
   .searchfilter {
-    background: linear-gradient(
-      148.74deg,
-      rgb(71, 79, 255) 2.49%,
-      rgb(227, 122, 204) 99.05%
-    );
-    width: 70%;
+    background: linear-gradient(148.74deg,
+        rgb(71, 79, 255) 2.49%,
+        rgb(227, 122, 204) 99.05%);
+    width: 100%;
     color: #f2f2f2;
     padding: 12px 0;
     font-size: 20px;
@@ -65,7 +80,6 @@
     border: 1px solid transparent;
     border-radius: 10px;
     transition: 0.3s ease-in-out;
-    margin-left: 50px;
   }
 }
 
@@ -84,19 +98,24 @@
         padding: 5px;
       }
     }
+
     .titlefilter {
       font-size: 35px;
     }
+
     .checkboxcontainer {
       gap: 40px;
+
       label {
         font-size: 26px;
       }
+
       input {
         width: 24px;
         height: 24px;
       }
     }
+
     .searchfilter {
       font-size: 30px;
     }

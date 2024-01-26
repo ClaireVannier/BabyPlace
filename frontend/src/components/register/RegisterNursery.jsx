@@ -40,7 +40,6 @@ function RegisterNursery() {
       .catch((err) => {
         console.error(err);
       });
-    console.info("Données du formulaire soumises :", formData);
   };
 
   return (

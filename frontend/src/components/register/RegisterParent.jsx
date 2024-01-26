@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
+import  uploadFile from "../../utils/upload-file";
 
 function RegisterParent() {
   const navigate = useNavigate();
+  const [avatar, setAvatar] = useState(null);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -42,9 +44,11 @@ function RegisterParent() {
               phone: formData.phone,
               userId: insertId
             })
-            .then((resp2) => {
+            .then(async (resp2) => {
               if (resp2.status === 201) {
                 const insertId = resp2.data.insertId;
+                await uploadFile("Avatar", avatar, "upload-parent-avatar", insertId);
+
                 navigate(`/register/parent/file/${insertId}`);
               } else {
                 alert("Une erreur est survenue, veuillez réessayer");
@@ -129,6 +133,16 @@ function RegisterParent() {
               name="phone"
               value={formData.phoneNumber}
               onChange={handleChange}
+              required
+            />
+          </label>
+          <label>
+            Photo de profil : <br />
+             <input
+              className="input-file"
+              type="file"
+              name="avatar"
+              onChange={(e) => setAvatar(e.target.files[0])}
               required
             />
           </label>
