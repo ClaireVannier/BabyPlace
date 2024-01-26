@@ -19,7 +19,7 @@ const register = async (req, res) => {
 };
 
 // s'inscrire en tant que pro
-const registerPro = async (req, res) => {
+const registerNursery = async (req, res) => {
   tables.user
     .create(req.body, true)
     .then((insertId) => {
@@ -78,9 +78,7 @@ const login = async (req, res) => {
 // };
 
 module.exports = {
-  // getAll,
   register,
-  registerPro,
+  registerNursery,
   login,
-  // getById,
 };

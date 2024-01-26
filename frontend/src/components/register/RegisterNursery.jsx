@@ -5,7 +5,7 @@ import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 
-function RegisterPro() {
+function RegisterNursery() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -25,14 +25,14 @@ function RegisterPro() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/register/pro`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/register/nursery`, {
         email: formData.email,
         password: formData.password,
       })
       .then((resp) => {
         if (resp.status === 201) {
-          console.info(resp);
-          navigate("/register/pro/file");
+          const insertId = resp.data.insertId;
+          navigate(`/register/nursery/file/${insertId}`);
         } else {
           alert("Une erreur est survenue, veuillez réessayer");
         }
@@ -95,4 +95,4 @@ function RegisterPro() {
   );
 }
 
-export default RegisterPro;
+export default RegisterNursery;

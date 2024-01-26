@@ -32,7 +32,7 @@ CREATE TABLE nursery (
     name VARCHAR(120) NOT NULL,
     address TEXT NOT NULL,
     phone VARCHAR(12) NOT NULL,
-    picture_url TEXT,
+    picture_upload_id INT,
     description TEXT NOT NULL,
     outdoor_space BOOLEAN,
     homemade_meals BOOLEAN,

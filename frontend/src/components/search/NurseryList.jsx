@@ -1,10 +1,29 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import exports from "./FakeData";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import NurseryCard from "./NurseryCard";
 import NurseryFilterModal from "./NurseryFilterModal";
+import { useNurseriesApi } from "../../contexts/nurseries-api.context"; 
+
 
 function NurseryList() {
+  const { nurseries, setNurseries } = useNurseriesApi();
+
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/nurseries`)
+    .then((response) => {
+      setNurseries(response.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }, [setNurseries]);
+
+  useEffect(() => {
+    console.log(nurseries);
+  }, [nurseries]);
+
+  
   const [filteredNurseries, setFilteredNurseries] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
   const [appliedFilters, setAppliedFilters] = useState({
@@ -81,7 +100,7 @@ function NurseryList() {
       <div className="cardList">
         {(filteredNurseries.length >= 1
           ? filteredNurseries
-          : exports.fakeNurseries
+          : nurseries
         ).map((item) => (
           <NurseryCard key={item.id} nursery={item} />
         ))}

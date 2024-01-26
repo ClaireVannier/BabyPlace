@@ -16,6 +16,7 @@ function AdministrativeChildren() {
     isWalking: false,
     doctor: "",
     allergies: "",
+    parentId: parentId
   });
 
   const handleChange = (e) => {
@@ -29,14 +30,7 @@ function AdministrativeChildren() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/children`, {
-        firstName: formData.firstName,
-        birthDate: formData.birthDate,
-        isWalking: formData.isWalking,
-        doctor: formData.doctor,
-        allergies: formData.allergies,
-        parentId: parentId
-      })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/children`, formData)
       .then((resp) => {
         if (resp.status === 201) {
           console.info(resp);

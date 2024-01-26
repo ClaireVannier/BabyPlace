@@ -5,7 +5,7 @@ import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 
-function Register() {
+function RegisterParent() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/register`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/register/parent`, {
         email: formData.email,
         password: formData.password,
       })
@@ -45,7 +45,7 @@ function Register() {
             .then((resp2) => {
               if (resp2.status === 201) {
                 const insertId = resp2.data.insertId;
-                navigate(`/register/file/${insertId}`);
+                navigate(`/register/parent/file/${insertId}`);
               } else {
                 alert("Une erreur est survenue, veuillez réessayer");
               }
@@ -145,4 +145,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterParent;

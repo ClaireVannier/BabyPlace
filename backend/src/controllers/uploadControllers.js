@@ -30,4 +30,14 @@ const createOutsitePermission = async (req, res) => {
   }
 };
 
-module.exports = { createIncome, createPhoto, createOutsitePermission };
+const createNurseryPicture = async (req, res) => {
+  try {
+    const { nurseryId } = req.params;
+    const result = await tables.upload.createNurseryPicture(req, nurseryId);
+    return res.status(201).send({ result });
+  } catch (err) {
+    return res.status(400).send({ message: err.message });
+  }
+};
+
+module.exports = { createIncome, createPhoto, createOutsitePermission, createNurseryPicture };

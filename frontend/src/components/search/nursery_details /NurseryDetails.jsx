@@ -2,19 +2,24 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
 function NurseryDetails({ nursery }) {
+
+  if (!nursery) {
+    return <p>Chargement...</p>;
+  }
+  
   return (
     <div className="nursery-detail-container">
       <h2 className="nursery-detail-name">{nursery.name}</h2>
       <div className="nursery-detail-container-white">
         <img
           className="nursery-detail-img"
-          src={nursery.picture_url}
+          src={`${import.meta.env.VITE_BACKEND_UPLOADS_URL}/${nursery.picture_upload_url}`}
           alt={nursery.name}
         />
         <div className="nursery-detail-info">
           <p>
             <span>Adresse:</span> <br />
-            {nursery.adress}
+            {nursery.address}
           </p>
           <p>
             <span>Description:</span> <br />
@@ -50,17 +55,4 @@ function NurseryDetails({ nursery }) {
 }
 
 export default NurseryDetails;
-NurseryDetails.propTypes = {
-  nursery: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    adress: PropTypes.string.isRequired,
-    picture_url: PropTypes.string.isRequired,
-    description: PropTypes.string,
-    outdoor_space: PropTypes.bool,
-    homemade_meals: PropTypes.bool,
-    developmental_activities: PropTypes.bool,
-    musical_activities: PropTypes.bool,
-    capacity: PropTypes.number,
-  }).isRequired,
-};
+

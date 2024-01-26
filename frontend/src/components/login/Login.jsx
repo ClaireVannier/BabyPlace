@@ -23,10 +23,7 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, {
-        email: formData.email,
-        password: formData.password,
-      })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formData)
       .then((resp) => {
         console.info(resp);
         navigate("/search");
@@ -74,10 +71,6 @@ function Login() {
           <button type="submit" className="formBtn">
             Se connecter
           </button>
-          <p className="linktoregister">
-            Nouveau sur BabyPlace ? <br />
-            <NavLink to="/register">Inscrivez-vous ici</NavLink>
-          </p>
         </form>
       </div>
     </section>

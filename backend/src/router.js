@@ -20,6 +20,7 @@ router.put("/parents/:id", parentControllers.put);
 
 // Route for nursery
 router.get("/nursery/:id", nurseryControllers.get);
+router.get("/nurseries", nurseryControllers.getAll);
 router.post("/nursery", nurseryControllers.post); // ok ca marche
 router.put("/nursery/:id", nurseryControllers.put);
 
@@ -48,8 +49,8 @@ router.delete("/date/:id", dateControllers.deletedate);
 
 // Route for User
 // ok les 3 marchent
-router.post("/register", userControllers.register);
-router.post("/register/pro", userControllers.registerPro);
+router.post("/register/parent", userControllers.register);
+router.post("/register/nursery", userControllers.registerNursery);
 
 router.post("/login", userControllers.login);
 
@@ -73,6 +74,12 @@ router.post(
   "/upload-outside-permission/:id",
   upload.single("OutsidePermission"),
   uploadControllers.createOutsitePermission
+);
+
+router.post(
+  "/upload-nursery-picture/:nurseryId",
+  upload.single("NurseryPicture"),
+  uploadControllers.createNurseryPicture
 );
 
 module.exports = router;

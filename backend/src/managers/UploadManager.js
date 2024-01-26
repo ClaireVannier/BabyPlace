@@ -78,6 +78,31 @@ class UploadManager extends AbstractManager {
       throw error;
     }
   }
+
+  async createNurseryPicture(req, nurseryIdToUpdate) {
+    const { originalname, filename } = req.file;
+    const newName = `${generateUUID()}-${originalname}`;
+
+    try {
+      await renameFile(filename, newName);
+
+      const [result] = await this.database.query(
+        `INSERT INTO ${this.table} (url) VALUES (?)`,
+        [newName]
+      );
+
+      console.log(nurseryIdToUpdate)
+      const [result2] = await this.database.query(
+        `UPDATE nursery SET picture_upload_id = ? WHERE id = ?`,
+        [result.insertId, nurseryIdToUpdate]
+      );
+
+      return result2;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }
 
 module.exports = UploadManager;

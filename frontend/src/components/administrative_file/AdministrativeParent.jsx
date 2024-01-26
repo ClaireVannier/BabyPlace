@@ -4,6 +4,7 @@ import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 import { useState } from "react";
+import uploadFile from "../../utils/upload-file.js";
 
 function AdministrativeParent() {
   const navigate = useNavigate();
@@ -14,16 +15,7 @@ function AdministrativeParent() {
   const [fileOutsidePermission, setFileOutsidePermission] = useState(null);
   const [socialSecurityNumber, setSocialSecurityNumber] = useState(null);
 
-  const uploadFile = async (typeOfFile, file, endpoint, insertId) => {
-    const formData = new FormData();
-    formData.append(typeOfFile, file);
-
-    await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/${endpoint}/${insertId}`,
-      formData
-    );
-  };
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -110,13 +102,6 @@ function AdministrativeParent() {
           <button className="formBtnRegister" type="submit">
             Renseigner mes enfants
           </button>
-          {/* <NavLink
-            to="/register/children"
-            className="formBtnRegister"
-            type="submit"
-          >
-            Renseigner mes enfants
-          </NavLink> */}
         </form>
       </div>
     </div>

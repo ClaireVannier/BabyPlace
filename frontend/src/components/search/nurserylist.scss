@@ -32,9 +32,10 @@
 }
 
 .cardList {
-  margin: 35px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 35px;
   gap: 30px;
   padding-top: 60px;
 }

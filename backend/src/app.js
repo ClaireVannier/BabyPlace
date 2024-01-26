@@ -4,44 +4,27 @@ const cookieParser = require("cookie-parser");
 const fs = require("node:fs");
 const path = require("node:path");
 const router = require("./router");
+require("dotenv").config();
 
 const app = express();
 
 app.use(cors());
-
-require("dotenv").config();
-
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api", router);
 
 app.use(express.static(path.join(__dirname, "../public")));
+app.use("/api", router);
 
-const reactIndexFile = path.join(
-  __dirname,
-  "..",
-  "..",
-  "frontend",
-  "dist",
-  "index.html"
-);
-
-if (fs.existsSync(reactIndexFile)) {
-  app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(reactIndexFile);
-  });
-}
-
-module.exports = app;
-
-const reactBuildPath = `${__dirname}/../../frontend/dist`;
-
+const reactBuildPath = path.join(__dirname, "..", "..", "frontend", "dist");
 app.use(express.static(reactBuildPath));
 
 app.get("*", (req, res) => {
-  res.sendFile(`${reactBuildPath}/index.html`);
+  const reactIndexFile = path.join(reactBuildPath, "index.html");
+  if (fs.existsSync(reactIndexFile)) {
+    res.sendFile(reactIndexFile);
+  } else {
+    res.status(404).send("Index file not found");
+  }
 });
 
 const logErrors = (err, req, res, next) => {
@@ -50,7 +33,5 @@ const logErrors = (err, req, res, next) => {
 
   next(err);
 };
-
-app.use(logErrors);
 
 module.exports = app;
