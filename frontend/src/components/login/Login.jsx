@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
+import { useAuth } from "../../contexts/auth.context";
 
 function Login() {
   const navigate = useNavigate();
+  const auth = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -21,14 +23,19 @@ function Login() {
     }));
   };
 
+  useEffect(() => {
+    console.log(auth.userId, auth.isNursery);
+  }, [auth.userId, auth.isNursery])
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formData)
-      .then((res) => {
-        const token = res.data.token;
-        const user = jwtDecode(token);
-        console.log(user);
+      .then((resp) => {
+        const token = resp.data.token;
+        const payload = jwtDecode(token);
+        auth.setUserId(payload.userId);
+        auth.setIsNursery(payload.isNursery);
         navigate("/search");
       })
       .catch((err) => {
