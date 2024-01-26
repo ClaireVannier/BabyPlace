@@ -1,10 +1,31 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import exports from "./FakeData";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import NurseryCard from "./NurseryCard";
 import NurseryFilterModal from "./NurseryFilterModal";
+import { useNurseriesApi } from "../../contexts/nurseries-api.context";
+
 
 function NurseryList() {
+  const { nurseries, setNurseries } = useNurseriesApi(); // nurseries sont stockées dans le context
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (nurseries.length === 0) {
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/nurseries`);
+          setNurseries(response.data);
+        };
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [nurseries, setNurseries]);
+
+
+
   const [filteredNurseries, setFilteredNurseries] = useState([]);
   const [toggleModal, setToggleModal] = useState(false);
   const [appliedFilters, setAppliedFilters] = useState({
@@ -16,7 +37,7 @@ function NurseryList() {
   });
 
   const applyFilters = (filters) => {
-    const filteredList = exports.fakeNurseries.filter((nursery) => {
+    const filteredList = nurseries.filter((nursery) => {
       return (
         (!filters.outdoorSpace ||
           nursery.outdoor_space === filters.outdoorSpace) &&
@@ -24,7 +45,7 @@ function NurseryList() {
           nursery.homemade_meals === filters.homemadeMeals) &&
         (!filters.developmentalActivities ||
           nursery.developmental_activities ===
-            filters.developmentalActivities) &&
+          filters.developmentalActivities) &&
         (!filters.musicalActivities ||
           nursery.musical_activities === filters.musicalActivities) &&
         (!filters.date || nursery.date === filters.date)
@@ -74,6 +95,8 @@ function NurseryList() {
             <NurseryFilterModal
               applyFilters={applyFilters}
               appliedFilters={appliedFilters}
+              setFilteredNurseries={setFilteredNurseries}
+              setToggleModal={setToggleModal}
             />
           )}
         </div>
@@ -81,7 +104,7 @@ function NurseryList() {
       <div className="cardList">
         {(filteredNurseries.length >= 1
           ? filteredNurseries
-          : exports.fakeNurseries
+          : nurseries
         ).map((item) => (
           <NurseryCard key={item.id} nursery={item} />
         ))}

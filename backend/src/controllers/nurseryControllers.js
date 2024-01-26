@@ -15,11 +15,29 @@ const get = async (req, res) => {
   }
 };
 
+const getAll = async (req, res) => {
+  try {
+    const allNurseries = await tables.nursery.findAll();
+
+    if (allNurseries == null || allNurseries.length == 0) {
+      res.sendStatus(404);
+    } else {
+      allNurseries.forEach(nursery => {
+        transformTinyIntIntoBoolean(nursery);
+      });
+      res.json(allNurseries);
+    }
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500).json({ sucess: false, message: err.message });
+  }
+};
+
 const post = async (req, res) => {
   tables.nursery
     .create(req.body)
-    .then(() => {
-      res.status(201).json({ message: "Crèche créer avec succès" });
+    .then((insertId) => {
+      res.status(201).json({ insertId });
     })
     .catch((err) => {
       console.error(err);
@@ -47,9 +65,16 @@ const put = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+const transformTinyIntIntoBoolean = (nursery) => {
+  nursery.developmental_activities = !!nursery.developmental_activities;
+  nursery.homemade_meals = !!nursery.homemade_meals;
+  nursery.musical_activities = !!nursery.musical_activities;
+  nursery.outdoor_space = !!nursery.outdoor_space;
+}
 
 module.exports = {
   post,
   get,
+  getAll,
   put,
 };

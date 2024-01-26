@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
@@ -7,6 +7,8 @@ import imgregister from "../../assets/imgregister.svg";
 
 function AdministrativeChildren() {
   const navigate = useNavigate();
+  const { parentId } = useParams();
+
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -14,6 +16,7 @@ function AdministrativeChildren() {
     isWalking: false,
     doctor: "",
     allergies: "",
+    parentId: parentId
   });
 
   const handleChange = (e) => {
@@ -27,16 +30,9 @@ function AdministrativeChildren() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/children`, {
-        firstName: formData.firstName,
-        birthDate: formData.birthDate,
-        isWalking: formData.isWalking,
-        doctor: formData.doctor,
-        allergies: formData.allergies,
-      })
+      .post(`${import.meta.env.VITE_BACKEND_URL}/children`, formData)
       .then((resp) => {
         if (resp.status === 201) {
-          console.info(resp);
           navigate("/register/confirmationfile/false");
         } else {
           alert("Une erreur est survenue, veuillez réessayer");
@@ -47,24 +43,6 @@ function AdministrativeChildren() {
       });
   };
 
-  // const getChildValue = (e) => {
-  //   if (e.target.name === "firstname") {
-  //     child.firstname = e.target.value;
-  //   }
-  //   if (e.target.name === "birth_date") {
-  //     child.birth_date = e.target.value;
-  //   }
-  //   if (e.target.name === "is_walking") {
-  //     child.is_walking = e.target.checked;
-  //   }
-  //   if (e.target.name === "doctor") {
-  //     child.doctor = e.target.value;
-  //   }
-  //   if (e.target.name === "allergies") {
-  //     child.allergies = e.target.value;
-  //   }
-  //   // console.log(child);
-  // };
 
   return (
     <div className="registerContainer">
@@ -123,7 +101,7 @@ function AdministrativeChildren() {
               className="input-file-secu"
               type="text"
               onChange={handleChange}
-              required
+              
             />
           </label>
 

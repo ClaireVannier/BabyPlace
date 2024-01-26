@@ -1,18 +1,20 @@
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
+import  uploadFile from "../../utils/upload-file";
 
-function AdministrativeFormNursery() {
+function AdministrativeNursery() {
   const navigate = useNavigate();
+  const { userId } = useParams();
+  const [filePictureUrl, setFilePictureUrl] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
     address: "",
     phone: "",
-    pictureUrl: "",
     description: "",
     developmentalActivities: false,
     musicalActivities: false,
@@ -20,6 +22,7 @@ function AdministrativeFormNursery() {
     homemadeMeals: false,
     capacity: "",
     timeSlot: "",
+    userId: userId
   });
 
   const handleChange = (e) => {
@@ -33,22 +36,11 @@ function AdministrativeFormNursery() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/nursery`, {
-        name: formData.name,
-        address: formData.address,
-        phone: formData.phone,
-        pictureUrl: formData.pictureUrl,
-        description: formData.description,
-        developmentalActivities: formData.developmentalActivities,
-        musicalActivities: formData.musicalActivities,
-        outdoorSpace: formData.outdoorSpace,
-        homemadeMeals: formData.homemadeMeals,
-        capacity: formData.capacity,
-        timeSlot: formData.timeSlot,
-      })
-      .then((resp) => {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/nursery`, formData)
+      .then(async (resp) => {
         if (resp.status === 201) {
-          console.info(resp);
+          const insertId = resp.data.insertId;
+          await uploadFile("NurseryPicture", filePictureUrl, "upload-nursery-picture", insertId);
           navigate("/register/confirmationfile/true");
         } else {
           alert("Une erreur est survenue, veuillez réessayer");
@@ -104,13 +96,12 @@ function AdministrativeFormNursery() {
           </label>
           <label>
             Photo de la crèche : <br />
-            <input
-              name="pictureUrl"
+             <input
               className="input-file"
               type="file"
-              value={formData.pictureUrl}
-              onChange={handleChange}
-              // required
+              name="pictureUrl"
+              onChange={(e) => setFilePictureUrl(e.target.files[0])}
+              required
             />
           </label>
           <label>
@@ -131,7 +122,7 @@ function AdministrativeFormNursery() {
               value={formData.capacity}
               onChange={handleChange}
               className="input-file-secu"
-              type="text"
+              type="number"
               required
             />
           </label>
@@ -201,4 +192,4 @@ function AdministrativeFormNursery() {
   );
 }
 
-export default AdministrativeFormNursery;
+export default AdministrativeNursery;

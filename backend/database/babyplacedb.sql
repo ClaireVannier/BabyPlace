@@ -32,7 +32,7 @@ CREATE TABLE nursery (
     name VARCHAR(120) NOT NULL,
     address TEXT NOT NULL,
     phone VARCHAR(12) NOT NULL,
-    picture_url TEXT,
+    picture_upload_id INT,
     description TEXT NOT NULL,
     outdoor_space BOOLEAN,
     homemade_meals BOOLEAN,
@@ -43,9 +43,9 @@ CREATE TABLE nursery (
 CREATE TABLE administrative (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     social_security_number VARCHAR(15) NOT NULL,
-    income_proof_url TEXT NOT NULL,
-    photo_video_permission_url TEXT NOT NULL,
-    outing_permission_url TEXT NOT NULL
+    income_proof_upload_id INT,
+    photo_video_permission_upload_id INT,
+    outing_permission_upload_id INT
 );
 
 CREATE TABLE booking (
@@ -103,13 +103,8 @@ CREATE TABLE date (
 );
 
 
-INSERT INTO user (email,password) VALUES ('user@demo.com','1234')
 
  CREATE TABLE upload ( 
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  url varchar(255) NOT NULL,
-  unique(url),
-  created_at timestamp default CURRENT_TIMESTAMP
+  url varchar(255) NOT NULL
 );
-
-ALTER TABLE user ADD COLUMN avatar int(11), ADD CONSTRAINT fk_avatar_upload_id FOREIGN KEY (avatar) REFERENCES upload(id);

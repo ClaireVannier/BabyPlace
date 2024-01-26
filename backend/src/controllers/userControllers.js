@@ -9,8 +9,8 @@ function generateAccessToken(data) {
 const register = async (req, res) => {
   tables.user
     .create(req.body, false)
-    .then(() => {
-      res.status(201).json({ message: "Compte crée avec succès" });
+    .then((insertId) => {
+      res.status(201).json({ insertId });
     })
     .catch((err) => {
       console.error(err);
@@ -19,11 +19,11 @@ const register = async (req, res) => {
 };
 
 // s'inscrire en tant que pro
-const registerPro = async (req, res) => {
+const registerNursery = async (req, res) => {
   tables.user
     .create(req.body, true)
-    .then(() => {
-      res.status(201).json({ message: "Compte crée avec succès" });
+    .then((insertId) => {
+      res.status(201).json({ insertId });
     })
     .catch((err) => {
       console.error(err);
@@ -37,8 +37,8 @@ const login = async (req, res) => {
     const user = await tables.user.login(req.body);
     if (user) {
       const token = generateAccessToken({
-        id: user.id,
-        isNursery: user.is_nursery,
+        userId: user.id,
+        isNursery: !!user.is_nursery,
       });
       res.send({ token });
     } else {
@@ -78,9 +78,7 @@ const login = async (req, res) => {
 // };
 
 module.exports = {
-  // getAll,
   register,
-  registerPro,
+  registerNursery,
   login,
-  // getById,
 };

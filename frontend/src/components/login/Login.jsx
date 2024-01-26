@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { NavLink, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 
@@ -23,12 +24,11 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, {
-        email: formData.email,
-        password: formData.password,
-      })
-      .then((resp) => {
-        console.info(resp);
+      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formData)
+      .then((res) => {
+        const token = res.data.token;
+        const user = jwtDecode(token);
+        console.log(user);
         navigate("/search");
       })
       .catch((err) => {
@@ -74,10 +74,6 @@ function Login() {
           <button type="submit" className="formBtn">
             Se connecter
           </button>
-          <p className="linktoregister">
-            Nouveau sur BabyPlace ? <br />
-            <NavLink to="/register">Inscrivez-vous ici</NavLink>
-          </p>
         </form>
       </div>
     </section>

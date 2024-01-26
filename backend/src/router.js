@@ -1,8 +1,9 @@
 const express = require("express");
+const multer = require("multer");
 
 const router = express.Router();
+const upload = multer({ dest: "./public/uploads" });
 
-// Import itemControllers module for handling item-related operations
 const parentControllers = require("./controllers/parentControllers");
 const nurseryControllers = require("./controllers/nurseryControllers");
 const childrenControllers = require("./controllers/childrenControllers");
@@ -10,15 +11,7 @@ const bookingControllers = require("./controllers/bookingControllers");
 const administrativeControllers = require("./controllers/administrativeControllers");
 const dateControllers = require("./controllers/dateControllers");
 const userControllers = require("./controllers/userControllers");
-
-// // Route to get a list of items
-// router.get("/items", itemControllers.browse);
-
-// // Route to get a specific item by ID
-// router.get("/items/:id", itemControllers.read);
-
-// // Route to add a new item
-// router.post("/items", itemControllers.add);
+const uploadControllers = require("./controllers/uploadControllers");
 
 // Route for parents
 router.get("/parents/:id", parentControllers.get);
@@ -27,6 +20,7 @@ router.put("/parents/:id", parentControllers.put);
 
 // Route for nursery
 router.get("/nursery/:id", nurseryControllers.get);
+router.get("/nurseries", nurseryControllers.getAll);
 router.post("/nursery", nurseryControllers.post); // ok ca marche
 router.put("/nursery/:id", nurseryControllers.put);
 
@@ -42,7 +36,6 @@ router.put("/booking/:id", bookingControllers.put);
 router.delete("/booking/:id", bookingControllers.deleteBooking);
 
 // Route for Admnistrative
-
 router.get("/administrative/:id", administrativeControllers.get);
 router.post("/administrative", administrativeControllers.post); // ca marche sur postman
 router.put("/administrative/:id", administrativeControllers.put);
@@ -56,9 +49,40 @@ router.delete("/date/:id", dateControllers.deletedate);
 
 // Route for User
 // ok les 3 marchent
-router.post("/register", userControllers.register);
-router.post("/register/pro", userControllers.registerPro);
+router.post("/register/parent", userControllers.register);
+router.post("/register/nursery", userControllers.registerNursery);
 
 router.post("/login", userControllers.login);
+
+// route for upload un fichier
+router.post(
+  "/upload-income/:id",
+  upload.single("incomeProofUrl"),
+  uploadControllers.createIncome
+);
+
+router.post(
+  "/upload-photo/:id",
+  upload.single("PhotoVideoPermission"),
+  uploadControllers.createPhoto
+);
+
+router.post(
+  "/upload-outside-permission/:id",
+  upload.single("OutsidePermission"),
+  uploadControllers.createOutsitePermission
+);
+
+router.post(
+  "/upload-nursery-picture/:nurseryId",
+  upload.single("NurseryPicture"),
+  uploadControllers.createNurseryPicture
+);
+
+router.post(
+  "/upload-parent-avatar/:parentId",
+  upload.single("Avatar"),
+  uploadControllers.createAvatar
+);
 
 module.exports = router;

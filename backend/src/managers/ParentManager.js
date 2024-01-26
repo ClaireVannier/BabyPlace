@@ -15,8 +15,8 @@ class ParentManager extends AbstractManager {
 
   async create(parent) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (firstname, lastname, phone) values (?, ?, ?)`,
-      [parent.firstname, parent.lastname, parent.phone]
+      `insert into ${this.table} (firstname, lastname, phone, avatar_upload_id, user_id) values (?, ?, ?, NULL, ?)`,
+      [parent.firstname, parent.lastname, parent.phone, parent.userId]
     );
 
     return result.insertId;
@@ -26,6 +26,15 @@ class ParentManager extends AbstractManager {
     const [result] = await this.database.query(
       `update ${this.table} set firstname = ?, lastname = ?, phone = ? WHERE id = ?`,
       [parent.firstname, parent.lastname, parent.phone, parentId]
+    );
+
+    return result.affectedRows;
+  }
+
+  async setAdmininistrativeId(administrativeId, parentId) {
+    const [result] = await this.database.query(
+      `update ${this.table} set administrative_id = ? WHERE id = ?`,
+      [administrativeId, parentId]
     );
 
     return result.affectedRows;

@@ -4,9 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
+import  uploadFile from "../../utils/upload-file";
 
-function Register() {
+function RegisterParent() {
   const navigate = useNavigate();
+  const [avatar, setAvatar] = useState(null);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -28,23 +30,26 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/register`, {
+      .post(`${import.meta.env.VITE_BACKEND_URL}/register/parent`, {
         email: formData.email,
         password: formData.password,
       })
       .then((resp) => {
         if (resp.status === 201) {
-          console.info(resp);
-          axios
+          const insertId = resp.data.insertId;
+            axios
             .post(`${import.meta.env.VITE_BACKEND_URL}/parents`, {
               firstname: formData.firstname,
               lastname: formData.lastname,
               phone: formData.phone,
+              userId: insertId
             })
-            .then((resp2) => {
+            .then(async (resp2) => {
               if (resp2.status === 201) {
-                console.info(resp2);
-                navigate("/register/file");
+                const insertId = resp2.data.insertId;
+                await uploadFile("Avatar", avatar, "upload-parent-avatar", insertId);
+
+                navigate(`/register/parent/file/${insertId}`);
               } else {
                 alert("Une erreur est survenue, veuillez réessayer");
               }
@@ -131,6 +136,16 @@ function Register() {
               required
             />
           </label>
+          <label>
+            Photo de profil : <br />
+             <input
+              className="input-file"
+              type="file"
+              name="avatar"
+              onChange={(e) => setAvatar(e.target.files[0])}
+              required
+            />
+          </label>
           <button className="formBtn" type="submit">
             S'inscrire
           </button>
@@ -144,4 +159,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterParent;

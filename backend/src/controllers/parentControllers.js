@@ -18,8 +18,8 @@ const get = async (req, res) => {
 const post = async (req, res) => {
   tables.parent
     .create(req.body)
-    .then(() => {
-      res.status(201).json({ message: "Parent crée avec succès" });
+    .then((insertId) => {
+      res.status(201).json({ insertId });
     })
     .catch((err) => {
       console.error(err);
