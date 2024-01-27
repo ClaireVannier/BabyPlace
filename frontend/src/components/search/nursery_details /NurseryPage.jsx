@@ -2,11 +2,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NurseryDetails from "./NurseryDetails";
-import { useNurseriesApi } from "../../../contexts/nurseries-api.context"; 
+import { useNursery } from "../../../contexts/nursery.context";
 
 function NurseryPage() {
   const [selectedNursery, setSelectedNursery] = useState(null);
-  const { nurseries, setNurseries } = useNurseriesApi();
+  const { nurseries, setNurseries } = useNursery();
   const { id } = useParams();
 
   useEffect(() => {

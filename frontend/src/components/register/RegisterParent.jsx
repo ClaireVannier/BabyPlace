@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
-import  uploadFile from "../../utils/upload-file";
+import uploadFile from "../../utils/upload-file";
 
 function RegisterParent() {
   const navigate = useNavigate();

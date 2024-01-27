@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -29,20 +29,25 @@ function Login() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formData)
       .then((resp) => {
-        const token = resp.data.token;
-        const payload = jwtDecode(token);
-        auth.setUserId(payload.userId);
-        auth.setIsNursery(payload.isNursery);
+        setAuthData(resp);
         navigate("/search");
       })
       .catch((err) => {
         console.error(err);
       });
-    setFormData({
-      email: "",
-      password: "",
-    });
   };
+
+  // Cette méthode permet de mettre à jour toutes les informations relatives à l'Authentication
+  // Ces informations sont placées dans un Context afin de pouvoir être utilisées partout, 
+  // Dans n'importe quel composant :)
+  const setAuthData = (resp) => {
+    const token = resp.data.token;
+    const payload = jwtDecode(token);
+    auth.setToken(token);
+    auth.setUserId(payload.userId);
+    auth.setIsNursery(payload.isNursery);
+    auth.setProfil(payload.profil);
+  }
 
   return (
     <section className="formContainer">

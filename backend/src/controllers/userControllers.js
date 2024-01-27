@@ -36,13 +36,15 @@ const login = async (req, res) => {
   try {
     const user = await tables.user.login(req.body);
     if (user) {
+      const profil = await tables.user.getProfil(user.id);
       const token = generateAccessToken({
         userId: user.id,
         isNursery: !!user.is_nursery,
+        profil: profil
       });
       res.send({ token });
     } else {
-      res.status(401).send({ error: "Identifiants incorrects !" });
+      res.status(401).send({ error: "L'utilisateur n'existe pas ou les identifiants sont incorrects !" });
     }
   } catch (err) {
     console.error(err);

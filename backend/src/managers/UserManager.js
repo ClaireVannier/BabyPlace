@@ -30,7 +30,7 @@ class UserManager extends AbstractManager {
     );
 
     if (userRows.length === 0) {
-      return undefined; // L'utilisateur n'existe pas
+      return undefined;
     }
 
     const user = userRows[0];
@@ -45,7 +45,25 @@ class UserManager extends AbstractManager {
       [id]
     );
 
-    return profilRows.length > 0 ? profilRows[0] : undefined;
+    if (profilRows.length === 0) {
+      return undefined;
+    }
+
+    const profil = profilRows[0];
+
+    if (profil.is_nursery === 0) {
+      const [parentRows] = await this.database.query(
+        'SELECT * FROM parent WHERE user_id = ?',
+        [profil.id]
+      );
+      return  parentRows.length > 0 ? parentRows[0] : undefined;
+    } else {
+      const [nurseryRows] = await this.database.query(
+        'SELECT * FROM nursery WHERE user_id = ?',
+        [profil.id]
+      );
+      return nurseryRows.length > 0 ? nurseryRows[0] : undefined;
+    }
   }
 
   async addAvatar(userId, avatarId) {
