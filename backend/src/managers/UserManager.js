@@ -30,7 +30,7 @@ class UserManager extends AbstractManager {
     );
 
     if (userRows.length === 0) {
-      return undefined; // L'utilisateur n'existe pas
+      return undefined;
     }
 
     const user = userRows[0];
@@ -39,14 +39,61 @@ class UserManager extends AbstractManager {
     return passwordMatch ? user : undefined;
   }
 
-  async getProfil(id) {
-    const [profilRows] = await this.database.query(
-      `SELECT id, email, is_nursery FROM ${this.table} WHERE id = ?`,
-      [id]
-    );
 
-    return profilRows.length > 0 ? profilRows[0] : undefined;
+  async getProfil(userId, isNursery) {
+    // Création de l'objet "profil"
+    const profil = {}
+
+    
+    if (isNursery) {
+      // Récupérer la Nursery liée au user_id
+      const [nurseryRows] = await this.database.query(
+        `SELECT * FROM nursery WHERE user_id = ?`,
+        [userId]
+      );
+
+      if (nurseryRows.length === 0) {
+        profil.nursery = {};
+      }
+      // Ajout de l'objet "nursery" dans l'objet "profil"
+      profil.nursery = nurseryRows[0];
+
+    } else { 
+      // Récupérer mon parent lié au user_id
+      const [parentRows] = await this.database.query(
+        `SELECT * FROM parent WHERE user_id = ?`,
+        [userId]
+      );
+
+      if (parentRows.length === 0) {
+        profil.parent = undefined;
+      }
+      // Ajout de l'objet "parent" dans l'objet "profil"
+      profil.parent = parentRows[0];
+
+      // Récupérer les enfants liés au parent_id
+      const [childrenRows] = await this.database.query(
+        `SELECT * FROM children WHERE parent_id = ?`,
+        [profil.parent.id]
+      );
+
+      if (childrenRows.length === 0) {
+        profil.children = [];
+      }
+      // Ajout du tableau "children" dans l'objet "profil
+      profil.children = childrenRows;
+    }
+    return profil;
   }
+
+
+
+
+
+
+
+
+
 
   async addAvatar(userId, avatarId) {
     await this.database.query(

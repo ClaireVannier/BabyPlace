@@ -42,7 +42,7 @@ function NurseryDetails({ nursery }) {
         </div>
         <div className="booking-container">
           <NavLink
-            to={`/nursery/reservation/${nursery.id}`}
+            to={`/nursery/booking/${nursery.id}`}
             className="reservation-NavLink"
             type="button"
           >

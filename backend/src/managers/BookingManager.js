@@ -15,12 +15,19 @@ class BookingManager extends AbstractManager {
 
   async create(booking) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (children_id, nursery_id) values (?, ? )`,
+      `insert into ${this.table} (children_id, nursery_id) values (?, ?)`,
       [booking.childrenId, booking.nurseryId]
     );
 
-    return result.insertId;
+    const bookingId = result.insertId;
+
+    const [results2] = await this.database.query(
+      `insert into date (booking_id, start_date, end_date) values (?, ?, ?)`,
+      [bookingId, booking.startDate, booking.endDate]
+    );
+    return results2.insertId;
   }
+
 
   // Est ce que j'ai besoin de mettre à jour une réservation?
   // async update(booking, bookingId) {

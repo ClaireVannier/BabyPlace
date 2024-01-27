@@ -3,11 +3,11 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import NurseryCard from "./NurseryCard";
 import NurseryFilterModal from "./NurseryFilterModal";
-import { useNurseriesApi } from "../../contexts/nurseries-api.context";
+import { useNursery } from "../../contexts/nursery.context";
 
 
 function NurseryList() {
-  const { nurseries, setNurseries } = useNurseriesApi(); // nurseries sont stockées dans le context
+  const { nurseries, setNurseries } = useNursery(); // nurseries sont stockées dans le context
 
   useEffect(() => {
     const fetchData = async () => {

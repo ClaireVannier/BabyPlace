@@ -41,17 +41,14 @@ router.post("/administrative", administrativeControllers.post); // ca marche sur
 router.put("/administrative/:id", administrativeControllers.put);
 
 // Route for date
-
 router.get("/date/:id", dateControllers.get);
 router.post("/date", dateControllers.post);
 router.put("/date/:id", dateControllers.put);
 router.delete("/date/:id", dateControllers.deletedate);
 
 // Route for User
-// ok les 3 marchent
 router.post("/register/parent", userControllers.register);
 router.post("/register/nursery", userControllers.registerNursery);
-
 router.post("/login", userControllers.login);
 
 // route for upload un fichier
