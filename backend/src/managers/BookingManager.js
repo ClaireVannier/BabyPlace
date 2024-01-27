@@ -5,14 +5,26 @@ class BookingManager extends AbstractManager {
     super({ table: "booking" });
   }
 
-  async read(id) {
+  async readByChildrenId(childrenId) {
     const [rows] = await this.database.query(
-      `SELECT * FROM ${this.table} WHERE id = ?`,
-      [id]
+      `
+      SELECT
+        date.id AS date_id,
+        booking.id AS booking_id,
+        date.start_date,
+        date.end_date,
+        nursery.name,
+        upload.url AS picture_url
+      FROM booking
+      JOIN date ON booking.id = date.booking_id
+      JOIN nursery ON booking.nursery_id = nursery.id
+      JOIN upload ON upload.id = nursery.picture_upload_id
+      WHERE booking.children_id = ?
+      `,
+      [childrenId]
     );
-    return rows[0];
+    return rows;
   }
-
   async create(booking) {
     const [result] = await this.database.query(
       `insert into ${this.table} (children_id, nursery_id) values (?, ?)`,

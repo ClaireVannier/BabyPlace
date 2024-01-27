@@ -13,7 +13,7 @@ function NurseryDetails({ nursery }) {
       <div className="nursery-detail-container-white">
         <img
           className="nursery-detail-img"
-          src={`${import.meta.env.VITE_BACKEND_UPLOADS_URL}/${nursery.picture_upload_url}`}
+          src={`${import.meta.env.VITE_BACKEND_UPLOADS_URL}/${nursery.picture_url}`}
           alt={nursery.name}
         />
         <div className="nursery-detail-info">

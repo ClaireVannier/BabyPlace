@@ -1,13 +1,20 @@
 const tables = require("../tables");
 
-const get = async (req, res) => {
+const getByChildrenId = async (req, res) => {
   try {
-    const booking = await tables.booking.read(req.params.id);
+    const { childrenId } = req.params;
+    const bookingList = await tables.booking.readByChildrenId(childrenId);
 
-    if (booking == null) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    bookingList.forEach(booking => {
+      booking.start_date = new Date(booking.start_date).toLocaleDateString('fr-FR', options);
+      booking.end_date = new Date(booking.end_date).toLocaleDateString('fr-FR', options);
+    })
+
+    if (bookingList == null) {
       res.sendStatus(404);
     } else {
-      res.json(booking);
+      res.json(bookingList);
     }
   } catch (err) {
     console.error(err);
@@ -21,7 +28,7 @@ const post = async (req, res) => {
   try {
     const insertId = await tables.booking.create(booking);
 
-    res.status(201).json({ message: "Réservation créée.", id: insertId});
+    res.status(201).json({ message: "Réservation créée.", id: insertId });
   } catch (err) {
     console.error(err);
     res.status(500).error(err.message);
@@ -70,7 +77,7 @@ const deleteBooking = async (req, res) => {
 };
 
 module.exports = {
-  get,
+  getByChildrenId,
   post,
   put,
   deleteBooking,

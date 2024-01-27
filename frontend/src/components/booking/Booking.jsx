@@ -1,11 +1,12 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import logocoeur from "../../assets/logocoeur.svg";
 import { useAuth } from "../../contexts/auth.context";
 import axios from "axios";
 
 function Booking() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const auth = useAuth();
   const children = auth.profil.children[0];
 
@@ -22,7 +23,6 @@ function Booking() {
       ...prevData,
       [name]: value,
     }));
-    console.log("formData", formData);
   };
 
 
@@ -31,10 +31,8 @@ function Booking() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/booking`, formData)
       .then((resp) => {
-        console.log(resp);
         if (resp.status === 201) {
-
-          alert("Votre réservation à bien été effectuée")
+          navigate("/booking/confirmation");
         }
       })
       .catch((err) => {
@@ -42,11 +40,6 @@ function Booking() {
       });
   };
 
-  // je vérifie que je recupere bien la valeur des deux input
-  // useEffect(() => {
-  //   console.log(formData)
-  // },
-  //   [formData.startDate, formData.endDate])
 
 
   return (

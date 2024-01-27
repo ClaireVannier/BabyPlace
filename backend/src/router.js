@@ -30,7 +30,7 @@ router.post("/children", childrenControllers.post); // ok ca marche
 router.put("/children/:id", childrenControllers.put);
 
 // Route for booking
-router.get("/booking/:id", bookingControllers.get);
+router.get("/booking/:childrenId", bookingControllers.getByChildrenId);
 router.post("/booking", bookingControllers.post);
 router.put("/booking/:id", bookingControllers.put);
 router.delete("/booking/:id", bookingControllers.deleteBooking);

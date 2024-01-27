@@ -15,8 +15,10 @@ class NurseryManager extends AbstractManager {
 
   async findAll() {
     const [rows] = await this.database.query(
-      `SELECT nursery.*, upload.url AS picture_upload_url FROM ${this.table} 
-       LEFT JOIN upload ON ${this.table}.picture_upload_id = upload.id`   
+      `SELECT 
+        nursery.id, nursery.name, nursery.address, nursery.phone, nursery.description, nursery.outdoor_space, nursery.homemade_meals, nursery.developmental_activities, nursery.musical_activities, nursery.capacity, nursery.time_slot, upload.url AS picture_url 
+        FROM ${this.table} 
+        LEFT JOIN upload ON ${this.table}.picture_upload_id = upload.id`   
       );
     return rows;
   }

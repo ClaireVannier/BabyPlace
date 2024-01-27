@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const AbstractManager = require("./AbstractManager");
+const transformTinyIntIntoBoolean = require("../utils/transform-tiny-to-bool");
 
 const { compare, hash: _hash } = bcrypt;
 
@@ -48,7 +49,11 @@ class UserManager extends AbstractManager {
     if (isNursery) {
       // Récupérer la Nursery liée au user_id
       const [nurseryRows] = await this.database.query(
-        `SELECT * FROM nursery WHERE user_id = ?`,
+        `SELECT 
+        nursery.id, nursery.name, nursery.address, nursery.phone, nursery.description, nursery.outdoor_space, nursery.homemade_meals, nursery.developmental_activities, nursery.musical_activities, nursery.capacity, nursery.time_slot, upload.url AS picture_url
+        FROM nursery 
+        JOIN upload ON upload.id = nursery.picture_upload_id
+        WHERE user_id = ?`,
         [userId]
       );
 
@@ -56,12 +61,17 @@ class UserManager extends AbstractManager {
         profil.nursery = {};
       }
       // Ajout de l'objet "nursery" dans l'objet "profil"
+      transformTinyIntIntoBoolean(nurseryRows[0]);
       profil.nursery = nurseryRows[0];
-
+      
     } else { 
       // Récupérer mon parent lié au user_id
       const [parentRows] = await this.database.query(
-        `SELECT * FROM parent WHERE user_id = ?`,
+        `SELECT 
+        parent.id, parent.firstname, parent.lastname, parent.phone, upload.url AS avatar_url
+        FROM parent 
+        JOIN upload ON parent.avatar_upload_id = upload.id
+        WHERE user_id = ?`,
         [userId]
       );
 

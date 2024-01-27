@@ -1,4 +1,5 @@
 const tables = require("../tables");
+const transformTinyIntIntoBoolean = require("../utils/transform-tiny-to-bool");
 
 const get = async (req, res) => {
   try {
@@ -65,12 +66,8 @@ const put = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
-const transformTinyIntIntoBoolean = (nursery) => {
-  nursery.developmental_activities = !!nursery.developmental_activities;
-  nursery.homemade_meals = !!nursery.homemade_meals;
-  nursery.musical_activities = !!nursery.musical_activities;
-  nursery.outdoor_space = !!nursery.outdoor_space;
-}
+
+
 
 module.exports = {
   post,

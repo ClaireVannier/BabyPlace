@@ -15,11 +15,10 @@ function ConfirmationBooking() {
       />
       <h2 className="confirmation-title">Fantastique !</h2>
       <p className="account-created">
-        La crèche Picoti confirme accueillir votre enfant le 12 janvier.
+        Votre réservation a bien été effectuée ✅
       </p>
       <p className="need-information">
-        La crèche se reserve le droit d'annuler malgré tout, vous pouvez suivre
-        le statut de votre réservation dans votre profil.
+        La crèche se réserve le droit d'annuler malgré tout, vous pouvez suivre le statut de votre réservation depuis votre profil.
       </p>
       <NavLink to="/profil" className="gotofile">
         Aller voir mon profil
