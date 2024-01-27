@@ -21,7 +21,7 @@ const post = async (req, res) => {
   try {
     const insertId = await tables.booking.create(booking);
 
-    res.status(201).json({ insertId });
+    res.status(201).json({ message: "Réservation créée.", id: insertId});
   } catch (err) {
     console.error(err);
     res.status(500).error(err.message);

@@ -1,19 +1,20 @@
-import { NavLink, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import logocoeur from "../../assets/logocoeur.svg";
+import { useAuth } from "../../contexts/auth.context";
+import axios from "axios";
 
 function Booking() {
   const { id } = useParams();
-  const [selectedCheckbox, setSelectedCheckbox] = useState(null);
-
+  const auth = useAuth();
+  const children = auth.profil.children[0];
 
   const [formData, setFormData] = useState({
     startDate: "",
     endDate: "",
-    childrenId: null,
+    childrenId: children.id,
     nurseryId: parseInt(id, 10),
   });
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,16 +22,32 @@ function Booking() {
       ...prevData,
       [name]: value,
     }));
+    console.log("formData", formData);
   };
 
 
-  const handleCheckboxChange = (childId) => {
-    // Si la checkbox actuelle est déjà sélectionnée, désélectionner
-    // Sinon, sélectionner la checkbox et désélectionner l'autre
-    setSelectedCheckbox((prevSelected) =>
-      prevSelected === childId ? null : childId
-    );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/booking`, formData)
+      .then((resp) => {
+        console.log(resp);
+        if (resp.status === 201) {
+
+          alert("Votre réservation à bien été effectuée")
+        }
+      })
+      .catch((err) => {
+        console.error(err)
+      });
   };
+
+  // je vérifie que je recupere bien la valeur des deux input
+  // useEffect(() => {
+  //   console.log(formData)
+  // },
+  //   [formData.startDate, formData.endDate])
+
 
   return (
     <div className="reservation-container">
@@ -40,47 +57,35 @@ function Booking() {
       </div>
       <div className="info-reservation-container">
         <div>
-          <label>
-            Je réserve du: <br />
-            <input
-              type="datetime-local"
-              name="startDate"
-              onChange={handleChange}
-            />
-          </label>
-          <label>
-            {" "}
-            <br />
-            au: <br />
-            <input
-              type="datetime-local"
-              name="endDate"
-              onChange={handleChange}
-            />
-          </label>
-          <p className="children-resa">Pour mon/mes enfant(s):</p>
-          {/* {children.map((child) => (
-            <label key={child.id}>
-              <p>{child.firstname}</p>
+          <form onSubmit={handleSubmit}>
+            <label>
+              Je réserve du: <br />
               <input
-                className="child-check"
-                type="checkbox"
-                value={child.id}
-                checked={selectedCheckbox === child.id}
-                onChange={() => handleCheckboxChange(child.id)}
+                type="datetime-local"
+                name="startDate"
+                onChange={handleChange}
               />
             </label>
-          ))} */}
+            <label>
+              {" "}
+              <br />
+              au: <br />
+              <input
+                type="datetime-local"
+                name="endDate"
+                onChange={handleChange}
+              />
+            </label>
+            <p className="children-resa">Pour mon enfant : {children.firstname}</p>
+            <button
+              type="submit"
+              className="button-reservation">
+              Réserver
+            </button>
+          </form >
         </div>
-        <NavLink
-          to="/booking/confirmation"
-          type="submit"
-          className="button-reservation"
-        >
-          Réserver
-        </NavLink>
       </div>
-    </div>
+    </div >
   );
 
 }

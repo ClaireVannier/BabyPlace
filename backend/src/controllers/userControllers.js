@@ -36,7 +36,8 @@ const login = async (req, res) => {
   try {
     const user = await tables.user.login(req.body);
     if (user) {
-      const profil = await tables.user.getProfil(user.id);
+
+      const profil = await tables.user.getProfil(user.id, !!user.is_nursery);
       const token = generateAccessToken({
         userId: user.id,
         isNursery: !!user.is_nursery,
