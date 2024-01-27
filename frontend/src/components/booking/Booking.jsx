@@ -1,26 +1,34 @@
+import axios from "axios";
+
 import { NavLink, useParams } from "react-router-dom";
-import { useState } from "react";
-import exports from "../search/FakeData";
+import { useState, useEffect } from "react";
 import logocoeur from "../../assets/logocoeur.svg";
+import { useNurseriesApi } from "../../contexts/nurseries-api.context";
 
-function Reservation() {
-  // extrait l'id de l'url
+function Booking() {
   const { id } = useParams();
-  // cet état stockera l'id de l'enfant séléctionner
   const [selectedCheckbox, setSelectedCheckbox] = useState(null);
+  const [nursery, setNursery] = useState(null);
+  const { nurseries, setNurseries } = useNurseriesApi();
 
-  // TODO : créer un contexte "AuthContext"
-  // ce contexte encapsule l'objet {Parent}, utilisable alors partout dans tous les composants de l'appli
-  // Ici : useContext(AuthContext) et récupérer {Parent}
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (nurseries.length === 0) {
+          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/nurseries`);
+          setNurseries(response.data);
+        }
+        setNursery(nurseries.find((n) => n.id === parseInt(id, 10)));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, [nurseries, nursery, setNurseries, id]);
 
-  // viens rechercher la crèche qui correspond à l'id extrait des paramètre d'url (si id 1 récupere les infos de la creche correspondant à l'id 1)
-  const nursery = exports.fakeNurseries.find(
-    (nursery) => nursery.id === parseInt(id, 10)
-  );
-  const parent = exports.fakeParents;
-  const children = parent[0].children; // mon contexte ne contient qu'un seul parent
 
-  // on créer un objet réservations vide avec l'id de l'enfant séléctionnée via la checkbox
+
+
   const booking = {
     startDate: "",
     endDate: "",
@@ -77,7 +85,7 @@ function Reservation() {
             />
           </label>
           <p className="children-resa">Pour mon/mes enfant(s):</p>
-          {children.map((child) => (
+          {/* {children.map((child) => (
             <label key={child.id}>
               <p>{child.firstname}</p>
               <input
@@ -88,10 +96,10 @@ function Reservation() {
                 onChange={() => handleCheckboxChange(child.id)}
               />
             </label>
-          ))}
+          ))} */}
         </div>
         <NavLink
-          to="/reservation/confirmation"
+          to="/booking/confirmation"
           type="submit"
           className="button-reservation"
         >
@@ -100,6 +108,7 @@ function Reservation() {
       </div>
     </div>
   );
+
 }
 
-export default Reservation;
+export default Booking;

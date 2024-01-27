@@ -6,11 +6,11 @@ import RegisterParent from "./components/register/RegisterParent";
 import RegisterNursery from "./components/register/RegisterNursery";
 import Profil from "./components/profil/Profil";
 import NurseryList from "./components/search/NurseryList";
-import ConfirmationReservation from "./components/confirmations/ConfirmationReservation";
+import ConfirmationBooking from "./components/confirmations/ConfirmationBooking";
 import ConfirmationFile from "./components/confirmations/ConfirmationFile";
 import AdministrativeParent from "./components/administrative_file/AdministrativeParent";
 import NurseryPage from "./components/search/nursery_details /NurseryPage";
-import Reservation from "./components/reservations/Reservations";
+import Booking from "./components/booking/Booking";
 import AdministrativeChildren from "./components/administrative_file/AdministrativeChildren";
 import AdministrativeNursery from "./components/administrative_file/AdministrativeNursery";
 import { NurseriesApiProvider } from "./contexts/nurseries-api.context";
@@ -19,8 +19,8 @@ import { AuthProvider } from "./contexts/auth.context";
 function App() {
   return (
     <div>
-        <AuthProvider>
-          <NurseriesApiProvider>
+      <AuthProvider>
+        <NurseriesApiProvider>
 
           <Routes>
             <Route path="/" element={<Home />} />
@@ -30,13 +30,13 @@ function App() {
 
             <Route path="/register/nursery" element={<RegisterNursery />} />
             <Route path="/profil" element={<Profil />} />
-          
-          
-              <Route path="/search" element={<NurseryList />} />
+
+
+            <Route path="/search" element={<NurseryList />} />
 
             <Route
-              path="/reservation/confirmation"
-              element={<ConfirmationReservation />}
+              path="/booking/confirmation"
+              element={<ConfirmationBooking />}
             />
 
             <Route
@@ -44,10 +44,10 @@ function App() {
               element={<ConfirmationFile />}
             />
 
-            
-              <Route path="search/nursery-details/:id" element={<NurseryPage />} />
 
-            <Route path="nursery/reservation/:id" element={<Reservation />} />
+            <Route path="search/nursery-details/:id" element={<NurseryPage />} />
+
+            <Route path="nursery/booking/:id" element={<Booking />} />
             <Route path="/register/children/:parentId" element={<AdministrativeChildren />} />
             <Route
               path="/register/nursery/file/:userId"
@@ -56,7 +56,7 @@ function App() {
           </Routes>
 
         </NurseriesApiProvider>
-        </AuthProvider>
+      </AuthProvider>
 
 
     </div>

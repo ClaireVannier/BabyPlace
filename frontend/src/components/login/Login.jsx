@@ -23,9 +23,6 @@ function Login() {
     }));
   };
 
-  useEffect(() => {
-    console.log(auth.userId, auth.isNursery);
-  }, [auth.userId, auth.isNursery])
 
   const handleSubmit = (e) => {
     e.preventDefault();
