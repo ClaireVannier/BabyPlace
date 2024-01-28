@@ -29,8 +29,10 @@ function Login() {
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formData)
       .then((resp) => {
-        setAuthData(resp);
-        navigate("/search");
+        const token = resp.data.token;
+        const payload = jwtDecode(token);
+        setAuthData(token, payload);
+        navigate(payload.isNursery ? "/dashboard" : "/search");
       })
       .catch((err) => {
         console.error(err);
@@ -40,9 +42,7 @@ function Login() {
   // Cette méthode permet de mettre à jour toutes les informations relatives à l'Authentication
   // Ces informations sont placées dans un Context afin de pouvoir être utilisées partout, 
   // Dans n'importe quel composant :)
-  const setAuthData = (resp) => {
-    const token = resp.data.token;
-    const payload = jwtDecode(token);
+  const setAuthData = (token, payload) => {
     auth.setToken(token);
     auth.setUserId(payload.userId);
     auth.setIsNursery(payload.isNursery);

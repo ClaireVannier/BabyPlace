@@ -21,6 +21,29 @@ const getByChildrenId = async (req, res) => {
     res.sendStatus(500).json({ sucess: false, message: err.message });
   }
 };
+const getByNurseryId = async (req, res) => {
+  try {
+    const { nurseryId } = req.params;
+    const bookingList = await tables.booking.readByNurseryId(nurseryId);
+
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    bookingList.forEach(booking => {
+      booking.children_is_walking = !!booking.children_is_walking;
+      booking.start_date = new Date(booking.start_date).toLocaleDateString('fr-FR', options);
+      booking.end_date = new Date(booking.end_date).toLocaleDateString('fr-FR', options);
+    })
+
+
+    if (bookingList == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(bookingList);
+    }
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500).json({ sucess: false, message: err.message });
+  }
+};
 
 const post = async (req, res) => {
   const booking = req.body;
@@ -78,6 +101,7 @@ const deleteBooking = async (req, res) => {
 
 module.exports = {
   getByChildrenId,
+  getByNurseryId,
   post,
   put,
   deleteBooking,

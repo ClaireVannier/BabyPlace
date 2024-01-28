@@ -15,6 +15,7 @@ import AdministrativeChildren from "./components/administrative_file/Administrat
 import AdministrativeNursery from "./components/administrative_file/AdministrativeNursery";
 import { NurseryProvider } from "./contexts/nursery.context";
 import { AuthProvider } from "./contexts/auth.context";
+import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
               <Route path="/register/nursery" element={<RegisterNursery />} />
               <Route path="/profil" element={<Profil />} />
 
-
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/search" element={<NurseryList />} />
 
               <Route

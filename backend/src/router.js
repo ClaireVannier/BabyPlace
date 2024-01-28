@@ -31,6 +31,7 @@ router.put("/children/:id", childrenControllers.put);
 
 // Route for booking
 router.get("/booking/:childrenId", bookingControllers.getByChildrenId);
+router.get("/booking/nursery/:nurseryId", bookingControllers.getByNurseryId);
 router.post("/booking", bookingControllers.post);
 router.put("/booking/:id", bookingControllers.put);
 router.delete("/booking/:id", bookingControllers.deleteBooking);
