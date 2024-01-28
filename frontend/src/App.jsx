@@ -15,14 +15,15 @@ import AdministrativeChildren from "./components/administrative_file/Administrat
 import AdministrativeNursery from "./components/administrative_file/AdministrativeNursery";
 import { NurseryProvider } from "./contexts/nursery.context";
 import { AuthProvider } from "./contexts/auth.context";
+import { HttpProvider } from "./contexts/http.context";
 import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
   return (
     <div>
-      <AuthProvider>
-        <NurseryProvider>
-         
+      <HttpProvider>
+        <AuthProvider>
+          <NurseryProvider>
 
             <Routes>
               <Route path="/" element={<Home />} />
@@ -46,7 +47,6 @@ function App() {
                 element={<ConfirmationFile />}
               />
 
-
               <Route path="search/nursery-details/:id" element={<NurseryPage />} />
 
               <Route path="nursery/booking/:id" element={<Booking />} />
@@ -57,9 +57,9 @@ function App() {
               />
             </Routes>
 
-            
-        </NurseryProvider>
-      </AuthProvider>
+          </NurseryProvider>
+        </AuthProvider>
+      </HttpProvider>
 
 
     </div>

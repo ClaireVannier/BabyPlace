@@ -1,18 +1,19 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/auth.context";
 import { NavLink } from "react-router-dom";
+import { useHttp } from "../../contexts/http.context";
 
 function Profile() {
 
   const auth = useAuth();
+  const http = useHttp();
+
   const parent = auth.profil.parent;
   const childrenId = auth.profil.children[0].id;
   const [bookingList, setBookingList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/booking/${childrenId}`)
+    http.get(`booking/${childrenId}`)
       .then((resp) => {
         if (resp.status === 200) {
           setBookingList(resp.data);

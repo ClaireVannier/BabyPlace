@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useHttp } from "../../contexts/http.context";
 import axios from "axios";
+
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 
 function RegisterNursery() {
+
+  const http = useHttp();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -24,8 +28,7 @@ function RegisterNursery() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/register/nursery`, {
+    http.postWithoutToken(`register/nursery`, {
         email: formData.email,
         password: formData.password,
       })

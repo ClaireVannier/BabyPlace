@@ -1,13 +1,16 @@
-import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
 import uploadFile from "../../utils/upload-file";
+import { useHttp } from "../../contexts/http.context";
 
 function RegisterParent() {
+
   const navigate = useNavigate();
+  const http = useHttp();
+
   const [avatar, setAvatar] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -29,26 +32,23 @@ function RegisterParent() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/register/parent`, {
-        email: formData.email,
-        password: formData.password,
-      })
+    http.postWithoutToken(`register/parent`, {
+      email: formData.email,
+      password: formData.password,
+    })
       .then((resp) => {
         if (resp.status === 201) {
           const insertId = resp.data.insertId;
-            axios
-            .post(`${import.meta.env.VITE_BACKEND_URL}/parents`, {
-              firstname: formData.firstname,
-              lastname: formData.lastname,
-              phone: formData.phone,
-              userId: insertId
-            })
+          http.postWithoutToken(`parents`, {
+            firstname: formData.firstname,
+            lastname: formData.lastname,
+            phone: formData.phone,
+            userId: insertId
+          })
             .then(async (resp2) => {
               if (resp2.status === 201) {
                 const insertId = resp2.data.insertId;
                 await uploadFile("Avatar", avatar, "upload-parent-avatar", insertId);
-
                 navigate(`/register/parent/file/${insertId}`);
               } else {
                 alert("Une erreur est survenue, veuillez réessayer");
@@ -138,7 +138,7 @@ function RegisterParent() {
           </label>
           <label>
             Photo de profil : <br />
-             <input
+            <input
               className="input-file"
               type="file"
               name="avatar"

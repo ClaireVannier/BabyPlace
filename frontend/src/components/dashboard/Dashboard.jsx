@@ -1,16 +1,17 @@
-import axios from "axios";
 import { useAuth } from "../../contexts/auth.context";
+import { useHttp } from "../../contexts/http.context";
 import { useEffect, useState } from "react";
 
 function Dashboard() {
 
   const auth = useAuth()
+  const http = useHttp();
+
   const nursery = auth.profil.nursery;
   const [bookingList, setBookingList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/booking/nursery/${nursery.id}`)
+    http.get(`booking/nursery/${nursery.id}`)
       .then((resp) => {
         if (resp.status === 200) {
           setBookingList(resp.data);

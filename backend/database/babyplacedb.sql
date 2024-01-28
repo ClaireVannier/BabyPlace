@@ -15,7 +15,8 @@ CREATE TABLE parent (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     firstname VARCHAR(50) NOT NULL,
     lastname VARCHAR(80) NOT NULL,
-    phone VARCHAR(12) NOT NULL
+    phone VARCHAR(12) NOT NULL,
+    avatar_upload_id INT
 );
 
 CREATE TABLE children (
@@ -77,11 +78,13 @@ ADD CONSTRAINT fk_administrative_id
     FOREIGN KEY (administrative_id)
     REFERENCES administrative(id);
 
+
 ALTER TABLE parent
 ADD COLUMN user_id INT,
 ADD CONSTRAINT fk_parent_user
     FOREIGN KEY (user_id)
     REFERENCES user(id);
+
 
 ALTER TABLE nursery
 ADD COLUMN user_id INT,

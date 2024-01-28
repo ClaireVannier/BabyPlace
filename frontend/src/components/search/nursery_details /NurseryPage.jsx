@@ -1,19 +1,21 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import NurseryDetails from "./NurseryDetails";
+import { useHttp } from "../../../contexts/http.context";
 import { useNursery } from "../../../contexts/nursery.context";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import NurseryDetails from "./NurseryDetails";
 
 function NurseryPage() {
-  const [selectedNursery, setSelectedNursery] = useState(null);
+  const http = useHttp();
   const { nurseries, setNurseries } = useNursery();
   const { id } = useParams();
+
+  const [selectedNursery, setSelectedNursery] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (nurseries.length === 0) {
-          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/nurseries`);
+          const response = await http.get(`nurseries`);
           setNurseries(response.data);
         }
         const nurseryDetail = nurseries.find((nursery) => nursery.id === parseInt(id, 10));

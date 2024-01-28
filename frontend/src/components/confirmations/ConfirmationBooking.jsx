@@ -21,7 +21,7 @@ function ConfirmationBooking() {
         La crèche se réserve le droit d'annuler malgré tout, vous pouvez suivre le statut de votre réservation depuis votre profil.
       </p>
       <NavLink to="/profil" className="gotofile">
-        Aller voir mon profil
+        Consulter mes réservations
       </NavLink>
     </div>
   );

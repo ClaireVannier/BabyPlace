@@ -1,14 +1,15 @@
 import { useState } from "react";
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import { useAuth } from "../../contexts/auth.context";
+import { useHttp } from "../../contexts/http.context";
 
 function Login() {
   const navigate = useNavigate();
   const auth = useAuth();
+  const http = useHttp();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -26,12 +27,14 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/login`, formData)
+    let payload;
+    http.post(`login`, formData)
       .then((resp) => {
         const token = resp.data.token;
-        const payload = jwtDecode(token);
+        payload = jwtDecode(token);
         setAuthData(token, payload);
+      })
+      .then(() => {
         navigate(payload.isNursery ? "/dashboard" : "/search");
       })
       .catch((err) => {
@@ -48,6 +51,8 @@ function Login() {
     auth.setIsNursery(payload.isNursery);
     auth.setProfil(payload.profil);
   }
+
+
 
   return (
     <section className="formContainer">

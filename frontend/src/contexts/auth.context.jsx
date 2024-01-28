@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useHttp} from "./http.context";
 
 /* utilitaires */
 const AuthContext = createContext();
@@ -9,6 +10,8 @@ export const useAuth = () => {
 
 /* Création du contexte */
 export const AuthProvider = ({ children }) => {
+  
+  const http = useHttp();
 
   /* Valeurs de mon contexte que je souhaite partager entre mes composants */
   const [token, setToken] = useState(null);
@@ -23,6 +26,11 @@ export const AuthProvider = ({ children }) => {
     console.log("isNursery", isNursery);
     console.log("profil", profil);
   }, [token, userId, isNursery, profil]); // <-- si l'une de ces valeurs change, la fonction "useEffect" se redéclenchera en intégralité.
+  
+  
+  useEffect(() => {
+    http.setHttpToken(token);
+  }, [token]);
 
   /* Exposer le context (et ses valeurs à partager) aux composants */
   return (
