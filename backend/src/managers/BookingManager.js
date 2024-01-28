@@ -44,10 +44,41 @@ class BookingManager extends AbstractManager {
       `,
       [nurseryId]
     );
-    
+
     return rows;
   }
 
+  async checkAvailability(nurseryId, datesToCheck) {
+  
+    // Obtenir la capacité de la crèche indépendamment des réservations
+    const [capacityResult] = await this.database.query(
+      'SELECT capacity FROM nursery WHERE id = ?',
+      [nurseryId]
+    );
+    const capacity = capacityResult[0] ? capacityResult[0].capacity : null;
+  
+    // Obtenir le nombre de réservations pour les dates spécifiées
+    const [bookingResult] = await this.database.query(
+      `SELECT COUNT(*) as overlappingBookings 
+        FROM booking 
+        JOIN date ON booking.id = date.booking_id
+        WHERE booking.nursery_id = ? 
+          AND (
+            (date.start_date <= ? AND date.end_date >= ?) OR
+            (date.start_date <= ? AND date.end_date >= ?) OR
+            (? <= date.start_date AND ? >= date.end_date)
+          )`,
+      [
+        nurseryId,
+        datesToCheck.startDate, datesToCheck.startDate,
+        datesToCheck.endDate, datesToCheck.endDate,
+        datesToCheck.startDate, datesToCheck.endDate
+      ]
+    );
+  
+    return { overlappingBookings: bookingResult[0].overlappingBookings, capacity };
+  }
+  
 
   async create(booking) {
     const [result] = await this.database.query(
