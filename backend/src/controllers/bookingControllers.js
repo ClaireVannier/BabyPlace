@@ -58,6 +58,19 @@ const post = async (req, res) => {
   }
 };
 
+const checkAvailability = async (req, res) => {
+  const { nurseryId } = req.params;
+  const datesToCheck = req.body;
+
+  try {
+    const count = await tables.booking.checkAvailability(nurseryId, datesToCheck);
+    res.status(200).json({ ...count });
+  } catch (err) {
+    console.error(err);
+    res.status(500).error(err.message);
+  }
+};
+
 const put = async (req, res) => {
   const booking = req.body;
   const bookingId = req.params.id;
@@ -102,6 +115,7 @@ const deleteBooking = async (req, res) => {
 module.exports = {
   getByChildrenId,
   getByNurseryId,
+  checkAvailability,
   post,
   put,
   deleteBooking,
