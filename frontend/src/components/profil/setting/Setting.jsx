@@ -1,6 +1,7 @@
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/auth.context";
+import { useState } from "react";
 import { useHttp } from "../../../contexts/http.context";
 
 
@@ -8,8 +9,49 @@ function Setting() {
 
   const auth = useAuth();
   const http = useHttp();
+  const navigate = useNavigate();
 
   const parent = auth.profil.parent;
+  const children = auth.profil.children[0];
+
+  const [updateParent, setUpdateParent] = useState({
+    phone: "",
+    isWalking: false,
+    doctor: "",
+    allergies: ""
+  });
+
+  const handleChange = (e) => {
+    const { name, value, checked, type } = e.target;
+
+    const newValue = type === "checkbox" ? checked : value;
+
+    setUpdateParent((prevData) => ({
+      ...prevData,
+      [name]: newValue,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    http.put(`parents/${parent.id}`, {
+      phone: updateParent.phone
+    })
+      .then((resp) => {
+        http.put(`children/${children.id}`, {
+          isWalking: updateParent.isWalking,
+          doctor: updateParent.doctor,
+          allergies: updateParent.allergies
+        })
+        if (resp.status === 200) {
+          alert("Vos informations ont bien été modifiées");
+          navigate("/profil")
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      })
+  }
 
   return (
     <div className="profilContainer">
@@ -56,11 +98,12 @@ function Setting() {
         <div className="registerForm">
           <h2 className="titleFormRegister">Vous pouvez modifier ces informations :</h2>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <label>
               Numéro de téléphone : <br />
               <input
-                name="firstName"
+                name="phone"
+                onChange={handleChange}
                 className="input-file-secu"
                 type="text"
               />
@@ -70,6 +113,7 @@ function Setting() {
               Cocher si oui: <br />
               <input
                 name="isWalking"
+                onChange={handleChange}
                 className="input-checkbox"
                 type="checkbox"
               />
@@ -78,6 +122,7 @@ function Setting() {
               Nom du médecin traitant: <br />
               <input
                 name="doctor"
+                onChange={handleChange}
                 className="input-file-secu"
                 type="text"
               />
@@ -86,6 +131,7 @@ function Setting() {
               Allergies connues: <br />
               <input
                 name="allergies"
+                onChange={handleChange}
                 className="input-file-secu"
                 type="text"
               />

@@ -72,7 +72,7 @@ router.put("/nursery/:id", allowNurseryMiddleware, matchNurseryIdMiddleware, nur
 
 // Route for children
 router.get("/children/:id", childrenControllers.get);
-// router.put("/children/:id", childrenControllers.put);
+router.put("/children/:id", childrenControllers.put);
 
 // Route for booking
 router.get("/booking/:childrenId", matchChildrenIdMiddleware, bookingControllers.getByChildrenId);

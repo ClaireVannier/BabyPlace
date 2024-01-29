@@ -21,13 +21,15 @@ function AdministrativeChildren() {
   });
 
   const handleChange = (e) => {
-    const { name, value, checked } = e.target;
+    const { name, value, checked, type } = e.target;
+
+    const newValue = type === "checkbox" ? checked : value;
+
     setFormData((prevData) => ({
       ...prevData,
-      [name]: checked || value,
+      [name]: newValue,
     }));
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     http.postWithoutToken(`children`, formData)

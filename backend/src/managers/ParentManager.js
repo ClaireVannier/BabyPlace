@@ -24,8 +24,8 @@ class ParentManager extends AbstractManager {
 
   async update(parent, parentId) {
     const [result] = await this.database.query(
-      `update ${this.table} set firstname = ?, lastname = ?, phone = ? WHERE id = ?`,
-      [parent.firstname, parent.lastname, parent.phone, parentId]
+      `update ${this.table} set phone = ? WHERE id = ?`,
+      [parent.phone, parentId]
     );
 
     return result.affectedRows;
