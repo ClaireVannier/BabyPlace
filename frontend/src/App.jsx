@@ -19,6 +19,7 @@ import { HttpProvider } from "./contexts/http.context";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoutes from "./utils/private-routes";
 import 'react-toastify/dist/ReactToastify.css';
+import Setting from "./components/profil/setting/Setting";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
 
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/search" element={<NurseryList />} />
+                <Route path="/setting" element={<Setting />} />
 
                 <Route
                   path="/booking/confirmation"

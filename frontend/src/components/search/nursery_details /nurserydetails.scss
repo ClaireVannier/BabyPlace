@@ -56,29 +56,11 @@
         background-color: #9b51e0;
         color: #f2f2f2;
         padding: 0.5em 1em;
-        font-size: 28px;
+        font-size: 20px;
         font-weight: 700;
         cursor: pointer;
         border-radius: 10px;
         transition: 0.3s ease-in-out;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 1400px) {
-  .nursery-detail-container {
-    .nursery-detail-name {
-      text-align: center;
-      font-size: 40px;
-    }
-    .nursery-detail-container-white {
-      max-width: 1300px;
-      margin: auto;
-      margin-top: 50px;
-      .reservation-button {
-        font-size: 35px;
-        margin-left: 1050px;
       }
     }
   }

@@ -15,12 +15,11 @@
     .logo-resa-coeur {
       height: 30px;
       width: 30px;
-      margin: 10px 0px 0 25px;
+      margin: 10px 10px 0 25px;
     }
 
     .title-resa {
       font-size: 23px;
-      margin-right: 25px;
     }
   }
 
@@ -47,6 +46,7 @@
     font-size: 22px;
 
     input {
+      font-size: 18px;
       margin: 15px 0;
       cursor: pointer;
     }
@@ -54,7 +54,7 @@
 
   .children-resa {
     font-size: 22px;
-    margin: 15px 0;
+    margin: 15px;
   }
 
   .button-reservation {
@@ -63,7 +63,7 @@
     background-color: #9b51e0;
     color: #f2f2f2;
     padding: 0.5em 1em;
-    font-size: 23px;
+    font-size: 18px;
     font-weight: 700;
     cursor: pointer;
     border-radius: 10px;

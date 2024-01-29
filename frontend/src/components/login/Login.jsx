@@ -5,14 +5,14 @@ import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import { useAuth } from "../../contexts/auth.context";
 import { useHttp } from "../../contexts/http.context";
-import { ToastContainer, toast } from 'react-toastify';
+// import { ToastContainer, toast } from 'react-toastify';
 
 function Login() {
   const navigate = useNavigate();
   const auth = useAuth();
   const http = useHttp();
 
-  const notify = (message, bgc) => toast(message);
+  // const notify = (message, bgc) => toast(message);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -28,23 +28,18 @@ function Login() {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let payload;
-    http.post(`login`, formData)
-      .then((resp) => {
-        const token = resp.data.token;
-        payload = jwtDecode(token);
-        setAuthData(token, payload);
-      })
-      .then(() => {
-        notify("Vous êtes connecté !", "green");
-        navigate(payload.isNursery ? "/dashboard" : "/search");
-      })
-      .catch((err) => {
-        notify(err, "red");
-        console.error(err);
-      });
+    try {
+      const resp = await http.post(`login`, formData);
+      const token = resp.data.token;
+      const payload = jwtDecode(token);
+      setAuthData(token, payload);
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      navigate(payload.isNursery ? "/dashboard" : "/search");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const setAuthData = (token, payload) => {
@@ -52,10 +47,9 @@ function Login() {
     auth.setUserId(payload.userId);
     auth.setIsNursery(payload.isNursery);
     auth.setProfil(payload.profil);
-  }
+  };
 
-
-
+  
   return (
     <section className="formContainer">
       <div className="logoForm">
@@ -92,7 +86,7 @@ function Login() {
           </button>
         </form>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </section >
 
   );
