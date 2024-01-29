@@ -5,11 +5,14 @@ import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import { useAuth } from "../../contexts/auth.context";
 import { useHttp } from "../../contexts/http.context";
+import { ToastContainer, toast } from 'react-toastify';
 
 function Login() {
   const navigate = useNavigate();
   const auth = useAuth();
   const http = useHttp();
+
+  const notify = (message, bgc) => toast(message);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -35,16 +38,15 @@ function Login() {
         setAuthData(token, payload);
       })
       .then(() => {
+        notify("Vous êtes connecté !", "green");
         navigate(payload.isNursery ? "/dashboard" : "/search");
       })
       .catch((err) => {
+        notify(err, "red");
         console.error(err);
       });
   };
 
-  // Cette méthode permet de mettre à jour toutes les informations relatives à l'Authentication
-  // Ces informations sont placées dans un Context afin de pouvoir être utilisées partout, 
-  // Dans n'importe quel composant :)
   const setAuthData = (token, payload) => {
     auth.setToken(token);
     auth.setUserId(payload.userId);
@@ -64,7 +66,7 @@ function Login() {
         <h2 className="titleForm">Je me connecte !</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Email: <br />
+            Email : <br />
             <input
               type="email"
               name="email"
@@ -75,7 +77,7 @@ function Login() {
             />
           </label>
           <label>
-            Mot de Passe: <br />
+            Mot de passe : <br />
             <input
               type="password"
               name="password"
@@ -90,7 +92,9 @@ function Login() {
           </button>
         </form>
       </div>
-    </section>
+      <ToastContainer />
+    </section >
+
   );
 }
 

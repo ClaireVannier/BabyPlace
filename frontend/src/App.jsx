@@ -17,6 +17,8 @@ import { NurseryProvider } from "./contexts/nursery.context";
 import { AuthProvider } from "./contexts/auth.context";
 import { HttpProvider } from "./contexts/http.context";
 import Dashboard from "./components/dashboard/Dashboard";
+import PrivateRoutes from "./utils/private-routes";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -28,33 +30,39 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/register/parent" element={<RegisterParent />} />
-              <Route path="/register/parent/file/:parentId" element={<AdministrativeParent />} />
 
-              <Route path="/register/nursery" element={<RegisterNursery />} />
-              <Route path="/profil" element={<Profil />} />
+              <Route element={<PrivateRoutes />}>
 
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/search" element={<NurseryList />} />
+                <Route path="/register/parent" element={<RegisterParent />} />
+                <Route path="/register/parent/file/:parentId" element={<AdministrativeParent />} />
 
-              <Route
-                path="/booking/confirmation"
-                element={<ConfirmationBooking />}
-              />
+                <Route path="/register/nursery" element={<RegisterNursery />} />
+                <Route path="/profil" element={<Profil />} />
 
-              <Route
-                path="/register/confirmationfile/:isNursery"
-                element={<ConfirmationFile />}
-              />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/search" element={<NurseryList />} />
 
-              <Route path="search/nursery-details/:id" element={<NurseryPage />} />
+                <Route
+                  path="/booking/confirmation"
+                  element={<ConfirmationBooking />}
+                />
 
-              <Route path="nursery/booking/:id" element={<Booking />} />
-              <Route path="/register/children/:parentId" element={<AdministrativeChildren />} />
-              <Route
-                path="/register/nursery/file/:userId"
-                element={<AdministrativeNursery />}
-              />
+                <Route
+                  path="/register/confirmationfile/:isNursery"
+                  element={<ConfirmationFile />}
+                />
+
+                <Route path="search/nursery-details/:id" element={<NurseryPage />} />
+
+                <Route path="nursery/booking/:id" element={<Booking />} />
+                <Route path="/register/children/:parentId" element={<AdministrativeChildren />} />
+                <Route
+                  path="/register/nursery/file/:userId"
+                  element={<AdministrativeNursery />}
+                />
+
+              </Route>
+              
             </Routes>
 
           </NurseryProvider>

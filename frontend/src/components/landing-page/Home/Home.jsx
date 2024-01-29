@@ -7,7 +7,7 @@ import pro1 from "../../../assets/pro1.svg";
 function Home() {
   const [userType, setUserType] = useState("parent");
   return (
-    <div>
+    <div className="page-container">
       <NavBar userType={userType} setUserType={setUserType} />
       {userType === "parent" ? (
         <main className="home">
