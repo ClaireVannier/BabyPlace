@@ -1,19 +1,20 @@
 import { NavLink } from "react-router-dom";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import NurseryCard from "./NurseryCard";
 import NurseryFilterModal from "./NurseryFilterModal";
 import { useNursery } from "../../contexts/nursery.context";
+import { useHttp } from "../../contexts/http.context";
 
 
 function NurseryList() {
-  const { nurseries, setNurseries } = useNursery(); // nurseries sont stockées dans le context
+  const http = useHttp();
+  const { nurseries, setNurseries } = useNursery();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (nurseries.length === 0) {
-          const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/nurseries`);
+          const response = await http.get(`nurseries`);
           setNurseries(response.data);
         };
       } catch (error) {
@@ -72,7 +73,7 @@ function NurseryList() {
             <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
           </svg>
         </NavLink>
-        <h2 className="title-search">Garde d'enfant à la demande</h2>
+        <h2 className="title-search">Recherche une crèche</h2>
         <button
           type="button"
           className="filterbtn"

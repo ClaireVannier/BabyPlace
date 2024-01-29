@@ -1,13 +1,14 @@
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
-import  uploadFile from "../../utils/upload-file";
+import uploadFile from "../../utils/upload-file";
+import { useHttp } from "../../contexts/http.context";
 
 function AdministrativeNursery() {
   const navigate = useNavigate();
+  const http = useHttp();
   const { userId } = useParams();
   const [filePictureUrl, setFilePictureUrl] = useState(null);
 
@@ -35,8 +36,7 @@ function AdministrativeNursery() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/nursery`, formData)
+    http.postWithoutToken(`nursery`, formData)
       .then(async (resp) => {
         if (resp.status === 201) {
           const insertId = resp.data.insertId;

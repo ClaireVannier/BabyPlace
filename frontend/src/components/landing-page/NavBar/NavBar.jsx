@@ -17,7 +17,7 @@ function NavBar({ userType, setUserType }) {
         type="button"
         onClick={() => setUserType("pro")}
       >
-        Vous êtes une crèche ?
+        Vous êtes un professionnel ?
       </button>
       <div className="navButton">
         <Link to={registerLink}>S'inscrire</Link>

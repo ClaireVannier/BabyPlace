@@ -2,17 +2,19 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import logocoeur from "../../assets/logocoeur.svg";
 import { useAuth } from "../../contexts/auth.context";
-import axios from "axios";
+import { useHttp } from "../../contexts/http.context";
 
 function Booking() {
+  const auth = useAuth();
+  const http = useHttp();
+
   const { id } = useParams();
   const nurseryId = parseInt(id, 10);
   const navigate = useNavigate();
-  const auth = useAuth();
   const children = auth.profil.children[0];
-  const [availability, setAvailability] = useState(false);
-  const [textColor, setTextColor] = useState('black');
 
+  const [availability, setAvailability] = useState(null);
+  const [textColor, setTextColor] = useState('black');
   const [formData, setFormData] = useState({
     startDate: "",
     endDate: "",
@@ -39,9 +41,7 @@ function Booking() {
 
   const checkAvailability = () => {
     const datesToCheck = { startDate: formData.startDate, endDate: formData.endDate };
-    console.log(datesToCheck);
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/booking/availability/${nurseryId}`, datesToCheck)
+    http.post(`booking/availability/${nurseryId}`, datesToCheck)
       .then((resp) => {
         if (resp.status === 200) {
           computeAvailability(resp.data);
@@ -62,8 +62,7 @@ function Booking() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/booking`, formData)
+    http.post(`booking`, formData)
       .then((resp) => {
         if (resp.status === 201) {
           navigate("/booking/confirmation");
@@ -115,14 +114,14 @@ function Booking() {
             </ul>
             <button
               type="submit"
-              disabled={availability.overlappingBookings >= availability.capacity}
+              disabled={availability && availability.overlappingBookings >= availability.capacity}
               className="button-reservation">
               Réserver
             </button>
-            <p>{availability.overlappingBookings >= availability.capacity ? 'Plus de places disponibles.' : 'Il reste de la place, profitez-en !'}</p>
+            <p>{availability ? availability.overlappingBookings >= availability.capacity ? 'Plus de places disponibles.' : 'Il reste de la place, profitez-en !' : ''}</p>
           </form>
           <br></br>
-          <p>Votre enfant sera pris en charge chaque jour, sans interruption ✅</p>
+          <p>{availability && 'Votre enfant sera pris en charge chaque jour, sans interruption ✅'}</p>
         </div>
       </div>
     </div >

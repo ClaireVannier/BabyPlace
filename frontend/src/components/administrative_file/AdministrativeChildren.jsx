@@ -1,14 +1,15 @@
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import imgregister from "../../assets/imgregister.svg";
+import { useHttp } from "../../contexts/http.context";
 
 function AdministrativeChildren() {
-  const navigate = useNavigate();
-  const { parentId } = useParams();
 
+  const navigate = useNavigate();
+  const http = useHttp();
+  const { parentId } = useParams();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -29,8 +30,7 @@ function AdministrativeChildren() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/children`, formData)
+    http.postWithoutToken(`children`, formData)
       .then((resp) => {
         if (resp.status === 201) {
           navigate("/register/confirmationfile/false");
@@ -101,7 +101,7 @@ function AdministrativeChildren() {
               className="input-file-secu"
               type="text"
               onChange={handleChange}
-              
+
             />
           </label>
 

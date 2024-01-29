@@ -12,48 +12,22 @@ const administrativeControllers = require("./controllers/administrativeControlle
 const dateControllers = require("./controllers/dateControllers");
 const userControllers = require("./controllers/userControllers");
 const uploadControllers = require("./controllers/uploadControllers");
+const { authMiddleware } = require("./middlewares/auth/auth.middleware");
+const { allowParentMiddleware, matchParentIdMiddleware, matchChildrenIdMiddleware } = require("./middlewares/roles/allow-parent.middleware");
+const { allowNurseryMiddleware, matchNurseryIdMiddleware } = require("./middlewares/roles/allow-nursery.middleware");
 
-// Route for parents
-router.get("/parents/:id", parentControllers.get);
-router.post("/parents", parentControllers.post); //  ok ca marche
-router.put("/parents/:id", parentControllers.put);
 
-// Route for nursery
-router.get("/nursery/:id", nurseryControllers.get);
-router.get("/nurseries", nurseryControllers.getAll);
-router.post("/nursery", nurseryControllers.post); // ok ca marche
-router.put("/nursery/:id", nurseryControllers.put);
 
-// Route for children
-router.get("/children/:id", childrenControllers.get);
-router.post("/children", childrenControllers.post); // ok ca marche
-router.put("/children/:id", childrenControllers.put);
-
-// Route for booking
-router.get("/booking/:childrenId", bookingControllers.getByChildrenId);
-router.get("/booking/nursery/:nurseryId", bookingControllers.getByNurseryId);
-router.post("/booking", bookingControllers.post);
-router.post("/booking/availability/:nurseryId", bookingControllers.checkAvailability);
-router.put("/booking/:id", bookingControllers.put);
-router.delete("/booking/:id", bookingControllers.deleteBooking);
-
-// Route for Admnistrative
-router.get("/administrative/:id", administrativeControllers.get);
-router.post("/administrative", administrativeControllers.post); // ca marche sur postman
-router.put("/administrative/:id", administrativeControllers.put);
-
-// Route for date
-router.get("/date/:id", dateControllers.get);
-router.post("/date", dateControllers.post);
-router.put("/date/:id", dateControllers.put);
-router.delete("/date/:id", dateControllers.deletedate);
-
-// Route for User
+// Routes Allowed for everyone
 router.post("/register/parent", userControllers.register);
 router.post("/register/nursery", userControllers.registerNursery);
 router.post("/login", userControllers.login);
 
-// route for upload un fichier
+router.post("/administrative", administrativeControllers.post);
+router.post("/children", childrenControllers.post);
+router.post("/parents", parentControllers.post);
+router.post("/nursery", nurseryControllers.post);
+
 router.post(
   "/upload-income/:id",
   upload.single("incomeProofUrl"),
@@ -83,5 +57,33 @@ router.post(
   upload.single("Avatar"),
   uploadControllers.createAvatar
 );
+
+// Mur de middleware : s'ajout eà toutes les routes ci-dessous. 
+router.use(authMiddleware);
+
+// Route for parents
+router.get("/parents/:id", allowParentMiddleware, matchParentIdMiddleware, parentControllers.get);
+router.put("/parents/:id", allowParentMiddleware, matchParentIdMiddleware, parentControllers.put);
+
+// Route for nursery
+router.get("/nursery/:id", nurseryControllers.get);
+router.get("/nurseries", nurseryControllers.getAll);
+router.put("/nursery/:id", allowNurseryMiddleware, matchNurseryIdMiddleware, nurseryControllers.put);
+
+// Route for children
+router.get("/children/:id", childrenControllers.get);
+// router.put("/children/:id", childrenControllers.put);
+
+// Route for booking
+router.get("/booking/:childrenId", matchChildrenIdMiddleware, bookingControllers.getByChildrenId);
+router.get("/booking/nursery/:nurseryId", matchNurseryIdMiddleware, bookingControllers.getByNurseryId);
+router.post("/booking", allowParentMiddleware, bookingControllers.post);
+router.post("/booking/availability/:nurseryId", allowParentMiddleware, bookingControllers.checkAvailability);
+router.put("/booking/:id", allowNurseryMiddleware, matchNurseryIdMiddleware, bookingControllers.put);
+router.delete("/booking/:id", allowNurseryMiddleware, matchNurseryIdMiddleware, bookingControllers.deleteBooking);
+
+// Route for Admnistrative
+router.get("/administrative/:id", administrativeControllers.get); // toutes les cr!che + le parent en question
+router.put("/administrative/:id", administrativeControllers.put); // que le parent en question
 
 module.exports = router;
