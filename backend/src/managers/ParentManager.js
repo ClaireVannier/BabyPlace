@@ -31,6 +31,24 @@ class ParentManager extends AbstractManager {
     return result.affectedRows;
   }
 
+  async delete(parentId) {
+    const [result] = await this.database.query(
+      `
+      DELETE parent, children, administrative, user, booking, date
+FROM parent
+JOIN children ON parent.id = children.parent_id
+JOIN administrative ON parent.administrative_id = administrative.id
+JOIN user ON parent.user_id = user.id
+JOIN booking ON children.id = booking.children_id
+JOIN date ON booking.id = date.booking_id
+WHERE parent.id = ?;
+      
+      `,
+      [parentId]
+    );
+    return result.affectedRows
+  }
+
   async setAdmininistrativeId(administrativeId, parentId) {
     const [result] = await this.database.query(
       `update ${this.table} set administrative_id = ? WHERE id = ?`,

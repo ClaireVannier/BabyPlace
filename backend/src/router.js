@@ -64,6 +64,7 @@ router.use(authMiddleware);
 // Route for parents
 router.get("/parents/:id", allowParentMiddleware, matchParentIdMiddleware, parentControllers.get);
 router.put("/parents/:id", allowParentMiddleware, matchParentIdMiddleware, parentControllers.put);
+router.delete("/parents/:id", allowParentMiddleware, matchParentIdMiddleware, parentControllers.deleteParent);
 
 // Route for nursery
 router.get("/nursery/:id", nurseryControllers.get);
