@@ -99,6 +99,7 @@ function AdministrativeNursery() {
              <input
               className="input-file"
               type="file"
+              accept=".png,.jpg,.jpeg"
               name="pictureUrl"
               onChange={(e) => setFilePictureUrl(e.target.files[0])}
               required

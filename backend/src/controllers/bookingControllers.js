@@ -73,7 +73,7 @@ const checkAvailability = async (req, res) => {
 
 const put = async (req, res) => {
   const booking = req.body;
-  const bookingId = req.params.id;
+  const bookingId = req.params.bookingId;
 
   try {
     const affectedRows = await tables.booking.update(booking, bookingId);
@@ -88,7 +88,6 @@ const put = async (req, res) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ success: false, message: err.message });
   }
 };
 

@@ -19,7 +19,8 @@ function Booking() {
     startDate: "",
     endDate: "",
     childrenId: children.id,
-    nurseryId: nurseryId
+    nurseryId: nurseryId,
+    statut: "Accepted"
   });
 
   const handleChange = (e) => {

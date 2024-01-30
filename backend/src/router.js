@@ -9,7 +9,6 @@ const nurseryControllers = require("./controllers/nurseryControllers");
 const childrenControllers = require("./controllers/childrenControllers");
 const bookingControllers = require("./controllers/bookingControllers");
 const administrativeControllers = require("./controllers/administrativeControllers");
-const dateControllers = require("./controllers/dateControllers");
 const userControllers = require("./controllers/userControllers");
 const uploadControllers = require("./controllers/uploadControllers");
 const { authMiddleware } = require("./middlewares/auth/auth.middleware");
@@ -80,7 +79,7 @@ router.get("/booking/:childrenId", matchChildrenIdMiddleware, bookingControllers
 router.get("/booking/nursery/:nurseryId", matchNurseryIdMiddleware, bookingControllers.getByNurseryId);
 router.post("/booking", allowParentMiddleware, bookingControllers.post);
 router.post("/booking/availability/:nurseryId", allowParentMiddleware, bookingControllers.checkAvailability);
-router.put("/booking/:id", allowNurseryMiddleware, matchNurseryIdMiddleware, bookingControllers.put);
+router.put("/booking/:bookingId/:nurseryId", allowNurseryMiddleware, matchNurseryIdMiddleware, bookingControllers.put);
 router.delete("/booking/:id", allowNurseryMiddleware, matchNurseryIdMiddleware, bookingControllers.deleteBooking);
 
 // Route for Admnistrative

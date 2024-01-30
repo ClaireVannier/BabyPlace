@@ -116,3 +116,6 @@ CREATE TABLE date (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   url varchar(255) NOT NULL
 );
+
+ALTER TABLE booking
+ADD COLUMN statut VARCHAR(10);

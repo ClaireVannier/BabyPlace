@@ -53,19 +53,25 @@ function Setting() {
       })
   }
 
+
   const handleDelete = (e) => {
     e.preventDefault();
-    http.deleteParent(`parents/${parent.id}`)
-      .then((resp) => {
-        if (resp.status === 200) {
-          alert("Vos informations ont bien été supprimées");
-          navigate("/register/parent")
-        }
-      })
-      .catch(err => {
-        console.error(err);
-      })
-  }
+      confirm("Êtes-vous sûr de vouloir supprimer votre compte?");
+  
+    if (true) {
+      http.deleteParent(`parents/${parent.id}`)
+        .then((resp) => {
+          if (resp.status === 200) {
+            navigate("/");
+          }
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    } else {
+    }
+  };
+  
 
 
   return (
