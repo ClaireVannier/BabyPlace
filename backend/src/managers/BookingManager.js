@@ -10,7 +10,7 @@ class BookingManager extends AbstractManager {
       `
       SELECT
         date.id AS date_id,
-        booking.id AS booking_id,
+        booking.id AS booking_id, booking.statut,
         date.start_date,
         date.end_date,
         nursery.name,
@@ -82,8 +82,8 @@ class BookingManager extends AbstractManager {
 
   async create(booking) {
     const [result] = await this.database.query(
-      `insert into ${this.table} (children_id, nursery_id) values (?, ?)`,
-      [booking.childrenId, booking.nurseryId]
+      `insert into ${this.table} (children_id, nursery_id, statut) values (?, ?, ?)`,
+      [booking.childrenId, booking.nurseryId, booking.statut]
     );
 
     const bookingId = result.insertId;
@@ -96,15 +96,14 @@ class BookingManager extends AbstractManager {
   }
 
 
-  // Est ce que j'ai besoin de mettre à jour une réservation?
-  // async update(booking, bookingId) {
-  //   const [result] = await this.database.query(
-  //     `update ${this.table} set booked_at = ? WHERE id = ?`,
-  //     [booking.booked_at, bookingId]
-  //   );
+  async update(booking, bookingId) {
+    const [result] = await this.database.query(
+      `update ${this.table} set statut = ? WHERE id = ?`,
+      [booking.statut, bookingId]
+    );
 
-  //   return result.affectedRows;
-  // }
+    return result.affectedRows;
+  }
 
   async delete(bookingId) {
     const [result] = await this.database.query(

@@ -31,10 +31,8 @@ class ChildrenManager extends AbstractManager {
 
   async update(children, childrenId) {
     const [result] = await this.database.query(
-      `update ${this.table} set firstname = ?, birth_date = ?, is_walking = ?, doctor = ?, allergies = ? WHERE id = ?`,
+      `update ${this.table} set is_walking = ?, doctor = ?, allergies = ? WHERE id = ?`,
       [
-        children.firstname,
-        children.birth_date,
         children.isWalking,
         children.doctor,
         children.allergies,

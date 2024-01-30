@@ -96,21 +96,13 @@ class UserManager extends AbstractManager {
     return profil;
   }
 
-
-
-
-
-
-
-
-
-
   async addAvatar(userId, avatarId) {
     await this.database.query(
       `UPDATE ${this.table} SET avatar = ? WHERE id = ?`,
       [avatarId, userId]
     );
   }
+  
 }
 
 module.exports = UserManager;

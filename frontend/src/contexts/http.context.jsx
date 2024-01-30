@@ -11,15 +11,16 @@ export const HttpProvider = ({ children }) => {
   const baseUrl = `${import.meta.env.VITE_BACKEND_URL}`;
 
   const [httpToken, setHttpToken] = useState("");
-  const [get, setGet] = useState(() => () => {});
-  const [post, setPost] = useState(() => () => {});
+  const [get, setGet] = useState(() => () => { });
+  const [post, setPost] = useState(() => () => { });
+  const [put, setPut] = useState(() => () => { });
+  const [deleteParent, setDeleteParent] = useState(() => () => { });
 
   const getConfig = () => {
     const config = { headers: {} };
     if (httpToken) {
       config.headers.Authorization = `Bearer ${httpToken}`;
     }
-    console.log(config);
     return config;
   };
 
@@ -33,10 +34,12 @@ export const HttpProvider = ({ children }) => {
   useEffect(() => {
     setGet(() => (url) => axios.get(`${baseUrl}/${url}`, getConfig()));
     setPost(() => (url, content) => axios.post(`${baseUrl}/${url}`, content, getConfig()));
+    setPut(() => (url, content) => axios.put(`${baseUrl}/${url}`, content, getConfig()));
+    setDeleteParent(() => (url) => axios.delete(`${baseUrl}/${url}`, getConfig()));
   }, [httpToken]);
 
   return (
-    <HttpContext.Provider value={{ setHttpToken, get, post, getWithoutToken, postWithoutToken }}>
+    <HttpContext.Provider value={{ setHttpToken, get, post, put, deleteParent, getWithoutToken, postWithoutToken }}>
       {children}
     </HttpContext.Provider>
   );

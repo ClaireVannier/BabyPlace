@@ -53,6 +53,27 @@ const login = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const parentId = req.params.id;
+
+  try {
+    const affectedRows = await tables.parent.delete(parentId);
+
+    if (affectedRows > 0) {
+      res.status(200).json({ success: true, message: "Suppression réussie." });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "Aucune résérvation trouvée pour la suppression.",
+      });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+
 // const getAll = async (_, res) => {
 //   try {
 //     const users = await UserManager.findAll();
@@ -83,5 +104,5 @@ const login = async (req, res) => {
 module.exports = {
   register,
   registerNursery,
-  login,
+  login
 };

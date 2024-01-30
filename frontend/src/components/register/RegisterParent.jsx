@@ -141,6 +141,7 @@ function RegisterParent() {
             <input
               className="input-file"
               type="file"
+              accept=".png,.jpg,.jpeg"
               name="avatar"
               onChange={(e) => setAvatar(e.target.files[0])}
               required

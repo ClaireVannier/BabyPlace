@@ -27,9 +27,9 @@ function ConfirmationFile() {
         className="gotofile"
         type="button"
       >
-        {"Me connecter et " + params.isNursery === "true"
-          ? "accéder au dashboard"
-          : "rechercher une crèche"}
+        {params.isNursery === "true"
+          ? " Me connecter et accéder au dashboard"
+          : "Me connecter et rechercher une crèche"}
       </NavLink>
     </div>
   );

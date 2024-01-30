@@ -79,7 +79,8 @@ function Profile() {
               {` ${reservation.name} du ${reservation.start_date} au ${reservation.end_date}`}
             </p>
 
-            <p className="status">Confirmée</p>
+            <p className="status">{reservation.statut}</p>
+            
 
           </li>
         ))}

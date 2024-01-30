@@ -57,7 +57,8 @@ ALTER TABLE booking
 ADD COLUMN children_id INT,
 ADD CONSTRAINT fk_booked_children
     FOREIGN KEY (children_id)
-    REFERENCES children(id);
+    REFERENCES children(id)
+    ON DELETE CASCADE; 
 
 ALTER TABLE booking
 ADD COLUMN nursery_id INT,
@@ -70,20 +71,23 @@ ALTER TABLE children
 ADD COLUMN parent_id INT,
 ADD CONSTRAINT fk_parent_id
     FOREIGN KEY (parent_id)
-    REFERENCES parent(id);
+    REFERENCES parent(id)
+    ON DELETE CASCADE; 
 
 ALTER TABLE parent
 ADD COLUMN administrative_id INT,
 ADD CONSTRAINT fk_administrative_id
     FOREIGN KEY (administrative_id)
-    REFERENCES administrative(id);
+    REFERENCES administrative(id)
+    ON DELETE CASCADE;
 
 
 ALTER TABLE parent
 ADD COLUMN user_id INT,
 ADD CONSTRAINT fk_parent_user
     FOREIGN KEY (user_id)
-    REFERENCES user(id);
+    REFERENCES user(id)
+    ON DELETE CASCADE;
 
 
 ALTER TABLE nursery
@@ -103,6 +107,7 @@ CREATE TABLE date (
     start_date DATETIME,
     end_date DATETIME,
     FOREIGN KEY (booking_id) REFERENCES booking(id)
+    ON DELETE CASCADE
 );
 
 
@@ -111,3 +116,6 @@ CREATE TABLE date (
   id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   url varchar(255) NOT NULL
 );
+
+ALTER TABLE booking
+ADD COLUMN statut VARCHAR(10);

@@ -69,6 +69,7 @@ function AdministrativeParent() {
             <input
               className="input-file"
               type="file"
+              accept=".pdf"
               name="incomeProofUrl"
               onChange={(e) => setFileIncomeProof(e.target.files[0])}
               required
@@ -79,6 +80,7 @@ function AdministrativeParent() {
             <input
               className="input-file"
               type="file"
+              accept=".pdf"
               name="PhotoVideoPermission"
               onChange={(e) => setFileVideoPermission(e.target.files[0])}
               required
@@ -89,6 +91,7 @@ function AdministrativeParent() {
             <input
               className="input-file"
               type="file"
+              accept=".pdf"
               name="OutsidePermission"
               onChange={(e) => setFileOutsidePermission(e.target.files[0])}
               required

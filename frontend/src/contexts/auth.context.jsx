@@ -20,12 +20,12 @@ export const AuthProvider = ({ children }) => {
   const [profil, setProfil] = useState(null);
 
   /* Logs utiles en développement */
-  useEffect(() => {
-    console.log("token", token);
-    console.log("userId", userId);
-    console.log("isNursery", isNursery);
-    console.log("profil", profil);
-  }, [token, userId, isNursery, profil]); // <-- si l'une de ces valeurs change, la fonction "useEffect" se redéclenchera en intégralité.
+  // useEffect(() => {
+  //   console.log("token", token);
+  //   console.log("userId", userId);
+  //   console.log("isNursery", isNursery);
+  //   console.log("profil", profil);
+  // }, [token, userId, isNursery, profil]); // <-- si l'une de ces valeurs change, la fonction "useEffect" se redéclenchera en intégralité.
 
 
   useEffect(() => {
