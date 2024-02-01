@@ -43,6 +43,10 @@
   margin: 25px 5px;
   box-shadow: 1px 5px 8px 0px rgb(91 91 91 / 23%);
 
+  .statut {
+    background-color: red;
+  }
+
   .info-head-container {
     display: flex;
     justify-content: space-between;
@@ -55,16 +59,21 @@
     font-size: 15px;
   }
 
-  .parent-info, .child-info{
+  .parent-info,
+  .child-info {
     line-height: 1.2;
   }
 
-  
+
   .dashboard-date {
     display: flex;
     justify-content: center;
     gap: 25px;
     line-height: 1.2;
+
+    span {
+      font-weight: 700;
+    }
   }
 
   .dashboard-button {
@@ -125,26 +134,39 @@
       font-size: 18px;
     }
 
-    .dashboard-date{
+    .dashboard-date {
       display: flex;
       justify-content: flex-start;
       margin-top: 20px;
     }
+
     .dashboard-button {
       display: flex;
       flex-direction: column;
       gap: 20px;
-  
+
       button {
         font-size: 18px;
         padding: 5px 8px;
         border-radius: 5px;
-  
       }
     }
-  
+
   }
-  
+  .rod-statut {
+    margin-left: 100px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    max-height: 30px;
+
+    .actual-statut {
+      font-size: 18px;
+      padding: 1px 80px;
+      color: whitesmoke;
+    }
+  }
+
   .welcome {
     margin: 25px 20px;
     font-size: 25px;

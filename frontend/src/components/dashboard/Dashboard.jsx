@@ -17,13 +17,21 @@ function Dashboard() {
 
 
   const handleSubmit = (e, bookingId) => {
+    const newStatut = e.target.name;
+
     http.put(`booking/${bookingId}/${nursery.id}`, {
       bookingId: bookingId,
-      statut: e.target.name
+      statut: newStatut
     })
       .then((resp) => {
         if (resp.status === 200) {
           console.log("Mise à jour réussie.");
+          alert("Vous avez bien mis à jour la réservation !")
+          setBookingList(prevBookingList =>
+            prevBookingList.map(booking =>
+              booking.booking_id === bookingId ? { ...booking, statut: newStatut } : booking
+            )
+          );
         }
       })
       .catch((err) => {
@@ -43,6 +51,16 @@ function Dashboard() {
       });
   }, []);
 
+  const toTitleCase = (str) => {
+    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+  
+  const StatutTitleCase = (statut) => {
+    const newStatut = toTitleCase(statut);
+    return newStatut;
+  };
+  
+
   return (
     <div className="dashboard-container">
       <div className="header-container">
@@ -57,6 +75,7 @@ function Dashboard() {
           bookingList.map((booking, index) =>
           (
             <div className="resa-container" key={index}>
+              <div className="statut"></div>
               <div className="info-head-container">
                 <div className="parent-info">
                   <p className="parent-name">
@@ -69,18 +88,21 @@ function Dashboard() {
                     {booking.children_is_walking ? ' qui sait marcher.' : ' qui ne sait pas encore marcher'}</p>
                 </div>
                 <div className="dashboard-button">
-                  <button className="accept" name="Acceptée" onClick={(e) => handleSubmit(e, booking.booking_id)}>
+                  <button className="accept" name="ACCEPTÉE" onClick={(e) => handleSubmit(e, booking.booking_id)}>
                     Accepter
                   </button>
-                  <button className="reject" name="Rejetée" onClick={(e) => handleSubmit(e, booking.booking_id)}>
+                  <button className="reject" name="REJETÉE" onClick={(e) => handleSubmit(e, booking.booking_id)}>
                     Refuser
                   </button>
                 </div>
 
               </div>
               <div className="dashboard-date">
-                <p>Date d'arrivée : <br />{booking.start_date}</p>
-                <p> Date de départ : <br />{booking.end_date}</p>
+                <p>Date d'arrivée : <br /><span>{booking.start_date}</span></p>
+                <p> Date de départ : <br /><span>{booking.end_date}</span></p>
+                <div className="rod-statut">
+                  <p className="actual-statut" style={{ backgroundColor: booking.statut === "ACCEPTÉE" ? '#22c55e' : booking.statut === "REJETÉE" ? 'red' : 'orange' }}>{StatutTitleCase(booking.statut)}</p>
+                </div>
               </div>
             </div>
           ))

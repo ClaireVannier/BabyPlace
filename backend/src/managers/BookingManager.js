@@ -30,7 +30,7 @@ class BookingManager extends AbstractManager {
       `
       SELECT
         date.id AS date_id,
-        booking.id AS booking_id,
+        booking.id AS booking_id, booking.statut,
         date.start_date,
         date.end_date,
         children.firstname AS children_firstname, children.is_walking as children_is_walking, children.doctor AS children_doctor,
@@ -49,14 +49,14 @@ class BookingManager extends AbstractManager {
   }
 
   async checkAvailability(nurseryId, datesToCheck) {
-  
+
     // Obtenir la capacité de la crèche indépendamment des réservations
     const [capacityResult] = await this.database.query(
       'SELECT capacity FROM nursery WHERE id = ?',
       [nurseryId]
     );
     const capacity = capacityResult[0] ? capacityResult[0].capacity : null;
-  
+
     // Obtenir le nombre de réservations pour les dates spécifiées
     const [bookingResult] = await this.database.query(
       `SELECT COUNT(*) as overlappingBookings 
@@ -75,10 +75,10 @@ class BookingManager extends AbstractManager {
         datesToCheck.startDate, datesToCheck.endDate
       ]
     );
-  
+
     return { overlappingBookings: bookingResult[0].overlappingBookings, capacity };
   }
-  
+
 
   async create(booking) {
     const [result] = await this.database.query(
