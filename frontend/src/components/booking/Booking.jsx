@@ -20,10 +20,11 @@ function Booking() {
     endDate: "",
     childrenId: children.id,
     nurseryId: nurseryId,
-    statut: "Accepted"
+    statut: "En attente"
   });
 
   const handleChange = (e) => {
+    
     const { name, value } = e.target;
     // Récupérer que la date aa/mm/jj sans les heures/minutes
     const date = new Date(value).toISOString().split('T')[0];
@@ -90,7 +91,7 @@ function Booking() {
             <label>
               Je réserve du: <br />
               <input
-                type="datetime-local"
+                type="date"
                 name="startDate"
                 onChange={handleChange}
               />
@@ -100,7 +101,7 @@ function Booking() {
               <br />
               au: <br />
               <input
-                type="datetime-local"
+                type="date"
                 name="endDate"
                 onChange={handleChange}
               />

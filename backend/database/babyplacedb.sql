@@ -104,8 +104,8 @@ ADD COLUMN time_slot VARCHAR(255) NOT NULL;
 CREATE TABLE date (
     id INT PRIMARY KEY AUTO_INCREMENT,
     booking_id INT,
-    start_date DATETIME,
-    end_date DATETIME,
+    start_date DATE,
+    end_date DATE,
     FOREIGN KEY (booking_id) REFERENCES booking(id)
     ON DELETE CASCADE
 );
