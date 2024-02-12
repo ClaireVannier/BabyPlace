@@ -52,7 +52,10 @@ function Dashboard() {
   }, []);
 
   const toTitleCase = (str) => {
-    return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+    return str.toLowerCase().replace(/\b\w/g, (char, index) => { 
+      return index === str.length - 1 ? char : char.toUpperCase();
+
+    });
   };
   
   const StatutTitleCase = (statut) => {
