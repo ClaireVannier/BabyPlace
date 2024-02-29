@@ -1,0 +1,66 @@
+.nurserylistcontainer {
+  height: 60px;
+  display: flex;
+  background: whitesmoke;
+  box-shadow: 0px 12px 20px 0px rgba(91, 91, 91, 0.75);
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+}
+.nurserylistcontainer .icon-profil {
+  height: 30px;
+  width: 30px;
+  margin: 10px 0px 0 18px;
+  cursor: pointer;
+}
+.nurserylistcontainer .filterbtn {
+  float: right;
+  background-color: whitesmoke;
+}
+.nurserylistcontainer .filterbtn .icon-filter {
+  height: 29px;
+  width: 25px;
+  cursor: pointer;
+}
+.nurserylistcontainer .title-search {
+  font-size: 23px;
+}
+
+.cardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 35px;
+  gap: 30px;
+  padding-top: 60px;
+}
+
+@media screen and (min-width: 850px) {
+  .nurserylistcontainer {
+    display: flex;
+    flex-direction: row;
+    height: 80px;
+  }
+  .nurserylistcontainer .title-search {
+    font-size: 32px;
+    margin: 0 auto;
+  }
+  .nurserylistcontainer .icon-profil {
+    height: 35px;
+    width: 35px;
+    margin-left: 50px;
+  }
+  .nurserylistcontainer .filterbtn .icon-filter {
+    height: 40px;
+    width: 35px;
+    margin-right: 50px;
+  }
+  .cardList {
+    padding-top: 100px;
+    gap: 50px;
+  }
+}/*# sourceMappingURL=nurserylist.css.map */

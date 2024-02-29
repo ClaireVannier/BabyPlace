@@ -1,0 +1,120 @@
+.registerContainer .imgRegister {
+  display: none;
+}
+.registerContainer .logoForm {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  width: 60%;
+}
+.registerContainer .logoForm #logoFormCoeur {
+  height: 50px;
+  margin-top: 30px;
+}
+.registerContainer .logoForm #logoFormTxt {
+  width: 100%;
+}
+.registerContainer .registerForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.registerContainer .titleFormRegister {
+  text-align: center;
+  margin: 30px 5px;
+  font-size: 22px;
+}
+.registerContainer label {
+  width: 100%;
+}
+.registerContainer label .input-file-secu {
+  width: 80%;
+  padding: 5px 0;
+  overflow-wrap: anywhere;
+}
+.registerContainer label .input-file-description {
+  margin-left: 16px;
+  width: 95%;
+  padding: 25px 0px;
+}
+.registerContainer label .input-file {
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  background-color: transparent;
+}
+.registerContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin: 20px 30px 0 65px;
+}
+.registerContainer form p {
+  font-size: 17px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.registerContainer form .confirm-file {
+  font-size: 16px;
+  text-align: center;
+  font-style: italic;
+  margin-top: 20px;
+}
+.registerContainer .formBtnRegister {
+  text-align: center;
+  background: linear-gradient(180deg, rgb(71, 79, 255) 2.49%, rgb(227, 122, 204) 99.05%);
+  color: #f2f2f2;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  margin-bottom: 15px;
+  margin-right: 40px;
+}
+.registerContainer .linktologin {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 18px;
+  color: grey;
+}
+
+@media screen and (min-width: 900px) {
+  .registerContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .registerContainer .imgRegister {
+    display: block;
+  }
+  .registerContainer .registerForm {
+    width: 30%;
+    margin: 0 150px 0 200px;
+  }
+  .registerContainer form {
+    width: 80%;
+    display: flex;
+    gap: 20px;
+  }
+  .registerContainer label {
+    font-size: 16px;
+    width: 90%;
+  }
+  .registerContainer input {
+    width: 100%;
+    font-size: 20px;
+  }
+  .registerContainer .linktologin {
+    margin-top: 40px;
+    font-size: 22px;
+  }
+}/*# sourceMappingURL=administrativeformparent.css.map */

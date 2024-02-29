@@ -1,0 +1,92 @@
+.registerContainer .imgRegister {
+  display: none;
+}
+.registerContainer .logoForm {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  width: 60%;
+  max-width: 150px;
+  margin-top: 50px;
+}
+.registerContainer .logoForm #logoFormCoeur {
+  height: 50px;
+}
+.registerContainer .logoForm #logoFormTxt {
+  width: 100%;
+}
+.registerContainer .titleForm {
+  margin: 30px 0;
+}
+.registerContainer label input {
+  margin-top: 5px;
+  padding: 10px 15px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  outline: none;
+  background-color: transparent;
+}
+.registerContainer form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 250px;
+}
+.registerContainer .formBtn {
+  text-align: center;
+  margin-top: 10px;
+  background: #882bff;
+  color: #f2f2f2;
+  padding: 15px 0;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  width: 70%;
+  margin-right: 40px;
+}
+.registerContainer .linktologin {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 18px;
+  color: grey;
+}
+
+@media screen and (min-width: 900px) {
+  .registerContainer .imgRegister {
+    display: block;
+    width: 400px;
+  }
+  .registerContainer .titleForm {
+    font-size: 24px;
+  }
+  .registerContainer .registerForm {
+    width: 30%;
+    margin: 0 150px 0 200px;
+  }
+  .registerContainer form {
+    width: 80%;
+    display: flex;
+    gap: 20px;
+  }
+  .registerContainer label {
+    font-size: 23px;
+    width: 80%;
+  }
+  .registerContainer input {
+    width: 100%;
+    font-size: 20px;
+  }
+  .registerContainer .linktologin {
+    margin-top: 40px;
+    font-size: 22px;
+  }
+  .registerContainer .formBtn {
+    width: 50%;
+  }
+}/*# sourceMappingURL=registerparent.css.map */

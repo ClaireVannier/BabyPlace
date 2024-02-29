@@ -1,0 +1,67 @@
+.nursery-detail-container {
+  background: linear-gradient(130deg, rgb(71, 79, 255) 2.49%, rgb(227, 122, 204) 99.05%);
+  height: -moz-max-content;
+  height: max-content;
+  padding-bottom: 20px;
+}
+.nursery-detail-container .header-details {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 40px 20px 0 20px;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+.nursery-detail-container .nursery-detail-name {
+  color: white;
+  font-size: 29px;
+  font-weight: 700;
+}
+.nursery-detail-container .nursery-detail-container-white {
+  background-color: white;
+  margin: 30px 20px;
+  padding-bottom: 30px;
+  border-radius: 15px;
+  min-height: 85vh;
+}
+.nursery-detail-container .nursery-detail-container-white .nursery-detail-img {
+  border-radius: 15px 15px 0 0;
+  width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.nursery-detail-container .nursery-detail-container-white .nursery-detail-info {
+  margin: 30px 15px 10px 15px;
+  font-size: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+.nursery-detail-container .nursery-detail-container-white .nursery-detail-info span {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+.nursery-detail-container .nursery-detail-container-white .nursery-detail-info h3 {
+  font-weight: 700;
+}
+.nursery-detail-container .nursery-detail-container-white .booking-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+  margin-top: 50px;
+}
+.nursery-detail-container .nursery-detail-container-white .booking-container .reservation-NavLink {
+  display: inline-block;
+  background-color: #9b51e0;
+  color: #f2f2f2;
+  padding: 0.5em 1em;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+}/*# sourceMappingURL=nurserydetails.css.map */
