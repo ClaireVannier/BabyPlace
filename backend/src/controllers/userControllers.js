@@ -74,35 +74,9 @@ const deleteUser = async (req, res) => {
 };
 
 
-// const getAll = async (_, res) => {
-//   try {
-//     const users = await UserManager.findAll();
-//     res.json(users);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500);
-//   }
-// };
-
-// const getById = async (req, res) => {
-//   const id = +req.params.id;
-//   try {
-//     const [result] = await UserManager.find(id);
-//     if (!result.length) {
-//       return res.status(404).send({ error: "User not found" });
-//     }
-//     return res.send(result[0]);
-//   } catch (error) {
-//     return res.status(422).send({ error: error.message });
-//   }
-// };
-
-// const getProfil = (req, res) => {
-//   res.send(req.user);
-// };
-
 module.exports = {
   register,
   registerNursery,
-  login
+  login,
+  deleteUser
 };

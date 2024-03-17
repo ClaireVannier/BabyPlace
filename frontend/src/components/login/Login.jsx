@@ -5,14 +5,12 @@ import logobaby from "../../assets/logobaby.svg";
 import logocoeur from "../../assets/logocoeur.svg";
 import { useAuth } from "../../contexts/auth.context";
 import { useHttp } from "../../contexts/http.context";
-// import { ToastContainer, toast } from 'react-toastify';
 
 function Login() {
   const navigate = useNavigate();
   const auth = useAuth();
   const http = useHttp();
 
-  // const notify = (message, bgc) => toast(message);
 
   const [formData, setFormData] = useState({
     email: "",
