@@ -57,7 +57,7 @@ router.post(
   uploadControllers.createAvatar
 );
 
-// Mur de middleware : s'ajout eà toutes les routes ci-dessous. 
+// Mur de middleware : s'ajoute à toutes les routes ci-dessous. 
 router.use(authMiddleware);
 
 // Route for parents

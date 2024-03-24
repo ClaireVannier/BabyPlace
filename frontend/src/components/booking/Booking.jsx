@@ -10,9 +10,10 @@ function Booking() {
 
   const { id } = useParams();
   const nurseryId = parseInt(id, 10);
-  const navigate = useNavigate();
   const children = auth.profil.children[0];
-
+  
+  const navigate = useNavigate();
+  
   const [availability, setAvailability] = useState(null);
   const [textColor, setTextColor] = useState('black');
   const [formData, setFormData] = useState({

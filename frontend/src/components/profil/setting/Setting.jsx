@@ -56,8 +56,8 @@ function Setting() {
 
   const handleDelete = (e) => {
     e.preventDefault();
-      confirm("Êtes-vous sûr de vouloir supprimer votre compte?");
-  
+    confirm("Êtes-vous sûr de vouloir supprimer votre compte?");
+
     if (true) {
       http.deleteParent(`parents/${parent.id}`)
         .then((resp) => {
@@ -67,11 +67,37 @@ function Setting() {
         })
         .catch(err => {
           console.error(err);
-        });
-    } else {
+        })
     }
+    else {
+      navigate("/search"); 
   };
-  
+}
+
+
+// const handleDelete = (e) => {
+//   e.preventDefault();
+
+//   // La fonction confirm retourne true (si l'utilisateur clique sur OK) ou false (si l'utilisateur clique sur Annuler)
+//   const userConfirmed = confirm("Êtes-vous sûr de vouloir supprimer votre compte?");
+
+//   if (userConfirmed) {
+//     // Si l'utilisateur confirme la suppression
+//     http.deleteParent(`parents/${parent.id}`)
+//       .then((resp) => {
+//         if (resp.status === 200) {
+//           navigate("/"); // Redirige vers la page d'accueil après la suppression
+//         }
+//       })
+//       .catch(err => {
+//         console.error(err);
+//       });
+//   } else {
+//     // Si l'utilisateur annule la suppression
+//     navigate("/search"); // Redirige vers la page de recherche
+//   }
+// };
+
 
 
   return (
@@ -169,4 +195,5 @@ function Setting() {
     </div>
   )
 }
+
 export default Setting;
