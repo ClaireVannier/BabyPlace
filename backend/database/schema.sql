@@ -32,7 +32,7 @@ CREATE TABLE nursery (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     name VARCHAR(120) NOT NULL,
     address TEXT NOT NULL,
-    phone VARCHAR(12) NOT NULL,
+    phone VARCHAR(17) NOT NULL,
     picture_upload_id INT,
     description TEXT NOT NULL,
     outdoor_space BOOLEAN,
